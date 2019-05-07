@@ -1,18 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="#B0CA36"
+   >
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/cleanhome" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_horizontal"
+        android:text="Iniciar sesión como "
+        android:textSize="25dp" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+
+        android:id="@+id/btn_employee"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:text="Colaborador"
+        android:textColor="#ffffff"
+        android:layout_marginTop="50dp"
+        android:background="#47838E"
+        android:textSize="20dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+
+        android:id="@+id/btn_client"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:text="Cliente"
+        android:textColor="#ffffff"
+        android:layout_marginTop="15dp"
+        android:background="#47838E"
+        android:textSize="20dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
