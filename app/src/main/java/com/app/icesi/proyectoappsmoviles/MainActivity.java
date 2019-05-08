@@ -21,20 +21,19 @@ public class MainActivity extends AppCompatActivity {
         btn_employee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent();
+                Intent i=new Intent(MainActivity.this, LoginActivity.class);
+                i.putExtra("userType","employee");
+                startActivity(i);
             }
         });
-
-//cambio
-
-
-
 
         btn_client=findViewById(R.id.btn_client);
         btn_client.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i=new Intent(MainActivity.this, LoginActivity.class);
+                i.putExtra("userType","client");
+                startActivity(i);
             }
         });
 
