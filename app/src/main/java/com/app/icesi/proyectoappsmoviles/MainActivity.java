@@ -1,5 +1,6 @@
 package com.app.icesi.proyectoappsmoviles;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,9 +21,13 @@ public class MainActivity extends AppCompatActivity {
         btn_employee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i=new Intent();
             }
         });
+
+//cambio
+
+
 
 
         btn_client=findViewById(R.id.btn_client);
