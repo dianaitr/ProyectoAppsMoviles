@@ -25,7 +25,8 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".RegisterEmployeeActivity" />
-        <activity android:name=".RegisterClientActivity"></activity>
+        <activity android:name=".RegisterClientActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
