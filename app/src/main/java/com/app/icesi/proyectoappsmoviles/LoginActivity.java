@@ -119,8 +119,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         btn_login.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(typeUser.equals("client")){
+                    Intent i = new Intent(LoginActivity.this,PerfilClienteActivity.class);
+                    startActivity(i);
+                }
 
-                //TODO
 
             }
         });

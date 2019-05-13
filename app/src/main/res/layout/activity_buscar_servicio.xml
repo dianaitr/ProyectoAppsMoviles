@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BuscarServicioActivity"
+    android:orientation="vertical"
+    android:background="#57B2B4">
+
+<LinearLayout
+    android:layout_width="410dp"
+    android:layout_height="105dp"
+    android:orientation="vertical"
+    android:background="#B0CA36">
+
+    <EditText
+        android:id="@+id/et_buscadorServicioCliente"
+        android:hint="Buscar servicio"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="12dp"
+        android:layout_width="388dp"
+        android:layout_height="70dp"
+        android:background="#ffff"/>
+
+</LinearLayout>
+
+
+
+
+        <GridView
+            android:id="@+id/gv_buscarServicioCliente"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </GridView>
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
