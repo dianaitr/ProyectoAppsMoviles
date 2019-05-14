@@ -95,7 +95,6 @@
 
 
             <Button
-
                 android:id="@+id/btn_login"
                 style="?android:textAppearanceSmall"
                 android:fontFamily="@font/roboto"
@@ -110,13 +109,29 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"/>
 
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="25dp" />
+
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="30dp" />
+
             <TextView
                 android:id="@+id/btn_forgetPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¿Olvidaste tu contraseña?"
                 android:layout_gravity="center_horizontal"
-                android:linksClickable="true"/>
+                android:linksClickable="true" />
 
             <TextView
                 android:layout_marginTop="25dp"
