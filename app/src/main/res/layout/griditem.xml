@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    Imagen, nombre, apellido, calificacion
+    <ImageView
+        android:id="@+id/imagenEmpleado_cliente"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:background="#57B2B4"/>
+    <TextView
+        android:id="@+id/tv_nameEmpleado_cliente"
+        android:layout_width="130dp"
+        android:layout_height="20dp"
+        android:hint="nombre empleado"
+        android:background="#00BCD4"
+        android:layout_marginLeft="15mm"
+        />
+    <TextView
+        android:id="@+id/tv_apellidoEmpleado_cliente"
+        android:layout_width="130dp"
+        android:layout_height="20dp"
+        android:hint="apellidos empleado"
+        android:background="#00BCD4"
+        android:layout_marginTop="5mm"
+        android:layout_marginLeft="15mm"
+        />
+    <TextView
+
+        android:layout_width="130dp"
+        android:layout_height="20dp"
+        android:hint="Calificación:"
+        android:background="#00BCD4"
+        android:layout_marginTop="10mm"
+        android:layout_marginLeft="15mm" />
+    <TextView
+        android:id="@+id/tv_numeroCalificionEmpleado_cliente"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:hint="numero"
+        android:background="#00BCD4"
+        android:layout_marginTop="10mm"
+        android:layout_marginLeft="35mm" />
+
+</FrameLayout>
