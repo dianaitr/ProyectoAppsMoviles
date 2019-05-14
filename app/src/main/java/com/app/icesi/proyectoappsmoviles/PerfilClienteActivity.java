@@ -13,7 +13,12 @@ import android.widget.TextView;
 
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,11 +34,20 @@ public class PerfilClienteActivity extends AppCompatActivity {
     FirebaseAuth auth;
     private Usuario me;
 
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
+
+
     private ImageView iv_foto;
     private TextView tv_nombre;
     private TextView tv_apellidos;
     private TextView tv_telefono;
     private TextView tv_calificacion;
+
+    private TextView tv_user;
+    private Button btn_sign_out;
+    private String typeUser;
+
 
     private Switch sw_activo;
     private Button bt_servicios;
@@ -55,6 +69,31 @@ public class PerfilClienteActivity extends AppCompatActivity {
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
+
+        typeUser=getIntent().getExtras().getString("userType");
+
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
+        tv_user = findViewById(R.id.tv_user);
+        btn_sign_out = findViewById(R.id.btn_sign_out);
+        btn_sign_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+
 
         //Si no hay usuario loggeado
         if (auth.getCurrentUser() == null) {
@@ -97,5 +136,28 @@ public class PerfilClienteActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    ///////////////metodos autenticacion google
+
+    private void signOut() {
+        // Firebase sign out
+        auth.signOut();
+
+        // Google sign out
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        tv_user.setText("salio");
+                       Intent i = new Intent(ProfileActivity.this, LoginActivity.class);
+                        i.putExtra("userType",typeUser);
+                        startActivity(i);
+                        finish();
+
+
+                    }
+                });
     }
 }
