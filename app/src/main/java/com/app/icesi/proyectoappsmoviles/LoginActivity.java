@@ -630,7 +630,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //showProgressDialog();
         dialog = ProgressDialog.show(this, "Procesando",
                 "Por favor espere", true);
-
         // [END_EXCLUDE]
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
