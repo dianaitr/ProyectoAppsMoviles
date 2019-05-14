@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterEmployeeActivity"
+    tools:context=".employee_activities.RegisterEmployeeActivity"
     android:background="#57B2B4"
     android:orientation="vertical"
 >
@@ -79,7 +79,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Dirección"
+        android:hint="DD-MM-YYYY"
         android:textSize="16dp"
         android:id="@+id/txtDateOfBirth"/>
 
@@ -127,12 +127,47 @@
             android:textSize="16dp"
             android:id="@+id/txtEmail"/>
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Con qué número podemos identificarte?"
+            android:textSize="16dp"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="N° de identificación"
+            android:textSize="16dp"
+            android:id="@+id/txtCC"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Qué servicios prestarás?"
+            android:textSize="16dp"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"/>
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="N° de identificación"
+            android:textSize="16dp"
+            android:id="@+id/listViewServices"/>
+
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Continuar"
-            android:id="@+id/btn_continuar"
+            android:text="Registrar"
+            android:id="@+id/btn_register"
             android:background="#B0CA36"/>
+
+
 
     </LinearLayout>
 
