@@ -77,12 +77,28 @@
         android:layout_gravity="left"
         android:layout_marginTop="20dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="DD-MM-YYYY"
-        android:textSize="16dp"
-        android:id="@+id/txtDateOfBirth"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:hint="00/00/0000"
+                android:textSize="16dp"
+                android:id="@+id/txtDateOfBirth"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calendario"
+                android:background="#B0CA36"
+                android:id="@+id/btn_calendar"/>
+
+
+
+        </LinearLayout>
+
 
 
     <TextView
@@ -97,7 +113,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:id="@+id/rdSex">
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,6 +145,22 @@
             android:textSize="16dp"
             android:id="@+id/txtEmail"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Cúal es tu número de teléfono?"
+            android:textSize="16dp"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo electrónico"
+            android:textSize="16dp"
+            android:id="@+id/txtTel"/>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -154,13 +187,78 @@
             android:layout_marginTop="20dp"/>
 
 
-        <ListView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="N° de identificación"
+            android:layout_height="150dp"
             android:textSize="16dp"
-            android:id="@+id/listViewServices"
-            android:background="#57B2B4"/>
+
+            android:background="#57B2B4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aseo básico para el hogar"
+                    android:textSize="12dp"
+                    android:id="@+id/cb"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Barrer"
+                    android:textSize="12dp"
+                    android:id="@+id/cb0"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trapear"
+                    android:textSize="12dp"
+                    android:id="@+id/cb1"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Desempolvar"
+                    android:textSize="12dp"
+                    android:id="@+id/cb2"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lavado de ropa"
+                    android:textSize="12dp"
+                    android:id="@+id/cb3"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Planchado de ropa"
+                    android:textSize="12dp"
+                    android:id="@+id/cb4"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Limpieza de baños"
+                    android:textSize="12dp"
+                    android:id="@+id/cb5"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cocina"
+                    android:textSize="12dp"
+                    android:id="@+id/cb6"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Limpieza de cocina"
+                    android:textSize="12dp"
+                    android:id="@+id/cb7"/>
+
+
+            </LinearLayout>
+
+        </ScrollView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -176,7 +274,8 @@
             android:layout_height="wrap_content"
             android:text="Acepto los términos y condiciones de este enlace."
             android:textColor="	#00008B"
-            android:textSize="12dp"/>
+            android:textSize="12dp"
+            android:id="@+id/rdAcceptTermsCond"/>
 
         <Button
             android:layout_marginTop="8dp"
