@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".employee_activities.RegisterEmployeeActivity"
-    android:background="#57B2B4"
+    android:background="#81C8CA"
     android:orientation="vertical"
 >
 
@@ -16,7 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#57B2B4"
+
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -43,7 +43,8 @@
         android:layout_height="wrap_content"
         android:hint="Nombres"
         android:id="@+id/txtName"
-        android:textSize="16dp"/>
+        android:textSize="16dp"
+        />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -158,9 +159,27 @@
             android:layout_height="wrap_content"
             android:hint="N° de identificación"
             android:textSize="16dp"
-            android:id="@+id/listViewServices"/>
+            android:id="@+id/listViewServices"
+            android:background="#57B2B4"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Podrás editar las fechas y horas de prestación de servicio en tu perfil."
+            android:textSize="12dp"
+            android:layout_gravity="left"
+           />
+
+        <RadioButton
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Acepto los términos y condiciones de este enlace."
+            android:textColor="	#00008B"
+            android:textSize="12dp"/>
 
         <Button
+            android:layout_marginTop="8dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Registrar"

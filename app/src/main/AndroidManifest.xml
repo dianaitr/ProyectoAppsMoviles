@@ -45,13 +45,12 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".RegisterEmployeeActivity" />
+        <activity android:name=".employee_activities.RegisterEmployeeActivity" />
         <activity android:name=".RegisterClientActivity"/>
         <activity android:name=".BuscarServicioActivity"/>
         <activity android:name=".PerfilClienteActivity"></activity>
 
 
-    </application><![CDATA[=======
-    >>>>>>> fd45f2338d7eb2068f69e90a885101b96485c6e6]]>
+    </application>
 
 </manifest>

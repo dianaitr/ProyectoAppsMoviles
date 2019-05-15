@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">proyectoAppsMoviles</string>
+    <string name="app_name">Happy Home</string>
     <string name="title_activity_login">Iniciar sesión</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

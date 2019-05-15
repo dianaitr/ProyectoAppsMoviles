@@ -34,6 +34,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.icesi.proyectoappsmoviles.employee_activities.RegisterEmployeeActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -586,7 +587,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (user != null) {
             //mDetailTextView.setText("alguien entro yuju");
 
-            Intent i=new Intent(LoginActivity.this, ProfileActivity.class);
+            Intent i=new Intent(LoginActivity.this, PerfilClienteActivity.class);
             i.putExtra("userType",typeUser);
             startActivity(i);
             finish();

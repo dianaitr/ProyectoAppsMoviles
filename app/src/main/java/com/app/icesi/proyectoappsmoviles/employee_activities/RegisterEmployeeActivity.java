@@ -11,7 +11,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
 
     Button btn_register;
 
-    EditText txtName,txtLastName,txtAdress,txtEmail;
+    EditText txtName,txtLastName,txtAddress,txtEmail;
 
 
     @Override
