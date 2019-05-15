@@ -1,16 +1,20 @@
-package com.app.icesi.proyectoappsmoviles;
+package com.app.icesi.proyectoappsmoviles.client_activities;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.app.icesi.proyectoappsmoviles.LoginActivity;
+import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -37,12 +41,13 @@ public class PerfilClienteActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
 
-
+    private BottomNavigationView btn_navigationview;
     private ImageView iv_foto;
     private TextView tv_nombre;
     private TextView tv_apellidos;
     private TextView tv_telefono;
     private TextView tv_calificacion;
+
 
     private TextView tv_user;
     private Button btn_sign_out;
@@ -59,11 +64,33 @@ public class PerfilClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_cliente);
+
+        btn_navigationview=findViewById(R.id.menu_navigation);
+        btn_navigationview.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId()==R.id.menu_perfilUsuario){
+
+                    Intent i= new Intent(PerfilClienteActivity.this, PerfilClienteActivity.class);
+                    startActivity(i);
+                    finish();
+                }else if(menuItem.getItemId()==R.id.menu_notificaciones){
+                    Intent i= new Intent(PerfilClienteActivity.this, NotificacionClienteActivity.class);
+                    startActivity(i);
+                    finish();
+
+                }
+
+                return false;
+            }
+        });
+
         btn_buscarService=findViewById(R.id.btn_nuevoServicioCliente);
         btn_buscarService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i= new Intent(PerfilClienteActivity.this,BuscarServicioActivity.class );
+                Intent i= new Intent(PerfilClienteActivity.this, BuscarServicioActivity.class );
             }
         });
         rtdb = FirebaseDatabase.getInstance();
@@ -151,7 +178,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         tv_user.setText("salio");
-                       Intent i = new Intent(ProfileActivity.this, LoginActivity.class);
+                       Intent i = new Intent(PerfilClienteActivity.this, LoginActivity.class);
                         i.putExtra("userType",typeUser);
                         startActivity(i);
                         finish();
