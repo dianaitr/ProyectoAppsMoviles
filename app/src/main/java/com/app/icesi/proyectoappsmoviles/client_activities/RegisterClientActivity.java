@@ -1,7 +1,9 @@
-package com.app.icesi.proyectoappsmoviles;
+package com.app.icesi.proyectoappsmoviles.client_activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.app.icesi.proyectoappsmoviles.R;
 
 public class RegisterClientActivity extends AppCompatActivity {
 

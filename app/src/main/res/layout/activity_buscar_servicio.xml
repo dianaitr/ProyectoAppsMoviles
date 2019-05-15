@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BuscarServicioActivity"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    tools:context=".client_activities.BuscarServicioActivity"
     android:orientation="vertical"
     android:background="#57B2B4">
 
@@ -23,18 +24,27 @@
         android:layout_height="70dp"
         android:background="#ffff"/>
 
+
 </LinearLayout>
 
 
+    <GridView
+        android:id="@+id/gv_buscarServicioCliente"
+        android:layout_width="match_parent"
+        android:layout_height="80mm"
+        android:layout_margin="1mm">
 
 
-        <GridView
-            android:id="@+id/gv_buscarServicioCliente"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    </GridView>
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="bottom"
+        design:menu="@menu/menu_navigation"
+        android:background="#ffff"
 
-        </GridView>
 
+        />
 
 
 

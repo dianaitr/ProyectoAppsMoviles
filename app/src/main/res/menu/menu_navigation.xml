@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_perfilUsuario"
+        android:title="@string/perfil"
+        android:icon="@drawable/ic_perfiluser"
+        />
+    <item
+        android:id="@+id/menu_notificaciones"
+        android:title="@string/notificaciones"
+        android:icon="@drawable/ic_notifications"
+        />
+
+
+</menu>
