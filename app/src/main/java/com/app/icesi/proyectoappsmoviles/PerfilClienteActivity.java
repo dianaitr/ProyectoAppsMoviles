@@ -85,7 +85,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
-        tv_user = findViewById(R.id.tv_user);
+       // tv_user = findViewById(R.id.tv_user);
         btn_sign_out = findViewById(R.id.btn_sign_out);
         btn_sign_out.setOnClickListener(new View.OnClickListener() {
             @Override

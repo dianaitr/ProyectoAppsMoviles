@@ -108,6 +108,19 @@
         android:textSize="10dp"
         android:textStyle="bold"
         android:textColor="#ffff"/>
+    <Button
+        android:id="@+id/btn_sign_out"
+        android:layout_width="20mm"
+        android:layout_height="6mm"
+        android:background="#B0CA36"
+        android:layout_marginTop="10mm"
+        android:layout_marginLeft="20mm"
+        android:textAllCaps="false"
+        android:text="Cerrar sesión"
+        android:textSize="11dp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        />
 
 
 </LinearLayout>
