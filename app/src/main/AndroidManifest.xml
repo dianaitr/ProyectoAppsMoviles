@@ -51,6 +51,8 @@
         <activity android:name=".client_activities.RegisterClientActivity" />
         <activity android:name=".client_activities.BuscarServicioActivity" />
         <activity android:name=".client_activities.PerfilClienteActivity" />
+        <activity android:name=".employee_activities.CalendarEmpRegActivity"></activity>
+
     </application>
 
 </manifest>
