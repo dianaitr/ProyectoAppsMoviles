@@ -23,6 +23,7 @@
         android:layout_marginLeft="100dp"
         android:hint="nombre empleado"
         android:textSize="20dp"
+        android:fontFamily="bold"
 
 
         />
@@ -59,7 +60,8 @@
             android:layout_height="60dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="contactar" />
+            android:text=">"
+            android:background="#B0CA36"/>
     </RelativeLayout>
 
 </LinearLayout>
