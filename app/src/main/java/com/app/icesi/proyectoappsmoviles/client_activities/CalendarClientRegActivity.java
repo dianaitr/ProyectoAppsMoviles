@@ -25,6 +25,7 @@ public class CalendarClientRegActivity extends AppCompatActivity {
                 Intent i= new Intent(CalendarClientRegActivity.this,RegisterEmployeeActivity.class);
                 i.putExtra("dateClient",date);
                 startActivity(i);
+                finish();
             }
         });
 

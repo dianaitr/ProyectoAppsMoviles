@@ -38,6 +38,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -47,6 +48,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -54,15 +57,19 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
 
 
 
@@ -90,8 +97,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private TextView btn_newAccount;
 
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
 
     ProgressDialog dialog;
 
@@ -105,13 +110,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     //google login
     //Button for auth with google
     private SignInButton signInButton;
-
-
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
 
     FirebaseAuth auth;
-    private GoogleSignInClient mGoogleSignInClient;
+    FirebaseDatabase rtdb;
 
-    private static final int RC_SIGN_IN = 9001;
 
 
 
@@ -120,17 +124,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-       /* mStatusTextView = findViewById(R.id.status);
-        mDetailTextView = findViewById(R.id.detail);
-
-        mStatusTextView.setText("click para salir");
-
-        mStatusTextView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });*/
 
         typeUser=getIntent().getExtras().getString("userType");
 
@@ -170,13 +163,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
         //////////////////////////////////////////FB LOGIN////////////////////////////////////////
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
+
         mCallbackManager = CallbackManager.Factory.create();
 
 
 
         loginButton = findViewById(R.id.login_button);
         // Set the initial permissions to request from the user while logging in
-        loginButton.setReadPermissions("email", "public_profile");
+
+        List<String> permissionNeeds = Arrays.asList("email");
+        loginButton.setReadPermissions(permissionNeeds);
+        //loginButton.setReadPermissions("email", "public_profile");
 
         //mLoginButton.setAuthType(AUTH_TYPE);
         // Register a callback to respond to the user
@@ -202,6 +200,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.d("Face>>", "facebook:onError", error);
                 Toast toast2 =Toast.makeText(getApplicationContext(),"ERROR LOGIN", Toast.LENGTH_LONG);
                 toast2.show();
+                Log.v("LoginActivity", error.getCause().toString());
                 // [START_EXCLUDE]
                 updateUI(null);
                 // [END_EXCLUDE]
@@ -227,14 +226,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.btn_login);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
@@ -242,11 +233,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         btn_newAccount.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(typeUser.equals("employee")){
                     Intent i = new Intent(LoginActivity.this,RegisterEmployeeActivity.class);
-                    i.putExtra("typeUser",typeUser);
                     startActivity(i);
-
+                }else if(typeUser.equals("client")){
+                    Intent i = new Intent(LoginActivity.this, RegisterEmployeeActivity.class);
+                    startActivity(i);
+                }
             }
         });
 
@@ -254,18 +247,44 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         btn_login=findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if(typeUser.equals("client")){
-                    Intent i = new Intent(LoginActivity.this, PerfilClienteActivity.class);
-                    startActivity(i);
-                }else{
-                    Intent i = new Intent(LoginActivity.this, PerfilEmpleadoActivity.class);
-                    startActivity(i);
-                }
+            public void onClick(View view) {
+                //attemptLogin();
+
+                String mail = mEmailView.getText().toString();
+                String pass = mPasswordView.getText().toString();
+
+                auth.signInWithEmailAndPassword(mail, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        //Estamos logeados
+
+                        if(typeUser.equals("employee")){
+                            Intent i = new Intent(LoginActivity.this, PerfilEmpleadoActivity.class);
+                            i.putExtra("userType",typeUser); //por si acaso
+                            startActivity(i);
+                        }else if(typeUser.equals("client")){
+                            Intent i = new Intent(LoginActivity.this, PerfilClienteActivity.class);
+                            i.putExtra("userType",typeUser); //por si acaso
+                            startActivity(i);
+                        }
+                        finish();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this, "Hubo un problema al iniciar sesión", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
 
             }
         });
+
+
+
+
     }
 
 
@@ -497,7 +516,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-       // updateUI(account);
+        // updateUI(account);
+        /*mGoogleSignInClient.revokeAccess().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        updateUI(null);
+                    }
+                });*/
+
 
     }
 
@@ -508,11 +535,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-       //Toast toast3 =Toast.makeText(getApplicationContext(),"Entra a ACTRESUL", Toast.LENGTH_LONG);
+        //Toast toast3 =Toast.makeText(getApplicationContext(),"Entra a ACTRESUL", Toast.LENGTH_LONG);
         //toast3.show();
 
         // Pass the activity result back to the Facebook SDK
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
         //si es por google entra en el if que es despues de la actividad propia de google que se abre para seleccionar la cuenta
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
@@ -523,10 +549,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-
                 // Signed in successfully, show authenticated UI.
-                Toast toast1 =Toast.makeText(getApplicationContext(),"OBTUVO EL GOOGLE ACC", Toast.LENGTH_LONG);
-                toast1.show();
                 firebaseAuthWithGoogle(account);
 
             } catch (ApiException e) {
@@ -537,6 +560,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.e(">>>", "Google sign in failed" + e.getStatusCode());
                 updateUI(null);
             }
+        }else{
+            mCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -585,20 +610,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (user != null) {
             //mDetailTextView.setText("alguien entro yuju");
 
-//            Intent i=new Intent(LoginActivity.this, PerfilClienteActivity.class);
-//            i.putExtra("userType",typeUser);
-//            startActivity(i);
-//            finish();
-
-
-            //findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            if(typeUser.equals("employee")){
+                Intent i = new Intent(LoginActivity.this, PerfilEmpleadoActivity.class);
+                i.putExtra("userType",typeUser); //por si acaso
+                startActivity(i);
+                finish();
+            }else if(typeUser.equals("client")){
+                Intent i = new Intent(LoginActivity.this, PerfilClienteActivity.class);
+                i.putExtra("userType",typeUser); //por si acaso
+                startActivity(i);
+                finish();
+            }
         } else {
             //el usuario es igual a null, entonces deberia logearse
-
-
-            //mDetailTextView.setText("SALIR EL USUARIO ES NULL");
-            //findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-           // findViewById(R.id.signOutAndDisconnect).setVisibility(View.GONE);
+            //queda igual
         }
     }
 
@@ -622,7 +647,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     }
                 });
     }*/
-   /////////////////////////////////////Facebook authen///////////////////////////////////
+    /////////////////////////////////////Facebook authen///////////////////////////////////
 
 
     // [START auth_with_facebook]
