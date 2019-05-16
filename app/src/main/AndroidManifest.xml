@@ -11,7 +11,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -22,8 +22,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".client_activities.HistorialClienteActivity"></activity>
+        <activity android:name=".employee_activities.HistorialEmpleadoActivity" />
+        <activity android:name=".employee_activities.NotificacionEmpleadoActivity" />
         <activity android:name=".employee_activities.DisponibilidadEmpleadoActivity" />
-        <activity android:name=".employee_activities.PerfilEmpleadoActivity"></activity>
+        <activity android:name=".employee_activities.PerfilEmpleadoActivity" />
         <activity android:name=".client_activities.NotificacionClienteActivity" />
 
         <meta-data
@@ -65,7 +68,7 @@
         <activity
             android:name=".NavigationDrawerActivity"
             android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ConfigurationActivity"
             android:label="@string/title_activity_configuration" />
@@ -75,7 +78,7 @@
              Note that the API key is linked to the encryption key used to sign the APK.
              You need a different API key for each encryption key, including the release key that is used to
              sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"

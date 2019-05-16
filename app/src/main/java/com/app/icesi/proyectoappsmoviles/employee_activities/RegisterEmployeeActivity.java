@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
 import com.app.icesi.proyectoappsmoviles.LoginActivity;
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -179,7 +180,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         validacion();
                 }else{
 
-                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString(), txtPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             //TODO - registro en el firebase
@@ -208,7 +209,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                                 startActivity(i);
                             }else{
                                 rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
-                                Intent i= new Intent(RegisterEmployeeActivity.this,LoginActivity.class);
+                                Intent i= new Intent(RegisterEmployeeActivity.this, PerfilClienteActivity.class);
                                 i.putExtra("id", auth.getCurrentUser().getUid());
                                 startActivity(i);
                             }
@@ -219,6 +220,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(RegisterEmployeeActivity.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+                            Log.e(">>>", "registro problem: " + e.getMessage());
 
                         }
                     });

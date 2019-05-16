@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:design="http://schemas.android.com/apk/res-auto"
-    tools:context=".client_activities.NotificacionClienteActivity"
+    tools:context=".employee_activities.NotificacionEmpleadoActivity"
     android:orientation="vertical"
     android:background="#57B2B4">
 
@@ -17,14 +17,14 @@
 
 
         <Button
-            android:id="@+id/btn_atrasNotificacionCliente"
+            android:id="@+id/btn_atrasNotificacion_empleado"
             android:layout_width="30dp"
             android:layout_height="18dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/ic_btn_atras" />
 
         <Button
-            android:id="@+id/btn_configtificacionCliente"
+            android:id="@+id/btn_configtificacion_empleado"
             android:layout_width="25dp"
             android:layout_height="18dp"
             android:layout_marginLeft="380dp"
@@ -33,7 +33,7 @@
 
 
         <TextView
-            android:id="@+id/et_notificacionCliente"
+            android:id="@+id/et_notificacion_empleado"
             android:layout_width="217dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -46,16 +46,17 @@
 
 
     </RelativeLayout>
+
     <TextView
         android:layout_width="200dp"
         android:layout_height="20dp"
         android:text="Marcar todas como leídas"
         android:textColor="@color/colorAccent"
         android:layout_marginLeft="10dp"
-        android:id="@+id/tv_marcar_all_leidas_cliente"/>
+        android:id="@+id/tv_marcar_all_leidas_empleado"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/gv_notificacionesCliente"
+        android:id="@+id/gv_notificaciones_empleado"
         android:layout_width="350dp"
         android:layout_height="300dp"
         android:layout_marginTop="50dp"
@@ -63,6 +64,8 @@
 
 
     </android.support.v7.widget.RecyclerView>
+
+
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="90dp"
@@ -73,5 +76,7 @@
         android:id="@+id/menu_navigation"
 
         />
+
+
 
 </LinearLayout>
