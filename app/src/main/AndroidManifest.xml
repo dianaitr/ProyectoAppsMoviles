@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".employee_activities.PerfilEmpleadoActivity"></activity>
+        <activity android:name=".employee_activities.DisponibilidadEmpleadoActivity"></activity>
+        <activity android:name=".employee_activities.PerfilEmpleadoActivity" />
         <activity android:name=".client_activities.NotificacionClienteActivity" />
 
         <meta-data
