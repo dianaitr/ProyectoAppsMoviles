@@ -39,7 +39,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -61,9 +64,8 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
     String userType;
 
     private static final int REQUEST_CODE = 11;
-    private GoogleMap mMap;
     private LocationManager locationManager;
-
+    private Location myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +120,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                     Toast.makeText(RegisterEmployeeActivity.this, "Not Enough Permission", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
+                    Toast.makeText(RegisterEmployeeActivity.this, "Obteniendo dirección GPS...", Toast.LENGTH_LONG).show();
                     String provider = "";
                     if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) provider=LocationManager.NETWORK_PROVIDER;
                     else if  (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) provider= LocationManager.GPS_PROVIDER;
@@ -125,7 +128,8 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                     locationManager.requestLocationUpdates(provider, 10, 10, new LocationListener() {
                         @Override
                         public void onLocationChanged(Location location) {
-                            txtAddress.setText(getAddress(location));
+                            myLocation = location;
+                            txtAddress.setText(getAddress(myLocation));
                         }
 
                         @Override
@@ -186,6 +190,17 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             usuario.setCedula(txtCC.getText().toString());
                             usuario.setCorreo(txtEmail.getText().toString());
                             usuario.setTelefono(txtTel.getText().toString());
+                            usuario.setUbicacion(myLocation);
+                            usuario.setCalificacion(0);
+                            usuario.setActivo(false);
+                            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                            Date date = null;
+                            try {
+                                date = format.parse(txtAddress.getText().toString());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            usuario.setFecha_nacimiento(date);
 
                             if(userType.equals("employee")){
                                 rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);

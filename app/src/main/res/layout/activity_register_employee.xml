@@ -168,7 +168,8 @@
             android:layout_height="wrap_content"
             android:hint="Correo electrónico"
             android:textSize="16dp"
-            android:id="@+id/txtEmail"/>
+            android:id="@+id/txtEmail"
+            android:inputType="textEmailAddress"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -184,7 +185,8 @@
             android:layout_height="wrap_content"
             android:hint="Número de telefono"
             android:textSize="16dp"
-            android:id="@+id/txtTel"/>
+            android:id="@+id/txtTel"
+            android:inputType="phone"/>
 
 
         <TextView
@@ -202,22 +204,6 @@
             android:hint="N° de identificación"
             android:textSize="16dp"
             android:id="@+id/txtCC"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¿Qué servicios prestarás?"
-            android:textSize="16dp"
-            android:layout_gravity="left"
-            android:layout_marginTop="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Podrás editar las fechas y horas de prestación de servicio en tu perfil."
-            android:textSize="12dp"
-            android:layout_gravity="left"
-           />
 
         <RadioButton
             android:layout_marginTop="5dp"
