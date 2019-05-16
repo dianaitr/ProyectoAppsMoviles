@@ -62,6 +62,10 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
         setContentView(R.layout.activity_register_client);
 
 
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        //firebaseDatabase.setPersistenceEnabled(true);
+        databaseReference=firebaseDatabase.getReference();
+        auth = FirebaseAuth.getInstance();
 
         txtName=findViewById(R.id.txtNameClient);
         txtLastName=findViewById(R.id.txtLastNamesClient);
@@ -113,6 +117,7 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
 
                 if(pass.equals(repass)) {
 
+                    Log.e("erorrrrrrrrrrr",correo+"-"+pass+"--"+repass);
                     auth.createUserWithEmailAndPassword(correo,pass).addOnSuccessListener(
                             new OnSuccessListener<AuthResult>() {
                                 @Override
@@ -137,7 +142,7 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
                                     //falta location
                                     //p.setUbicacion(new Location());
 
-                                    databaseReference.child("usuarios").child("clientes").child(p.getUid()).setValue(p);
+                                    databaseReference.child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(p);
                                     // Toast.makeText(this,"Agregado",Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(RegisterClientActivity.this, PerfilClienteActivity.class);
                                     i.putExtra("userId", p.getUid());
@@ -168,11 +173,8 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
     }
 
     private void inicializarFirebase() {
-        FirebaseApp.initializeApp(this);
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        //firebaseDatabase.setPersistenceEnabled(true);
-        databaseReference=firebaseDatabase.getReference();
-        auth = FirebaseAuth.getInstance();
+        //FirebaseApp.initializeApp(this);
+
 
 
     }
