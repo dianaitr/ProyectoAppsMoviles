@@ -49,9 +49,10 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
     String sexSelected="";
     RadioButton rdAcceptTermsCond;
 
-    FirebaseDatabase firebaseDatabase;
+
     DatabaseReference databaseReference;
     FirebaseAuth auth;
+    FirebaseDatabase rtdb;
 
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -63,10 +64,11 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
         setContentView(R.layout.activity_register_client);
 
 
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        //firebaseDatabase.setPersistenceEnabled(true);
-        databaseReference=firebaseDatabase.getReference();
         auth = FirebaseAuth.getInstance();
+        rtdb = FirebaseDatabase.getInstance();
+
+
+
 
         txtName=findViewById(R.id.txtNameClient);
         txtLastName=findViewById(R.id.txtLastNamesClient);
@@ -87,9 +89,6 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
         txtTel=findViewById(R.id.txtTelClient);
         txtPass=findViewById(R.id.txtPassword_Client);
         txtRepass=findViewById(R.id.txt_Re_Password_Client);
-
-
-
         rdSex= (RadioGroup) findViewById(R.id.rdSexClient);
         rdSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -105,7 +104,7 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
         });
         rdAcceptTermsCond= (RadioButton)findViewById(R.id.rdAcceptTermsCond);
 
-        inicializarFirebase();
+
 
         btn_registerClient=(Button)findViewById(R.id.btn_registerClient);
         btn_registerClient.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +123,7 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
 
-                                    Log.e("erorrrrrrrrrrr",auth.getCurrentUser().getUid());
+                                    Log.e("ENTROOOO",auth.getCurrentUser().getUid());
                                     //registro en el firebase
                                     Usuario p = new Usuario();
                                     p.setUid(auth.getCurrentUser().getUid());
@@ -143,13 +142,13 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
                                     //falta location
                                     //p.setUbicacion(new Location());
 
-                                    databaseReference.child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(p);
+                                    rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(p);
                                     // Toast.makeText(this,"Agregado",Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(RegisterClientActivity.this, ServiciosActivity.class);
-                                    i.putExtra("userId", p.getUid());
-                                    startActivity(i);
+                                    //Intent i = new Intent(RegisterClientActivity.this, ServiciosActivity.class);
+                                    //i.putExtra("userId", p.getUid());
+                                    //startActivity(i);
 
-                                    finish();
+                                    //finish();
 
                                 }
                             }
