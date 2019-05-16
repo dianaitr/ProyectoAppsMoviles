@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.icesi.proyectoappsmoviles">
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -14,8 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".employee_activities.DisponibilidadEmpleadoActivity"></activity>
-        <activity android:name=".employee_activities.PerfilEmpleadoActivity" />
+        <activity android:name=".employee_activities.DisponibilidadEmpleadoActivity" />
+        <activity android:name=".employee_activities.PerfilEmpleadoActivity">
+            </activity>
         <activity android:name=".client_activities.NotificacionClienteActivity" />
 
         <meta-data
@@ -40,20 +42,29 @@
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".client_activities.RegisterClientActivity" />
         <activity android:name=".client_activities.BuscarServicioActivity" />
         <activity android:name=".client_activities.PerfilClienteActivity" />
         <activity android:name=".employee_activities.RegisterEmployeeActivity" />
         <activity android:name=".employee_activities.CalendarEmpRegActivity" />
         <activity android:name=".client_activities.CalendarClientRegActivity" />
+        <activity android:name=".employee_activities.ServiciosActivity" />
+        <activity
+            android:name=".NavigationDrawerActivity"
+            android:label="@string/title_activity_navigation_drawer"
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <activity
+            android:name=".ConfigurationActivity"
+            android:label="@string/title_activity_configuration" />
     </application>
 
 </manifest>

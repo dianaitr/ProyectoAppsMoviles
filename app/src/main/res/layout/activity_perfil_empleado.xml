@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:design="http://schemas.android.com/apk/res-auto"
     tools:context=".employee_activities.PerfilEmpleadoActivity"
-    android:background="@color/colorPrimary"
+    android:background="#57B2B4"
     android:orientation="vertical">
 
 

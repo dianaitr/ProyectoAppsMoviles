@@ -1,45 +1,49 @@
 package com.app.icesi.proyectoappsmoviles.employee_activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
+import com.app.icesi.proyectoappsmoviles.LoginActivity;
 import com.app.icesi.proyectoappsmoviles.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
+import com.app.icesi.proyectoappsmoviles.model.Usuario;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.util.Calendar;
 
-public class RegisterEmployeeActivity extends AppCompatActivity {
+public class RegisterEmployeeActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    Button btn_register,btn_calendar;
+    Button btn_next,btn_calendar;
 
-    EditText txtName,txtLastName,txtAddress,txtEmail,txtCC,txtTel;
+    EditText txtName,txtLastName,txtAddress,txtEmail,txtCC,txtTel, txtPassword, txtRePassword;
     TextView txtDateOfBirth;
 
     RadioGroup rdSex;
     String sexSelected="";
     RadioButton rdAcceptTermsCond;
 
-    ListView listViewServices;
-    ArrayList listServices = new ArrayList();
+    FirebaseAuth auth;
+    FirebaseDatabase rtdb;
 
-    CheckBox cb,cb0,cb1,cb2,cb3,cb4,cb5,cb6,cb7;
-
-
-
+    String userType;
 
 
     @Override
@@ -47,19 +51,25 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_employee);
 
+        userType=getIntent().getExtras().getString("userType");
+
+        auth = FirebaseAuth.getInstance();
+        rtdb = FirebaseDatabase.getInstance();
 
         txtName=findViewById(R.id.txtName);
         txtLastName=findViewById(R.id.txtLastNames);
         txtAddress=findViewById(R.id.txtAdress);
         txtEmail=findViewById(R.id.txtEmail);
+        txtPassword=findViewById(R.id.txtPassword_Empleado);
+        txtRePassword=findViewById(R.id.txt_Re_Password_Empleado);
         txtDateOfBirth=findViewById(R.id.txtDateOfBirth);
         txtDateOfBirth.setText(getIntent().getStringExtra("date"));
         btn_calendar= findViewById(R.id.btn_calendar);
         btn_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RegisterEmployeeActivity.this,CalendarEmpRegActivity.class);
-                startActivity(i);
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(),"date picker");
             }
         });
         txtCC=findViewById(R.id.txtCC);
@@ -81,20 +91,10 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
             }
         });
         rdAcceptTermsCond= (RadioButton)findViewById(R.id.rdAcceptTermsCond);
-        cb= findViewById(R.id.cb);
-        cb0 = findViewById(R.id.cb0);
-        cb1 = findViewById(R.id.cb1);
-        cb2 = findViewById(R.id.cb2);
-        cb3 = findViewById(R.id.cb3);
-        cb4 = findViewById(R.id.cb4);
-        cb5 = findViewById(R.id.cb5);
-        cb6 = findViewById(R.id.cb6);
-        cb7 = findViewById(R.id.cb7);
-        //TODO - checkboxes
 
 
-        btn_register=findViewById(R.id.btn_register);
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        btn_next=findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(txtName.getText().equals("") || txtLastName.getText().equals("")
@@ -105,7 +105,42 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
                         validacion();
                 }else{
 
-                    //TODO - registro en el firebase
+                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString(), txtPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            //TODO - registro en el firebase
+                            Usuario usuario = new Usuario();
+                            usuario.setUid(auth.getCurrentUser().getUid());
+                            usuario.setNombres(txtName.getText().toString());
+                            usuario.setApellidos(txtLastName.getText().toString());
+                            usuario.setCedula(txtCC.getText().toString());
+                            usuario.setCorreo(txtEmail.getText().toString());
+                            usuario.setTelefono(txtTel.getText().toString());
+
+                            if(userType.equals("employee")){
+                                rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);
+                                Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
+                                i.putExtra("id", auth.getCurrentUser().getUid());
+                                startActivity(i);
+                            }else{
+                                rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
+                                Intent i= new Intent(RegisterEmployeeActivity.this,LoginActivity.class);
+                                i.putExtra("id", auth.getCurrentUser().getUid());
+                                startActivity(i);
+                            }
+
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterEmployeeActivity.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+
+
 
                 }
             }
@@ -115,33 +150,6 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
 
 
 
-    }
-
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-        // Check which checkbox was clicked
-        switch(view.getId()) {
-            case R.id.cb:
-                if (checked){
-
-                }
-                // Put some meat on the sandwich
-            else
-
-                // Remove the meat
-                break;
-            case R.id.cb1:
-                if (checked){
-
-                }
-                // Cheese me
-            else
-                // I'm lactose intolerant
-                break;
-            // TODO: Veggie sandwich
-        }
     }
 
     /**
@@ -205,6 +213,19 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
         if(name.equals("")){
             txtName.setError("Required");
         }
+
+    }
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+        Calendar c= Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH,month);
+        c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
+        txtDateOfBirth.setText(currentDateString);
 
     }
 }

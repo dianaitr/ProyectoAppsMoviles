@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/btn_perfilUser"
+            android:icon="@drawable/ic_perfiluser"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/btn_notificaciones"
+            android:icon="@drawable/ic_notifications"
+            android:title="Notificaciones" />
+
+        <item
+            android:id="@+id/btn_config"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Configuración" />
+    </group>
+
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/btn_info"
+                android:title="Información" />
+            <item
+                android:id="@+id/btn_logout"
+                android:title="Cerrar sesión" />
+        </menu>
+    </item>
+
+</menu>
