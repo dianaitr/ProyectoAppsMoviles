@@ -120,7 +120,6 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             if(userType.equals("employee")){
                                 rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);
                                 Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
-                                i.putExtra("id", auth.getCurrentUser().getUid());
                                 startActivity(i);
                             }else{
                                 rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
