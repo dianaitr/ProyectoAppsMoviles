@@ -244,7 +244,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View v) {
 
                     Intent i = new Intent(LoginActivity.this,RegisterEmployeeActivity.class);
-                    i.putExtra("typeUser",typeUser);
+                    i.putExtra("userType",typeUser);
                     startActivity(i);
 
             }
