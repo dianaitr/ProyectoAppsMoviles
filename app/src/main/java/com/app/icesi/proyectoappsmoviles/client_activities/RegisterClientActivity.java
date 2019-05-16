@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.ServiciosActivity;
 import com.app.icesi.proyectoappsmoviles.employee_activities.CalendarEmpRegActivity;
 import com.app.icesi.proyectoappsmoviles.employee_activities.RegisterEmployeeActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
@@ -139,7 +140,7 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
 
                                     databaseReference.child("usuarios").child("clientes").child(p.getUid()).setValue(p);
                                     // Toast.makeText(this,"Agregado",Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(RegisterClientActivity.this, PerfilClienteActivity.class);
+                                    Intent i = new Intent(RegisterClientActivity.this, ServiciosActivity.class);
                                     i.putExtra("userId", p.getUid());
                                     startActivity(i);
 
