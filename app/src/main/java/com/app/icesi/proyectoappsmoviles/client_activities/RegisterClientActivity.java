@@ -3,9 +3,11 @@ package com.app.icesi.proyectoappsmoviles.client_activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.location.Location;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -20,7 +22,11 @@ import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.employee_activities.CalendarEmpRegActivity;
 import com.app.icesi.proyectoappsmoviles.employee_activities.RegisterEmployeeActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,7 +41,7 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
 
     Button btn_registerClient,btn_calendar;
 
-    EditText txtName,txtLastName,txtAddress,txtEmail,txtCC,txtTel;
+    EditText txtName,txtLastName,txtAddress,txtEmail,txtCC,txtTel,txtPass,txtRepass;
     TextView txtDateOfBirth;
 
     RadioGroup rdSex;
@@ -44,6 +50,8 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    FirebaseAuth auth;
+
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -52,6 +60,8 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_client);
+
+
 
         txtName=findViewById(R.id.txtNameClient);
         txtLastName=findViewById(R.id.txtLastNamesClient);
@@ -70,6 +80,8 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
         });
         txtCC=findViewById(R.id.txtCCClient);
         txtTel=findViewById(R.id.txtTelClient);
+        txtPass=findViewById(R.id.txtPassword_Client);
+        txtRepass=findViewById(R.id.txt_Re_Password_Client);
 
 
 
@@ -95,35 +107,60 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v) {
 
+                final String correo = txtEmail.getText().toString();
+                final String pass = txtPass.getText().toString();
+                final String repass = txtRepass.getText().toString();
+
+                if(pass.equals(repass)) {
+
+                    auth.createUserWithEmailAndPassword(correo,pass).addOnSuccessListener(
+                            new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+
+                                    Log.e("erorrrrrrrrrrr",auth.getCurrentUser().getUid());
+                                    //registro en el firebase
+                                    Usuario p = new Usuario();
+                                    p.setUid(auth.getCurrentUser().getUid());
+                                    p.setNombres(txtName.getText().toString());
+                                    p.setApellidos(txtLastName.getText().toString());
+                                    p.setCedula(txtCC.getText().toString());
+                                    p.setCorreo(txtEmail.getText().toString());
+                                    p.setTelefono(txtTel.getText().toString());
+                                    p.setGenero(sexSelected);
+
+                                    String dates = txtDateOfBirth.getText().toString();
+                                    ParsePosition pp1 = new ParsePosition(0);
+                                    Date date = formatter.parse(dates, pp1);
+                                    p.setFecha_nacimiento(date);
+
+                                    //falta location
+                                    //p.setUbicacion(new Location());
+
+                                    databaseReference.child("usuarios").child("clientes").child(p.getUid()).setValue(p);
+                                    // Toast.makeText(this,"Agregado",Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(RegisterClientActivity.this, PerfilClienteActivity.class);
+                                    i.putExtra("userId", p.getUid());
+                                    startActivity(i);
+
+                                    finish();
+
+                                }
+                            }
+                    ).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterClientActivity.this, "Hubo un error al registrarse", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
 
-                        //registro en el firebase
-                        Usuario p=new Usuario();
-                        p.setUid(UUID.randomUUID().toString());
-                        p.setNombres(txtName.getText().toString());
-                        p.setApellidos(txtLastName.getText().toString());
-                        p.setCedula(txtCC.getText().toString());
-                        p.setCorreo(txtEmail.getText().toString());
-                        p.setTelefono(txtTel.getText().toString());
-                        p.setGenero(sexSelected);
-
-                        String dates=txtDateOfBirth.getText().toString();
-                        ParsePosition pp1 = new ParsePosition(0);
-                        Date date = formatter.parse(dates,pp1);
-                        p.setFecha_nacimiento(date);
-
-                        //falta location
-                        //p.setUbicacion(new Location());
-
-                        databaseReference.child("usuarios").child("clientes").child(p.getUid()).setValue(p);
-                        // Toast.makeText(this,"Agregado",Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(RegisterClientActivity.this,PerfilClienteActivity.class);
-                        i.putExtra("userId",p.getUid());
-                        startActivity(i);
 
 
-                        //Toast.makeText(this,"Debe aceptar los terminos y condiciones para poder registrarse.",Toast.LENGTH_SHORT).show();
 
+
+
+                }
             }
         });
 
@@ -135,7 +172,7 @@ public class RegisterClientActivity extends AppCompatActivity implements DatePic
         firebaseDatabase=FirebaseDatabase.getInstance();
         //firebaseDatabase.setPersistenceEnabled(true);
         databaseReference=firebaseDatabase.getReference();
-
+        auth = FirebaseAuth.getInstance();
 
 
     }
