@@ -108,13 +108,28 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <Button
+        android:id="@+id/btn_editar_disponibilidad_empleado"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:background="#B0CA36"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="60dp"
+        android:textAllCaps="false"
+        android:text="Agregar nueva fecha y horas de disponibilidad"
+        android:textAlignment="center"
+
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        />
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_gravity="bottom"
         design:menu="@menu/menu_navigation"
         android:background="#ffff"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/menu_navigation"
 
         />

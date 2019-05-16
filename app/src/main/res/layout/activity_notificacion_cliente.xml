@@ -47,21 +47,22 @@
 
     </RelativeLayout>
 
-    <GridView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/gv_notificacionesCliente"
-        android:layout_width="match_parent"
-        android:layout_height="85mm"
-        android:layout_margin="1mm">
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp">
 
 
-    </GridView>
+    </android.support.v7.widget.RecyclerView>
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_gravity="bottom"
         design:menu="@menu/menu_navigation"
         android:background="#ffff"
-        android:layout_marginTop="2mm"
+        android:layout_marginTop="225dp"
         android:id="@+id/menu_navigation"
 
         />
