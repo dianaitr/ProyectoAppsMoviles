@@ -96,16 +96,17 @@
     </RelativeLayout>
 
 
-    <GridView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/gv_lista_servicios_empleado"
         android:layout_width="250dp"
         android:layout_height="220dp"
         android:layout_marginTop="100dp"
         android:layout_marginLeft="90dp"
+        android:background="@color/colorPrimaryDark"
         >
 
 
-    </GridView>
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"

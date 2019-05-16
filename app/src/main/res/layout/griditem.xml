@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
 
-    Imagen, nombre, apellido, calificacion
+
     <ImageView
         android:id="@+id/imagenEmpleado_cliente"
         android:layout_width="90dp"
