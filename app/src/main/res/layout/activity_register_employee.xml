@@ -52,9 +52,22 @@
         android:textSize="16dp"
         android:id="@+id/txtLastNames"/>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:textSize="16dp"
+            android:id="@+id/txtPassword_Empleado"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Repetir contraseña"
+            android:textSize="16dp"
+            android:id="@+id/txt_Re_Password_Empleado"/>
 
 
-    <TextView
+
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Cúal es tu dirección de domicilio?"
