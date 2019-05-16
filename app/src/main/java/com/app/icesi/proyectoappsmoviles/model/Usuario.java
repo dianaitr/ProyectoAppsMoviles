@@ -26,6 +26,16 @@ public class Usuario {
     private double calificacion;
     private boolean activo;
 
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    private String contrasena;
+
     public Usuario() {
     }
 

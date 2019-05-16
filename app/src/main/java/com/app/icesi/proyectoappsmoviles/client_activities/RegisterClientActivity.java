@@ -1,17 +1,21 @@
 package com.app.icesi.proyectoappsmoviles.client_activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.location.Location;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.employee_activities.CalendarEmpRegActivity;
 import com.app.icesi.proyectoappsmoviles.employee_activities.RegisterEmployeeActivity;
@@ -20,12 +24,14 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-public class RegisterClientActivity extends AppCompatActivity {
+public class RegisterClientActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     Button btn_registerClient,btn_calendar;
 
@@ -52,13 +58,14 @@ public class RegisterClientActivity extends AppCompatActivity {
         txtAddress=findViewById(R.id.txtAdressClient);
         txtEmail=findViewById(R.id.txtEmailCliente);
         txtDateOfBirth=findViewById(R.id.txtDateOfBirthClient);
-        txtDateOfBirth.setText(getIntent().getStringExtra("dateClient"));
+        //txtDateOfBirth.setText(getIntent().getStringExtra("dateClient"));
         btn_calendar= findViewById(R.id.btn_calendarClient);
         btn_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RegisterClientActivity.this,CalendarClientRegActivity.class);
-                startActivity(i);
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(),"date picker");
+
             }
         });
         txtCC=findViewById(R.id.txtCCClient);
@@ -90,7 +97,7 @@ public class RegisterClientActivity extends AppCompatActivity {
 
 
 
-                        //TODO - registro en el firebase
+                        //registro en el firebase
                         Usuario p=new Usuario();
                         p.setUid(UUID.randomUUID().toString());
                         p.setNombres(txtName.getText().toString());
@@ -170,6 +177,20 @@ public class RegisterClientActivity extends AppCompatActivity {
         if(name.equals("")){
             txtName.setError("Required");
         }
+
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+        Calendar c= Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH,month);
+        c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
+        txtDateOfBirth.setText(currentDateString);
 
     }
 }

@@ -1,30 +1,38 @@
 package com.app.icesi.proyectoappsmoviles.employee_activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.ServiciosActivity;
+import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class RegisterEmployeeActivity extends AppCompatActivity {
+public class RegisterEmployeeActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    Button btn_register,btn_calendar;
+    Button btn_next,btn_calendar;
 
     EditText txtName,txtLastName,txtAddress,txtEmail,txtCC,txtTel;
     TextView txtDateOfBirth;
@@ -49,8 +57,8 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
         btn_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RegisterEmployeeActivity.this,CalendarEmpRegActivity.class);
-                startActivity(i);
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(),"date picker");
             }
         });
         txtCC=findViewById(R.id.txtCC);
@@ -74,8 +82,8 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
         rdAcceptTermsCond= (RadioButton)findViewById(R.id.rdAcceptTermsCond);
 
 
-        btn_register=findViewById(R.id.btn_register);
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        btn_next=findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(txtName.getText().equals("") || txtLastName.getText().equals("")
@@ -87,6 +95,17 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
                 }else{
 
                     //TODO - registro en el firebase
+                    Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
+                    Usuario u= new Usuario();
+                    u.setNombres(txtName.getText().toString());
+                    u.setApellidos(txtLastName.getText().toString());
+                    u.setCedula(txtCC.getText().toString());
+                    //u.setUbicacion(txtAddress.getText().toString());
+                    u.setCorreo(txtEmail.getText().toString());
+                    u.setTelefono(txtTel.getText().toString());
+                    //i.putExtra("userToCreate",u);
+                    startActivity(i);
+
 
                 }
             }
@@ -159,6 +178,19 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
         if(name.equals("")){
             txtName.setError("Required");
         }
+
+    }
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+        Calendar c= Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH,month);
+        c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
+        txtDateOfBirth.setText(currentDateString);
 
     }
 }
