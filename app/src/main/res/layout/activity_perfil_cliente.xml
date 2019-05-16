@@ -6,55 +6,59 @@
     android:layout_height="match_parent"
     xmlns:design="http://schemas.android.com/apk/res-auto"
     tools:context=".client_activities.PerfilClienteActivity"
+    tools:showIn="@layout/app_bar_navigation_drawer"
     android:orientation="vertical"
     android:background="#57B2B4">
 
 
     <LinearLayout
-        android:layout_width="70mm" 
-        android:layout_height="50mm"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
         android:orientation="vertical"
         android:background="#B0CA36"
         >
 
         <ImageView
+
             android:id="@+id/person1_imagen"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:layout_marginLeft="24mm"
-            android:layout_marginTop="10mm"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/person1"/>
+
 
         <TextView
             android:id="@+id/tv_nameCliente"
-            android:layout_width="100dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="24mm"
-            android:layout_marginTop="6mm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
             android:text="Pepita Perez"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:textColor="#ffff"/>
+            android:textColor="#ffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_localidadCliente"
-            android:layout_width="100dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="25mm"
-            android:layout_marginTop="1mm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
             android:text="Cali, Valle del Cauca"
-            android:textSize="8dp"
+            android:textSize="15dp"
             android:textStyle="bold"
             android:textColor="#000"/>
 
         <TextView
 
-            android:layout_width="100dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="27mm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
             android:text="Calificación"
-            android:textSize="8dp"
-            android:textStyle="bold"
+            android:textSize="15dp"
+
             android:textColor="#ffff"/>
 
         <TextView
@@ -72,13 +76,15 @@
 
     <Button
         android:id="@+id/btn_historialCliente"
-        android:layout_width="100mm"
-        android:layout_height="6mm"
+        android:paddingRight="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#C0CCDA"
         android:layout_marginTop="15dp"
         android:textAllCaps="false"
         android:text="Historial de solicitudes pedidas"
-        android:textAlignment="textStart"
+
         android:textSize="12dp"
         android:textStyle="bold"
         android:textColor="#000"
@@ -86,12 +92,15 @@
 
 
     <Button
+        android:layout_marginTop="15dp"
+
         android:id="@+id/btn_nuevoServicioCliente"
-        android:layout_width="20mm"
-        android:layout_height="6mm"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content"
         android:background="#B0CA36"
-        android:layout_marginTop="15mm"
-        android:layout_marginLeft="20mm"
         android:textAllCaps="false"
         android:text="Buscar un nuevo servicio"
         android:textSize="11dp"
@@ -101,22 +110,25 @@
 
     <TextView
         android:id="@+id/tv_ayudaCliente"
-        android:layout_width="100dp"
+
         android:layout_height="25dp"
-        android:layout_marginLeft="24mm"
-        android:layout_marginTop="6mm"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
 
         android:text="¿Necesitas ayuda?"
         android:textSize="10dp"
         android:textStyle="bold"
         android:textColor="#ffff"/>
     <Button
+
         android:id="@+id/btn_sign_out"
-        android:layout_width="20mm"
-        android:layout_height="6mm"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:background="#B0CA36"
-        android:layout_marginTop="2mm"
-        android:layout_marginLeft="20mm"
+
         android:textAllCaps="false"
         android:text="Cerrar sesión"
         android:textSize="11dp"
@@ -125,13 +137,13 @@
         />
 
     <android.support.design.widget.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_gravity="bottom"
-        design:menu="@menu/menu_navigation"
-        android:background="#ffff"
-        android:layout_marginTop="2mm"
+        android:layout_marginTop="65dp"
         android:id="@+id/btn_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:background="#ffff"
+        design:menu="@menu/menu_navigation"
 
         />
 

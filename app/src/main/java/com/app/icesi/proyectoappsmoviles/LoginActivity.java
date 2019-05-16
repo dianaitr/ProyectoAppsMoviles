@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
+import com.app.icesi.proyectoappsmoviles.employee_activities.PerfilEmpleadoActivity;
 import com.app.icesi.proyectoappsmoviles.employee_activities.RegisterEmployeeActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -256,6 +257,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View v) {
                 if(typeUser.equals("client")){
                     Intent i = new Intent(LoginActivity.this, PerfilClienteActivity.class);
+                    startActivity(i);
+                }else{
+                    Intent i = new Intent(LoginActivity.this, PerfilEmpleadoActivity.class);
                     startActivity(i);
                 }
 
