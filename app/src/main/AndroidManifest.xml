@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".client_activities.NotificacionClienteActivity"></activity>
+        <activity android:name=".client_activities.NotificacionClienteActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -47,16 +47,12 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-
         <activity android:name=".client_activities.RegisterClientActivity" />
         <activity android:name=".client_activities.BuscarServicioActivity" />
         <activity android:name=".client_activities.PerfilClienteActivity" />
-
-
         <activity android:name=".employee_activities.RegisterEmployeeActivity" />
-
-        <activity android:name=".employee_activities.CalendarEmpRegActivity"></activity>
-
+        <activity android:name=".employee_activities.CalendarEmpRegActivity" />
+        <activity android:name=".client_activities.CalendarClientRegActivity"></activity>
     </application>
 
 </manifest>
