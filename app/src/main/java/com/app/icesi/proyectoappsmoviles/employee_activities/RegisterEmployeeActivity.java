@@ -54,6 +54,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity {
         txtEmail=findViewById(R.id.txtEmail);
         txtDateOfBirth=findViewById(R.id.txtDateOfBirth);
         txtDateOfBirth.setText(getIntent().getStringExtra("date"));
+        btn_calendar= findViewById(R.id.btn_calendar);
         btn_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
