@@ -130,7 +130,7 @@
     <GridView
         android:id="@+id/gv_lista_servicios_empleado"
         android:layout_width="30mm"
-        android:layout_height="30mm"
+        android:layout_height="25mm"
         android:layout_marginTop="40mm"
         android:layout_marginLeft="16mm"
        >
@@ -142,10 +142,10 @@
 
     <Button
         android:id="@+id/btn_editar_servicios_empleado"
-        android:layout_width="35mm"
+        android:layout_width="33mm"
         android:layout_height="6mm"
         android:background="#C0CCDA"
-        android:layout_marginTop="68mm"
+        android:layout_marginTop="66mm"
         android:layout_marginLeft="15mm"
         android:textAllCaps="false"
         android:text="Editar servcios"
@@ -155,6 +155,69 @@
         android:textStyle="bold"
         android:textColor="#000"
         />
+
+    <Button
+        android:id="@+id/btn_editar_disponibilidad_empleado"
+        android:layout_width="33mm"
+        android:layout_height="6mm"
+        android:background="#C0CCDA"
+        android:layout_marginTop="73mm"
+        android:layout_marginLeft="15mm"
+        android:textAllCaps="false"
+        android:text="Editar mi disponibilidad"
+        android:textAlignment="textStart"
+
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        />
+    <Button
+        android:id="@+id/btn_editar_historial_empleado"
+        android:layout_width="33mm"
+        android:layout_height="6mm"
+        android:background="#C0CCDA"
+        android:layout_marginTop="80mm"
+        android:layout_marginLeft="15mm"
+        android:textAllCaps="false"
+        android:text="Historial de servicios prestados"
+        android:textAlignment="textStart"
+
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:id="@+id/tv_ayudaEmpleado"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="24mm"
+        android:layout_marginTop="88mm"
+
+        android:text="¿Necesitas ayuda?"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:textColor="#ffff"/>
+
+
+
+    <Button
+        android:id="@+id/btn_editar_cerrar_sesion_empleado"
+        android:layout_width="15mm"
+        android:layout_height="6mm"
+        android:background="#B0CA36"
+        android:layout_marginTop="92mm"
+        android:layout_marginLeft="23mm"
+        android:textAllCaps="false"
+        android:text="Cerrar sesión"
+
+        android:textAlignment="center"
+
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        />
+
 
 
     <android.support.design.widget.BottomNavigationView
