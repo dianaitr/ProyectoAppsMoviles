@@ -32,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
-import com.app.icesi.proyectoappsmoviles.client_activities.RegisterClientActivity;
 import com.app.icesi.proyectoappsmoviles.employee_activities.RegisterEmployeeActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -62,6 +61,7 @@ import java.util.List;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
 
 
 
@@ -241,13 +241,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         btn_newAccount.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(typeUser.equals("employee")){
+
                     Intent i = new Intent(LoginActivity.this,RegisterEmployeeActivity.class);
+                    i.putExtra("typeUser",typeUser);
                     startActivity(i);
-                }else if(typeUser.equals("client")){
-                    Intent i = new Intent(LoginActivity.this, RegisterClientActivity.class);
-                    startActivity(i);
-                }
+
             }
         });
 

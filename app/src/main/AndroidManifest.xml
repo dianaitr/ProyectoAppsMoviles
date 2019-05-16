@@ -48,7 +48,6 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".client_activities.RegisterClientActivity" />
         <activity android:name=".client_activities.BuscarServicioActivity" />
         <activity android:name=".client_activities.PerfilClienteActivity" />
         <activity android:name=".employee_activities.RegisterEmployeeActivity" />

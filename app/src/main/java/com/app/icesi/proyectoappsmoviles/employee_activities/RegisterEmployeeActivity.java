@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
+import com.app.icesi.proyectoappsmoviles.LoginActivity;
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,11 +43,15 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
 
+    String userType;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_employee);
+
+        userType=getIntent().getExtras().getString("userType");
 
         auth = FirebaseAuth.getInstance();
         rtdb = FirebaseDatabase.getInstance();
@@ -112,7 +117,18 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             usuario.setCorreo(txtEmail.getText().toString());
                             usuario.setTelefono(txtTel.getText().toString());
 
-                            rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);
+                            if(userType.equals("employee")){
+                                rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);
+                                Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
+                                i.putExtra("id", auth.getCurrentUser().getUid());
+                                startActivity(i);
+                            }else{
+                                rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
+                                Intent i= new Intent(RegisterEmployeeActivity.this,LoginActivity.class);
+                                i.putExtra("id", auth.getCurrentUser().getUid());
+                                startActivity(i);
+                            }
+
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -123,9 +139,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         }
                     });
 
-                    Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
-                    i.putExtra("id", auth.getCurrentUser().getUid());
-                    startActivity(i);
+
 
 
                 }
