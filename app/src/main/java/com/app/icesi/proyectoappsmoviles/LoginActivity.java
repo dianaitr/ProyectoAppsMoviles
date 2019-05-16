@@ -233,13 +233,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         btn_newAccount.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(typeUser.equals("employee")){
-                    Intent i = new Intent(LoginActivity.this,RegisterEmployeeActivity.class);
-                    startActivity(i);
-                }else if(typeUser.equals("client")){
-                    Intent i = new Intent(LoginActivity.this, RegisterEmployeeActivity.class);
-                    startActivity(i);
-                }
+                Intent i = new Intent(LoginActivity.this, RegisterEmployeeActivity.class);
+                i.putExtra("userType",typeUser); //por si acaso
+                startActivity(i);
+                finish();
             }
         });
 
@@ -250,8 +247,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View view) {
                 //attemptLogin();
 
-                String mail = mEmailView.getText().toString();
-                String pass = mPasswordView.getText().toString();
+                String mail = mEmailView.getText().toString().trim();
+                String pass = mPasswordView.getText().toString().trim();
 
                 auth.signInWithEmailAndPassword(mail, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
