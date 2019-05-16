@@ -46,6 +46,13 @@
 
 
     </RelativeLayout>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:text="Marcar todas como leídas"
+        android:textColor="@color/colorAccent"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/tv_marcar_all_leidas_cliente"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/gv_notificacionesCliente"

@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:design="http://schemas.android.com/apk/res-auto"
-    tools:context=".employee_activities.HistorialEmpleadoActivity"
+    tools:context=".client_activities.HistorialClienteActivity"
     android:orientation="vertical"
     android:background="#57B2B4">
-
     <RelativeLayout
         android:layout_width="410dp"
         android:layout_height="68dp"
@@ -37,10 +36,10 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="55dp"
             android:layout_marginTop="14dp"
 
-            android:text="Historial de servicios proveídos"
+            android:text="Historial de solicitudes pedidas"
             android:textColor="#000"
             android:textSize="21dp" />
 

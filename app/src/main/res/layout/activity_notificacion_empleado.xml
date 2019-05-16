@@ -53,7 +53,7 @@
         android:text="Marcar todas como leídas"
         android:textColor="@color/colorAccent"
         android:layout_marginLeft="10dp"
-        android:id="@+id/tv_marcar_all_leidas"/>
+        android:id="@+id/tv_marcar_all_leidas_empleado"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/gv_notificaciones_empleado"
