@@ -39,6 +39,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -69,7 +70,7 @@ import java.util.List;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity {
 
 
 
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    //private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -131,6 +132,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
+        auth.signOut();
+        LoginManager.getInstance().logOut();
 
         ///////////////////////////////////Configure of google login////////////////////////////////////////
         // Configure sign-in to request the user's ID, email address, and basic
@@ -190,6 +193,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.d("Face>>", "facebook:onCancel");
                 Toast toast1 =Toast.makeText(getApplicationContext(),"CANCEL LOGIN", Toast.LENGTH_LONG);
                 toast1.show();
+
                 // [START_EXCLUDE]
                 updateUI(null);
                 // [END_EXCLUDE]
@@ -212,19 +216,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-
-
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -233,6 +225,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         btn_newAccount.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                auth.signOut();
                 Intent i = new Intent(LoginActivity.this, RegisterEmployeeActivity.class);
                 i.putExtra("userType",typeUser); //por si acaso
                 startActivity(i);
@@ -247,8 +240,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View view) {
                 //attemptLogin();
 
-                String mail = mEmailView.getText().toString().trim();
-                String pass = mPasswordView.getText().toString().trim();
+                final String mail = mEmailView.getText().toString().trim();
+                final String pass = mPasswordView.getText().toString().trim();
 
                 auth.signInWithEmailAndPassword(mail, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
@@ -271,10 +264,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(LoginActivity.this, "Hubo un problema al iniciar sesión", Toast.LENGTH_SHORT).show();
+                        Log.e(">>>", "login con correo " + e.getMessage());
+                        Log.e(">>>", "Google sign in failed" + mail+"c es:"+pass+"");
+
                     }
                 });
-
-
 
             }
         });
@@ -291,7 +285,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    /*private void attemptLogin() {
         if (mAuthTask != null) {
             return;
         }
@@ -350,9 +344,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return password.length() > 4;
     }
 
-    /**
+    *//**
      * Shows the progress UI and hides the login form.
-     */
+     *//*
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
@@ -440,10 +434,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
-    /**
+    *//**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
-     */
+     *//*
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
@@ -496,7 +490,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
-
+*/
 
     ///////////////////////AQUI EMPIEZAN LO DE AUTENTICACION GOOGLE////////////////////
 
@@ -621,6 +615,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             //el usuario es igual a null, entonces deberia logearse
             //queda igual
+            //signOut();
+            auth.signOut();
         }
     }
 
@@ -631,7 +627,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
-   /* private void signOut() {
+    private void signOut() {
         // Firebase sign out
         auth.signOut();
 
@@ -643,7 +639,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         updateUI(null);
                     }
                 });
-    }*/
+        LoginManager.getInstance().logOut();
+    }
     /////////////////////////////////////Facebook authen///////////////////////////////////
 
 
@@ -668,8 +665,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("Face>>", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "An account already exists with the same email address",
+                            Log.w("Face>>", "signInWithCredential:failure"+task.getException().getMessage()+"", task.getException());
+                            Toast.makeText(LoginActivity.this, "Already exist an account with that email",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }

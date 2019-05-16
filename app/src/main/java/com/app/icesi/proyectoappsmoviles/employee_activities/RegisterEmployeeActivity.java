@@ -135,6 +135,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(RegisterEmployeeActivity.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+                            Log.e(">>>", "registro problem: " + e.getMessage());
 
                         }
                     });
