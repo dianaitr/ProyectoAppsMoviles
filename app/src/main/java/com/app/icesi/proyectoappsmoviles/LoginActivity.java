@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         // Set the initial permissions to request from the user while logging in
 
-        List<String> permissionNeeds = Arrays.asList("email");
+        List<String> permissionNeeds = Arrays.asList("email", "public_profile", "user_friends");
         loginButton.setReadPermissions(permissionNeeds);
         //loginButton.setReadPermissions("email", "public_profile");
 
@@ -204,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("Face>>", "facebook:onError", error);
                 Toast toast2 =Toast.makeText(getApplicationContext(),"ERROR LOGIN", Toast.LENGTH_LONG);
                 toast2.show();
-                Log.v("LoginActivity", error.getCause().toString());
+               Log.v("LoginActivity", error.getMessage());
                 // [START_EXCLUDE]
                 updateUI(null);
                 // [END_EXCLUDE]
@@ -548,7 +548,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 // The ApiException status code indicates the detailed failure reason.
                 // Please refer to the GoogleSignInStatusCodes class reference for more information.
-                Log.e(">>>", "Google sign in failed" + e.getStatusCode());
+                Log.e(">>>", "Google sign in failed" + e.getMessage());
                 updateUI(null);
             }
         }else{
