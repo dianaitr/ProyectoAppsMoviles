@@ -2,55 +2,61 @@ package com.app.icesi.proyectoappsmoviles.employee_activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.ServiciosActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class RegisterEmployeeActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     Button btn_next,btn_calendar;
 
-    EditText txtName,txtLastName,txtAddress,txtEmail,txtCC,txtTel;
+    EditText txtName,txtLastName,txtAddress,txtEmail,txtCC,txtTel, txtPassword, txtRePassword;
     TextView txtDateOfBirth;
 
     RadioGroup rdSex;
     String sexSelected="";
     RadioButton rdAcceptTermsCond;
 
+    FirebaseAuth auth;
+    FirebaseDatabase rtdb;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_employee);
 
+        auth = FirebaseAuth.getInstance();
+        rtdb = FirebaseDatabase.getInstance();
 
         txtName=findViewById(R.id.txtName);
         txtLastName=findViewById(R.id.txtLastNames);
         txtAddress=findViewById(R.id.txtAdress);
         txtEmail=findViewById(R.id.txtEmail);
+        txtPassword=findViewById(R.id.txtPassword_Empleado);
+        txtRePassword=findViewById(R.id.txt_Re_Password_Empleado);
         txtDateOfBirth=findViewById(R.id.txtDateOfBirth);
         txtDateOfBirth.setText(getIntent().getStringExtra("date"));
         btn_calendar= findViewById(R.id.btn_calendar);
@@ -94,16 +100,30 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         validacion();
                 }else{
 
-                    //TODO - registro en el firebase
+                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString(), txtPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            //TODO - registro en el firebase
+                            Usuario usuario = new Usuario();
+                            usuario.setNombres(txtName.getText().toString());
+                            usuario.setApellidos(txtLastName.getText().toString());
+                            usuario.setCedula(txtCC.getText().toString());
+                            usuario.setCorreo(txtEmail.getText().toString());
+                            usuario.setTelefono(txtTel.getText().toString());
+
+                            rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterEmployeeActivity.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
                     Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
-                    Usuario u= new Usuario();
-                    u.setNombres(txtName.getText().toString());
-                    u.setApellidos(txtLastName.getText().toString());
-                    u.setCedula(txtCC.getText().toString());
-                    //u.setUbicacion(txtAddress.getText().toString());
-                    u.setCorreo(txtEmail.getText().toString());
-                    u.setTelefono(txtTel.getText().toString());
-                    //i.putExtra("userToCreate",u);
+                    i.putExtra("id", "");
                     startActivity(i);
 
 
