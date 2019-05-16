@@ -15,9 +15,11 @@ public class Usuario {
     }
 
     private String uid;
+
     private String nombres;
     private String apellidos;
-    private Location ubicacion;
+    private double latitude;
+    private double longitude;
     private Date fecha_nacimiento;
     private String genero;
     private String correo;
@@ -39,10 +41,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombres, String apellidos, Location ubicacion, Date fecha_nacimiento, String genero, String correo, String telefono, String cedula, double calificacion, boolean activo) {
+    public Usuario(String uid, String nombres, String apellidos, double latitude, double longitude, Date fecha_nacimiento, String genero, String correo, String telefono, String cedula, double calificacion, boolean activo, String contrasena) {
+        this.uid = uid;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.ubicacion = ubicacion;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.fecha_nacimiento = fecha_nacimiento;
         this.genero = genero;
         this.correo = correo;
@@ -50,6 +54,7 @@ public class Usuario {
         this.cedula = cedula;
         this.calificacion = calificacion;
         this.activo = activo;
+        this.contrasena = contrasena;
     }
 
     public String getNombres() {
@@ -66,14 +71,6 @@ public class Usuario {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
-    }
-
-    public Location getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(Location ubicacion) {
-        this.ubicacion = ubicacion;
     }
 
     public Date getFecha_nacimiento() {
@@ -130,5 +127,21 @@ public class Usuario {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

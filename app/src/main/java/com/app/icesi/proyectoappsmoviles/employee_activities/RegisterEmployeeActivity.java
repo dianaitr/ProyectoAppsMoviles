@@ -191,7 +191,8 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             usuario.setCedula(txtCC.getText().toString());
                             usuario.setCorreo(txtEmail.getText().toString());
                             usuario.setTelefono(txtTel.getText().toString());
-                            usuario.setUbicacion(myLocation);
+                            usuario.setLatitude(myLocation.getLatitude());
+                            usuario.setLongitude(myLocation.getLongitude());
                             usuario.setCalificacion(0);
                             usuario.setActivo(false);
                             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
