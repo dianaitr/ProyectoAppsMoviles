@@ -92,6 +92,27 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
             }
         });
 
+        btn_navigation=findViewById(R.id.btn_navigation);
+        btn_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId()==R.id.menu_perfilUsuario){
+
+                    Intent i= new Intent(BuscarServicioActivity.this, PerfilClienteActivity.class);
+                    startActivity(i);
+                    finish();
+                }else if(menuItem.getItemId()==R.id.menu_notificaciones){
+                    Intent i= new Intent(BuscarServicioActivity.this, NotificacionClienteActivity.class);
+                    startActivity(i);
+                    finish();
+
+                }
+
+                return false;
+            }
+        });
+
 
 
 

@@ -104,6 +104,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i= new Intent(PerfilClienteActivity.this, BuscarServicioActivity.class );
+                startActivity(i);
             }
         });
         rtdb = FirebaseDatabase.getInstance();
