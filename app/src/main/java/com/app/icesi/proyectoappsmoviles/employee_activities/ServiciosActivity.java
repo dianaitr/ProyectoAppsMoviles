@@ -1,10 +1,11 @@
-package com.app.icesi.proyectoappsmoviles;
+package com.app.icesi.proyectoappsmoviles.employee_activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 
+import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 
 public class ServiciosActivity extends AppCompatActivity {

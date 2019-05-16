@@ -2,7 +2,6 @@ package com.app.icesi.proyectoappsmoviles.client_activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +18,7 @@ import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
 import com.app.icesi.proyectoappsmoviles.R;
-import com.app.icesi.proyectoappsmoviles.ServiciosActivity;
-import com.app.icesi.proyectoappsmoviles.employee_activities.CalendarEmpRegActivity;
-import com.app.icesi.proyectoappsmoviles.employee_activities.RegisterEmployeeActivity;
+import com.app.icesi.proyectoappsmoviles.employee_activities.ServiciosActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,7 +33,6 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
 
 public class RegisterClientActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 

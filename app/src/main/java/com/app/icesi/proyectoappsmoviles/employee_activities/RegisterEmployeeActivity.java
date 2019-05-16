@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,7 +18,6 @@ import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
 import com.app.icesi.proyectoappsmoviles.R;
-import com.app.icesi.proyectoappsmoviles.ServiciosActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -110,6 +110,8 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             usuario.setCedula(txtCC.getText().toString());
                             usuario.setCorreo(txtEmail.getText().toString());
                             usuario.setTelefono(txtTel.getText().toString());
+
+                            Log.e(">>>>>>>>>>>>>>><<","holiiiiii");
 
                             rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
 

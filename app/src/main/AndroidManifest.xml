@@ -54,6 +54,7 @@
         <activity android:name=".employee_activities.RegisterEmployeeActivity" />
         <activity android:name=".employee_activities.CalendarEmpRegActivity" />
         <activity android:name=".client_activities.CalendarClientRegActivity" />
+        <activity android:name=".employee_activities.ServiciosActivity" />
     </application>
 
 </manifest>
