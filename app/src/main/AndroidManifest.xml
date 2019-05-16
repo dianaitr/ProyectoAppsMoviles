@@ -52,11 +52,11 @@
         <activity android:name=".client_activities.BuscarServicioActivity" />
         <activity android:name=".client_activities.PerfilClienteActivity" />
 
-=======
+
         <activity android:name=".employee_activities.RegisterEmployeeActivity" />
 
         <activity android:name=".employee_activities.CalendarEmpRegActivity"></activity>
->>>>>>> f618d572da922b87f621377bd0bd668465f6b07d
+
     </application>
 
 </manifest>

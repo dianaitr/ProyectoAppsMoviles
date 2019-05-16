@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
 import com.app.icesi.proyectoappsmoviles.client_activities.RegisterClientActivity;
+import com.app.icesi.proyectoappsmoviles.employee_activities.RegisterEmployeeActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
