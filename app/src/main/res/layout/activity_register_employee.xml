@@ -63,24 +63,36 @@
             android:layout_height="wrap_content"
             android:hint="Repetir contraseña"
             android:textSize="16dp"
-            android:id="@+id/txt_Re_Password_Empleado"/>
-
-
-
-        <TextView
+            android:id="@+id/txt_Re_Password_Empleado"/>        
+    
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿Cúal es tu dirección de domicilio?"
+        android:text="¿Cuáles tu dirección de domicilio?"
         android:textSize="16dp"
         android:layout_gravity="left"
         android:layout_marginTop="20dp"/>
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Dirección"
-        android:textSize="16dp"
-        android:id="@+id/txtAdress"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:hint="Tu dirección"
+            android:textSize="16dp"
+            android:id="@+id/txtAdress"
+            android:layout_gravity="center"/>
+        
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_location"
+            android:id="@+id/btn_ubicacion"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
