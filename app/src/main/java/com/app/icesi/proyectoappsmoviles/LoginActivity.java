@@ -583,10 +583,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (user != null) {
             //mDetailTextView.setText("alguien entro yuju");
 
-            Intent i=new Intent(LoginActivity.this, PerfilClienteActivity.class);
-            i.putExtra("userType",typeUser);
-            startActivity(i);
-            finish();
+//            Intent i=new Intent(LoginActivity.this, PerfilClienteActivity.class);
+//            i.putExtra("userType",typeUser);
+//            startActivity(i);
+//            finish();
 
 
             //findViewById(R.id.sign_in_button).setVisibility(View.GONE);
