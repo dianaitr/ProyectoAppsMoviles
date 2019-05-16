@@ -105,15 +105,14 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         public void onSuccess(AuthResult authResult) {
                             //TODO - registro en el firebase
                             Usuario usuario = new Usuario();
+                            usuario.setUid(auth.getCurrentUser().getUid());
                             usuario.setNombres(txtName.getText().toString());
                             usuario.setApellidos(txtLastName.getText().toString());
                             usuario.setCedula(txtCC.getText().toString());
                             usuario.setCorreo(txtEmail.getText().toString());
                             usuario.setTelefono(txtTel.getText().toString());
 
-                            Log.e(">>>>>>>>>>>>>>><<","holiiiiii");
-
-                            rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
+                            rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -125,7 +124,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                     });
 
                     Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
-                    i.putExtra("id", "");
+                    i.putExtra("id", auth.getCurrentUser().getUid());
                     startActivity(i);
 
 

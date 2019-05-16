@@ -2,6 +2,7 @@ package com.app.icesi.proyectoappsmoviles.employee_activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -18,8 +19,10 @@ public class ServiciosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_servicios);
 
         Bundle bundle = getIntent().getExtras();
+        String id_colaborador="";
         if (bundle!=null){
-
+            id_colaborador = bundle.getString("id");
+            Log.e("serv",id_colaborador);
         }
 
         cb= findViewById(R.id.cb);
