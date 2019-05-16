@@ -212,19 +212,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-
-
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -247,8 +235,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View view) {
                 //attemptLogin();
 
-                String mail = mEmailView.getText().toString().trim();
-                String pass = mPasswordView.getText().toString().trim();
+                final String mail = mEmailView.getText().toString().trim();
+                final String pass = mPasswordView.getText().toString().trim();
 
                 auth.signInWithEmailAndPassword(mail, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
@@ -271,10 +259,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(LoginActivity.this, "Hubo un problema al iniciar sesión", Toast.LENGTH_SHORT).show();
+                        Log.e(">>>", "login con correo " + e.getMessage());
+                        Log.e(">>>", "Google sign in failed" + mail+"c es:"+pass+"");
+
                     }
                 });
-
-
 
             }
         });
