@@ -10,8 +10,8 @@
 
 
     <ImageView
-        android:layout_width="382dp"
-        android:layout_height="170dp"
+        android:layout_width="358dp"
+        android:layout_height="133dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/service" />
 
@@ -125,14 +125,14 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="30dp" />
 
-            <TextView
+            <!-- <TextView
 
                 android:id="@+id/btn_forgetPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¿Olvidaste tu contraseña?"
                 android:layout_gravity="center_horizontal"
-                android:linksClickable="true" />
+                android:linksClickable="true" /> -->
 
             <TextView
                 android:layout_marginTop="25dp"
