@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imagen_notificacion_empleado_cliente"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_notifications"/>
+    <TextView
+        android:id="@+id/tv_notificacion_titulo"
+        android:layout_width="180dp"
+        android:layout_height="20dp"
+        android:hint="Título de la notificación"
+        android:background="#00BCD4"
+        android:layout_marginLeft="55dp"
+        />
+    <TextView
+        android:id="@+id/tv_info_notificacion"
+        android:layout_width="130dp"
+        android:layout_height="20dp"
+        android:hint="Información"
+        android:background="#00BCD4"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="55dp"
+        />
+
+
+</FrameLayout>

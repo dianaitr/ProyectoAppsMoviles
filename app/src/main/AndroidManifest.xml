@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.icesi.proyectoappsmoviles">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -15,9 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".employee_activities.HistorialEmpleadoActivity"></activity>
+        <activity android:name=".employee_activities.NotificacionEmpleadoActivity" />
         <activity android:name=".employee_activities.DisponibilidadEmpleadoActivity" />
-        <activity android:name=".employee_activities.PerfilEmpleadoActivity">
-            </activity>
+        <activity android:name=".employee_activities.PerfilEmpleadoActivity" />
         <activity android:name=".client_activities.NotificacionClienteActivity" />
 
         <meta-data
@@ -42,11 +42,11 @@
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
@@ -59,9 +59,7 @@
         <activity
             android:name=".NavigationDrawerActivity"
             android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ConfigurationActivity"
             android:label="@string/title_activity_configuration" />

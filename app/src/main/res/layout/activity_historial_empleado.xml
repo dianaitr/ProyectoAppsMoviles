@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    tools:context=".employee_activities.HistorialEmpleadoActivity"
+    android:orientation="vertical"
+    android:background="#57B2B4">
+
+    <RelativeLayout
+        android:layout_width="410dp"
+        android:layout_height="68dp"
+        android:background="#B0CA36"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/btn_atrasHistorial_empleado"
+            android:layout_width="30dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_btn_atras" />
+
+        <Button
+            android:id="@+id/btn_configtificacion_historial_empleado"
+            android:layout_width="25dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="380dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/notificaconfigcliente" />
+
+
+        <TextView
+            android:id="@+id/et_historial_empleado"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="14dp"
+
+            android:text="Historial de servicios proveídos"
+            android:textColor="#000"
+            android:textSize="21dp" />
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gv_historial_empleado"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp">
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="bottom"
+        design:menu="@menu/menu_navigation"
+        android:background="#ffff"
+        android:layout_marginTop="225dp"
+        android:id="@+id/menu_navigation"
+
+        />
+
+
+</LinearLayout>
