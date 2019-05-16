@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imagen_config_disponibilidad"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/notificaconfigcliente"
+        android:layout_marginLeft="150dp"/>
+    <TextView
+        android:id="@+id/tv_fecha_disponible_empleado"
+        android:layout_width="130dp"
+        android:layout_height="18dp"
+        android:hint="DD/MM/AA"
+        android:textColor="#000"
+        android:background="#fff"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/tv_titulo_horas"
+        android:layout_width="130dp"
+        android:layout_height="18dp"
+        android:hint="Horas dispoibles"
+        android:textColor="#000"
+        android:background="#fff"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="32dp"
+        />
+    <TextView
+        android:id="@+id/tv_nameEmpleado_cliente"
+        android:layout_width="130dp"
+        android:layout_height="18dp"
+        android:hint="18h00 - 19h00"
+        android:background="#fff"
+        android:textColor="#000"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="52dp"
+        />
+
+</FrameLayout>

@@ -1,8 +1,17 @@
 package com.app.icesi.proyectoappsmoviles.employee_activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -19,22 +29,31 @@ import android.widget.Toast;
 import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
 import com.app.icesi.proyectoappsmoviles.LoginActivity;
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class RegisterEmployeeActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     Button btn_next,btn_calendar;
 
-    EditText txtName,txtLastName,txtAddress,txtEmail,txtCC,txtTel, txtPassword, txtRePassword;
-    TextView txtDateOfBirth;
+    EditText txtName,txtLastName,txtEmail,txtCC,txtTel, txtPassword, txtRePassword;
+    TextView txtDateOfBirth,txtAddress;
+    ImageButton btn_ubicacion;
 
     RadioGroup rdSex;
     String sexSelected="";
@@ -45,11 +64,21 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
 
     String userType;
 
+    private static final int REQUEST_CODE = 11;
+    private LocationManager locationManager;
+    private Location myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_employee);
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+        }, REQUEST_CODE);
 
         userType=getIntent().getExtras().getString("userType");
 
@@ -75,7 +104,53 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
         txtCC=findViewById(R.id.txtCC);
         txtTel=findViewById(R.id.txtTel);
 
+        btn_ubicacion=findViewById(R.id.btn_ubicacion);
+        btn_ubicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(RegisterEmployeeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(RegisterEmployeeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
 
+                    Toast.makeText(RegisterEmployeeActivity.this, "Not Enough Permission", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    Toast.makeText(RegisterEmployeeActivity.this, "Obteniendo dirección GPS...", Toast.LENGTH_LONG).show();
+                    String provider = "";
+                    if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) provider=LocationManager.NETWORK_PROVIDER;
+                    else if  (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) provider= LocationManager.GPS_PROVIDER;
+                    //Location location = locationManager.getLastKnownLocation(provider);
+                    locationManager.requestLocationUpdates(provider, 10, 10, new LocationListener() {
+                        @Override
+                        public void onLocationChanged(Location location) {
+                            myLocation = location;
+                            txtAddress.setText(getAddress(myLocation));
+                        }
+
+                        @Override
+                        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                        }
+
+                        @Override
+                        public void onProviderEnabled(String provider) {
+
+                        }
+
+                        @Override
+                        public void onProviderDisabled(String provider) {
+
+                        }
+                    });
+                }
+            }
+        });
 
         rdSex= (RadioGroup) findViewById(R.id.rdSex);
         rdSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -105,7 +180,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         validacion();
                 }else{
 
-                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString(), txtPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             //TODO - registro en el firebase
@@ -116,15 +191,25 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             usuario.setCedula(txtCC.getText().toString());
                             usuario.setCorreo(txtEmail.getText().toString());
                             usuario.setTelefono(txtTel.getText().toString());
+                            usuario.setUbicacion(myLocation);
+                            usuario.setCalificacion(0);
+                            usuario.setActivo(false);
+                            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                            Date date = null;
+                            try {
+                                date = format.parse(txtAddress.getText().toString());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            usuario.setFecha_nacimiento(date);
 
                             if(userType.equals("employee")){
                                 rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);
                                 Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
-                                i.putExtra("id", auth.getCurrentUser().getUid());
                                 startActivity(i);
                             }else{
                                 rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
-                                Intent i= new Intent(RegisterEmployeeActivity.this,LoginActivity.class);
+                                Intent i= new Intent(RegisterEmployeeActivity.this, PerfilClienteActivity.class);
                                 i.putExtra("id", auth.getCurrentUser().getUid());
                                 startActivity(i);
                             }
@@ -135,6 +220,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(RegisterEmployeeActivity.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+                            Log.e(">>>", "registro problem: " + e.getMessage());
 
                         }
                     });
@@ -152,32 +238,6 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
 
     }
 
-    /**
-     * Metodo para listar los servicios en la listView
-     */
-    private void listServicesInListView() {
-
-
-            //databaseReference.child("Servicios").addValueEventListener(new ValueEventListener() {
-                //@Override
-              //  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    //listServices.clear();
-                    //for(DataSnapshot objSnapshot: dataSnapshot.getChildren()){
-                      //  Service p= objSnapshot.getValue(Service.class);
-                        //listServices.add(p);
-                        //arrayAdapterSuperheroe =new ArrayAdapter<Superheroe>(MainActivity.this,
-                         //       android.R.layout.simple_list_item_1, listSuper);
-                        //listServicesInListView.setAdapter(arrayAdapterSuperheroe);
-                    //}
-                //}
-
-                //@Override
-               // public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                //}
-            //});
-
-    }
 
     public void validacion(){
         String name= txtName.getText().toString();
@@ -227,5 +287,18 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
 
         txtDateOfBirth.setText(currentDateString);
 
+    }
+
+    public String getAddress(Location location) {
+        String direccion = "";
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            Address address = addressList.get(0);
+            direccion = address.getAddressLine(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return direccion;
     }
 }

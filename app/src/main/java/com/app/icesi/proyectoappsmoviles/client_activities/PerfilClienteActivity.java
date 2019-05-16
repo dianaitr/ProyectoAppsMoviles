@@ -165,11 +165,11 @@ public class PerfilClienteActivity extends AppCompatActivity {
         rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                me = dataSnapshot.getValue(Usuario.class);
+               /* me = dataSnapshot.getValue(Usuario.class);
                 tv_nameCliente.setText(me.getNombres());
                 tv_localidadCliente.setText(me.getUbicacion()+"");
                 tv_calificacionCliente.setText(me.getCalificacion()+"");
-                sw_activo.setChecked(me.isActivo());
+                sw_activo.setChecked(me.isActivo());*/
             }
 
             @Override
@@ -179,6 +179,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
         });
 
     }
+
 
 
     ///////////////metodos autenticacion google
