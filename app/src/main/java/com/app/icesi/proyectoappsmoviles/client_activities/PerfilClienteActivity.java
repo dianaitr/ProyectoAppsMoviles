@@ -41,32 +41,45 @@ public class PerfilClienteActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
 
-    private BottomNavigationView btn_navigationview;
-    private ImageView iv_foto;
-    private TextView tv_nombre;
-    private TextView tv_apellidos;
-    private TextView tv_telefono;
-    private TextView tv_calificacion;
+    private BottomNavigationView btn_navigation;
+    private ImageView person1_imagen;
+    private TextView tv_nameCliente;
+    private TextView tv_localidadCliente;
+    private TextView tv_calificacionCliente;
+    private TextView tv_ayudaCliente;
 
 
-    private TextView tv_user;
+    private Button btn_historialCliente;
+    private Button btn_nuevoServicioCliente;
     private Button btn_sign_out;
-    private String typeUser;
 
+    private String typeUser;
 
     private Switch sw_activo;
     private Button bt_servicios;
     private Button bt_disponibilidad;
     private Button bt_historial;
     private Button bt_ayuda;
-    private Button btn_buscarService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_cliente);
 
-        btn_navigationview=findViewById(R.id.menu_navigation);
-        btn_navigationview.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+
+        //mapeo de xml
+        person1_imagen=findViewById(R.id.person1_imagen);
+        tv_nameCliente=findViewById(R.id.tv_nameCliente);
+        tv_localidadCliente=findViewById(R.id.tv_localidadCliente);
+        tv_calificacionCliente=findViewById(R.id.tv_nameCliente);
+        btn_sign_out = findViewById(R.id.btn_sign_out);
+        btn_historialCliente=findViewById(R.id.btn_historialCliente);
+        btn_nuevoServicioCliente=findViewById(R.id.btn_nuevoServicioCliente);
+        tv_ayudaCliente=findViewById(R.id.tv_ayudaCliente);
+
+        btn_navigation=findViewById(R.id.btn_navigation);
+        btn_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -86,8 +99,8 @@ public class PerfilClienteActivity extends AppCompatActivity {
             }
         });
 
-        btn_buscarService=findViewById(R.id.btn_nuevoServicioCliente);
-        btn_buscarService.setOnClickListener(new View.OnClickListener() {
+        btn_nuevoServicioCliente=findViewById(R.id.btn_nuevoServicioCliente);
+        btn_nuevoServicioCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i= new Intent(PerfilClienteActivity.this, BuscarServicioActivity.class );
@@ -96,6 +109,8 @@ public class PerfilClienteActivity extends AppCompatActivity {
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
+
+        me =new Usuario();
 
         typeUser=getIntent().getExtras().getString("userType");
 
@@ -113,13 +128,14 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
 
        // tv_user = findViewById(R.id.tv_user);
-        btn_sign_out = findViewById(R.id.btn_sign_out);
         btn_sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOut();
             }
         });
+
+
 
 
         //Si no hay usuario loggeado
@@ -142,7 +158,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(getApplicationContext()).load(uri).into(iv_foto);
+                Glide.with(getApplicationContext()).load(uri).into(person1_imagen);
             }
         });
 
@@ -150,10 +166,9 @@ public class PerfilClienteActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 me = dataSnapshot.getValue(Usuario.class);
-                tv_nombre.setText(me.getNombres());
-                tv_apellidos.setText(me.getApellidos());
-                tv_telefono.setText(me.getTelefono());
-                tv_calificacion.setText(me.getCalificacion() + "");
+                tv_nameCliente.setText(me.getNombres());
+                tv_localidadCliente.setText(me.getUbicacion()+"");
+                tv_calificacionCliente.setText(me.getCalificacion()+"");
                 sw_activo.setChecked(me.isActivo());
             }
 
@@ -177,7 +192,6 @@ public class PerfilClienteActivity extends AppCompatActivity {
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        tv_user.setText("salio");
                        Intent i = new Intent(PerfilClienteActivity.this, LoginActivity.class);
                         i.putExtra("userType",typeUser);
                         startActivity(i);
