@@ -1,6 +1,7 @@
 package com.app.icesi.proyectoappsmoviles.client_activities;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 public class RegisterClientActivity extends AppCompatActivity {
@@ -34,6 +38,9 @@ public class RegisterClientActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,25 +89,33 @@ public class RegisterClientActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                    //if(!rdAcceptTermsCond.isSelected()){
-                        //Toast.makeText(this,"Debe aceptar los terminos y condiciones para poder registrarse.",Toast.LENGTH_SHORT).show();
-                    //}else{
+
                         //TODO - registro en el firebase
                         Usuario p=new Usuario();
                         p.setUid(UUID.randomUUID().toString());
                         p.setNombres(txtName.getText().toString());
                         p.setApellidos(txtLastName.getText().toString());
+                        p.setCedula(txtCC.getText().toString());
+                        p.setCorreo(txtEmail.getText().toString());
+                        p.setTelefono(txtTel.getText().toString());
+                        p.setGenero(sexSelected);
 
-                        databaseReference.child("Usuarios").child("Clientes").child(p.getUid()).setValue(p);
-                       // Toast.makeText(this,"Agregado",Toast.LENGTH_SHORT).show();
+                        String dates=txtDateOfBirth.getText().toString();
+                        ParsePosition pp1 = new ParsePosition(0);
+                        Date date = formatter.parse(dates,pp1);
+                        p.setFecha_nacimiento(date);
+
+                        //falta location
+                        //p.setUbicacion(new Location());
+
+                        databaseReference.child("usuarios").child("clientes").child(p.getUid()).setValue(p);
+                        // Toast.makeText(this,"Agregado",Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(RegisterClientActivity.this,PerfilClienteActivity.class);
                         i.putExtra("userId",p.getUid());
                         startActivity(i);
-                   // }
 
 
-
-
+                        //Toast.makeText(this,"Debe aceptar los terminos y condiciones para poder registrarse.",Toast.LENGTH_SHORT).show();
 
             }
         });
