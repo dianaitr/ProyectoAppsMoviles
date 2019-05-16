@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    tools:context=".employee_activities.PerfilEmpleadoActivity"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="70mm"
+        android:layout_height="25mm"
+        android:orientation="vertical"
+        android:background="#B0CA36"
+        >
+
+        <ImageView
+            android:id="@+id/person2_imagen"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10mm"
+            android:layout_marginTop="8mm"
+            android:background="@drawable/person2"/>
+
+        <TextView
+            android:id="@+id/tv_nameEmpleado"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="24mm"
+            android:layout_marginTop="10mm"
+            android:text="Maria Antonia"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"/>
+        <TextView
+            android:id="@+id/tv_apellidoEmpleado"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="39mm"
+            android:layout_marginTop="10mm"
+            android:text="Clavijo"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"/>
+
+        <TextView
+            android:id="@+id/tv_telefonoEmpleado"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="25mm"
+            android:layout_marginTop="13mm"
+            android:text="Contacto:"
+            android:textSize="8dp"
+            android:textStyle="bold"
+            android:textColor="#fff"/>
+
+        <TextView
+
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="31mm"
+            android:layout_marginTop="13mm"
+            android:text="316 542 784"
+
+            android:textSize="8dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"
+            android:id="@+id/tv_numeroTelEmpleado"/>
+
+        <TextView
+
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="25mm"
+            android:layout_marginTop="15mm"
+            android:text="Calificación"
+
+            android:textSize="8dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"/>
+
+        <TextView
+            android:id="@+id/tv_numeroCalificacionEmpleado"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="27mm"
+            android:layout_marginTop="17mm"
+            android:text="4.8"
+            android:textSize="8dp"
+            android:textStyle="bold"
+            android:textColor="#fff"/>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_estadoEmpleado"
+        android:layout_width="58dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="8mm"
+        android:layout_marginTop="30mm"
+        android:text="Estás activo"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:textColor="#fff"/>
+
+    <Button
+        android:layout_width="55dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="45mm"
+        android:layout_marginTop="29mm"
+        android:background="@drawable/switch_estado_empleado"
+        android:id="@+id/btn_estadoEmpleado"/>
+
+    <TextView
+        android:id="@+id/tv_titulo_serviciosEmpleado"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="20mm"
+        android:layout_marginTop="35mm"
+        android:text="Servicios prestados"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:textColor="#fff"/>
+
+
+    <GridView
+        android:id="@+id/gv_lista_servicios_empleado"
+        android:layout_width="30mm"
+        android:layout_height="30mm"
+        android:layout_marginTop="40mm"
+        android:layout_marginLeft="16mm"
+       >
+
+
+    </GridView>
+
+
+
+    <Button
+        android:id="@+id/btn_editar_servicios_empleado"
+        android:layout_width="35mm"
+        android:layout_height="6mm"
+        android:background="#C0CCDA"
+        android:layout_marginTop="68mm"
+        android:layout_marginLeft="15mm"
+        android:textAllCaps="false"
+        android:text="Editar servcios"
+        android:textAlignment="textStart"
+
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        />
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="bottom"
+        design:menu="@menu/menu_navigation"
+        android:background="#ffff"
+        android:layout_marginTop="100mm"
+        android:id="@+id/menu_navigation"
+
+        />
+
+
+
+
+
+</RelativeLayout>
