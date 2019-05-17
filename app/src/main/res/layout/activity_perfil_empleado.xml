@@ -130,10 +130,10 @@
 
     <GridView
         android:id="@+id/gv_lista_servicios_empleado"
-        android:layout_width="160dp"
-        android:layout_height="170dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_marginTop="260dp"
-        android:layout_marginLeft="110dp"
+
        >
 
 
@@ -146,7 +146,7 @@
         android:layout_width="215dp"
         android:layout_height="35dp"
         android:background="#C0CCDA"
-        android:layout_marginTop="440dp"
+        android:layout_below="@+id/gv_lista_servicios_empleado"
         android:layout_marginLeft="99dp"
         android:textAllCaps="false"
         android:text="Editar servcios"
@@ -162,12 +162,11 @@
         android:layout_width="215dp"
         android:layout_height="35dp"
         android:background="#C0CCDA"
-        android:layout_marginTop="480dp"
         android:layout_marginLeft="99dp"
+        android:layout_below="@+id/btn_editar_servicios_empleado"
         android:textAllCaps="false"
         android:text="Editar mi disponibilidad"
         android:textAlignment="textStart"
-
         android:textSize="12dp"
         android:textStyle="bold"
         android:textColor="#000"
@@ -177,7 +176,8 @@
         android:layout_width="215dp"
         android:layout_height="35dp"
         android:background="#C0CCDA"
-        android:layout_marginTop="520dp"
+        android:layout_below="@+id/btn_editar_disponibilidad_empleado"
+
         android:layout_marginLeft="99dp"
         android:textAllCaps="false"
         android:text="Historial de servicios prestados"
@@ -193,7 +193,7 @@
         android:layout_width="100dp"
         android:layout_height="25dp"
         android:layout_marginLeft="155dp"
-        android:layout_marginTop="570dp"
+        android:layout_below="@+id/btn_editar_historial_empleado"
 
         android:text="¿Necesitas ayuda?"
         android:textSize="10dp"
@@ -203,17 +203,16 @@
 
 
     <Button
-        android:id="@+id/btn_editar_cerrar_sesion_empleado"
+        android:id="@+id/btn_sign_out_empleado"
         android:layout_width="100dp"
         android:layout_height="35dp"
         android:background="#B0CA36"
-        android:layout_marginTop="600dp"
+
+        android:layout_below="@+id/tv_ayudaEmpleado"
         android:layout_marginLeft="148dp"
         android:textAllCaps="false"
         android:text="Cerrar sesión"
-
         android:textAlignment="center"
-
         android:textSize="12dp"
         android:textStyle="bold"
         android:textColor="#000"
@@ -224,10 +223,10 @@
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-
+        android:layout_alignParentBottom="true"
         design:menu="@menu/menu_navigation"
         android:background="#ffff"
-        android:layout_marginTop="525dp"
+
         android:id="@+id/menu_navigation"
 
         />

@@ -31,7 +31,6 @@ import com.app.icesi.proyectoappsmoviles.LoginActivity;
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
