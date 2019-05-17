@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -56,7 +57,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
 
     RadioGroup rdSex;
     String sexSelected="";
-    RadioButton rdAcceptTermsCond;
+    CheckBox cbAcceptTermsCond;
 
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
@@ -120,33 +121,36 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                     Toast.makeText(RegisterEmployeeActivity.this, "Not Enough Permission", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    Toast.makeText(RegisterEmployeeActivity.this, "Obteniendo dirección GPS...", Toast.LENGTH_LONG).show();
                     String provider = "";
                     if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) provider=LocationManager.NETWORK_PROVIDER;
                     else if  (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) provider= LocationManager.GPS_PROVIDER;
-                    //Location location = locationManager.getLastKnownLocation(provider);
-                    locationManager.requestLocationUpdates(provider, 10, 10, new LocationListener() {
-                        @Override
-                        public void onLocationChanged(Location location) {
-                            myLocation = location;
-                            txtAddress.setText(getAddress(myLocation));
-                        }
+                    if (provider!=""){
+                        Toast.makeText(RegisterEmployeeActivity.this, "Obteniendo dirección GPS...", Toast.LENGTH_LONG).show();
+                        locationManager.requestLocationUpdates(provider, 10, 10, new LocationListener() {
+                            @Override
+                            public void onLocationChanged(Location location) {
+                                myLocation = location;
+                                txtAddress.setText(getAddress(myLocation));
+                            }
 
-                        @Override
-                        public void onStatusChanged(String provider, int status, Bundle extras) {
+                            @Override
+                            public void onStatusChanged(String provider, int status, Bundle extras) {
 
-                        }
+                            }
 
-                        @Override
-                        public void onProviderEnabled(String provider) {
+                            @Override
+                            public void onProviderEnabled(String provider) {
 
-                        }
+                            }
 
-                        @Override
-                        public void onProviderDisabled(String provider) {
+                            @Override
+                            public void onProviderDisabled(String provider) {
 
-                        }
-                    });
+                            }
+                        });
+                    } else {
+                        Toast.makeText(RegisterEmployeeActivity.this, "Por favor enciende el GPS", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -164,8 +168,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                 }
             }
         });
-        rdAcceptTermsCond= (RadioButton)findViewById(R.id.rdAcceptTermsCond);
-
+        cbAcceptTermsCond= (CheckBox) findViewById(R.id.cbAcceptTermsCond);
 
         btn_next=findViewById(R.id.btn_next);
         btn_next.setOnClickListener(new View.OnClickListener() {
@@ -175,7 +178,8 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         || txtAddress.getText().equals("")
                         || txtCC.getText().equals("")
                         || txtEmail.getText().equals("")
-                        || txtTel.getText().equals("")){
+                        || txtTel.getText().equals("")
+                        || txtPassword.getText().equals("") || txtRePassword.getText().equals("")){
                         validacion();
                 }else{
 
@@ -194,6 +198,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             usuario.setLongitude(myLocation.getLongitude());
                             usuario.setCalificacion(0);
                             usuario.setActivo(false);
+                            usuario.setGenero(sexSelected);
                             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                             Date date = null;
                             try {
@@ -232,10 +237,6 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
             }
         });
 
-
-
-
-
     }
 
 
@@ -244,34 +245,41 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
         String lastName= txtLastName.getText().toString();
         String address= txtAddress.getText().toString();
         String birth= txtDateOfBirth.getText().toString();
-        String genre=sexSelected;
         String email= txtEmail.getText().toString();
         String tel= txtTel.getText().toString();
-
+        String pass = txtPassword.getText().toString();
+        String repass = txtRePassword.getText().toString();
+        String cc = txtCC.getText().toString();
 
         if(name.equals("")){
-            txtName.setError("Required");
+            txtName.setError("Requerido");
         }
         if(lastName.equals("")){
-            txtLastName.setError("Required");
+            txtLastName.setError("Requerido");
         }
         if(address.equals("")){
-            txtAddress.setError("Required");
+            txtAddress.setError("Requerido");
         }
         if(birth.equals("")){
-            txtDateOfBirth.setError("Required");
-        }
-        if(genre.equals("")){
-            //rdSex.setError("Required");
+            txtDateOfBirth.setError("Requerido");
         }
         if(email.equals("")){
-            txtEmail.setError("Required");
+            txtEmail.setError("Requerido");
         }
         if(tel.equals("")){
-            txtName.setError("Required");
+            txtTel.setError("Requerido");
         }
-        if(name.equals("")){
-            txtName.setError("Required");
+        if(pass.equals("")){
+            txtPassword.setError("Requerido");
+        }
+        if(repass.equals("")){
+            txtRePassword.setError("Requerido");
+        }
+        if(cc.equals("")){
+            txtCC.setError("Requerido");
+        }
+        if(!cbAcceptTermsCond.isChecked()){
+            cbAcceptTermsCond.setError("Debes aceptar los términos y condiciones");
         }
 
     }
