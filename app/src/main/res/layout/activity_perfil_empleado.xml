@@ -110,7 +110,7 @@
         android:textColor="#fff"/>
 
     <Switch
-        android:id="@+id/btn_estadoEmpleado"
+        android:id="@+id/sw_estadoEmpleado"
         android:layout_width="55dp"
         android:layout_height="30dp"
         android:layout_marginLeft="300dp"

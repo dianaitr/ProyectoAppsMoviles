@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -199,10 +200,12 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             usuario.setCalificacion(0);
                             usuario.setActivo(false);
                             usuario.setGenero(sexSelected);
-                            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                            SimpleDateFormat format = new SimpleDateFormat("MMM dd. yyyy");
                             Date date = null;
                             try {
-                                date = format.parse(txtAddress.getText().toString());
+                                String strDate = txtDateOfBirth.getText().toString();
+                                Log.e(">>>", strDate);
+                                date = format.parse(strDate);
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
@@ -211,6 +214,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             if(userType.equals("employee")){
                                 rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);
                                 Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
+                                i.putExtra("userType",userType);
                                 startActivity(i);
                             }else{
                                 rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
@@ -291,7 +295,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
         c.set(Calendar.MONTH,month);
         c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
 
-        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        String currentDateString = DateFormat.getDateInstance(DateFormat.MEDIUM).format(c.getTime());
 
         txtDateOfBirth.setText(currentDateString);
 
