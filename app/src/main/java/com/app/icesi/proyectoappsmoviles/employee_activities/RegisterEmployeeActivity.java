@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,13 +34,17 @@ import com.app.icesi.proyectoappsmoviles.LoginActivity;
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,10 +52,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class RegisterEmployeeActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     Button btn_next,btn_calendar;
+    private Date date;
 
     EditText txtName,txtLastName,txtEmail,txtCC,txtTel, txtPassword, txtRePassword;
     TextView txtDateOfBirth,txtAddress;
@@ -157,6 +164,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
         });
 
         rdSex= (RadioGroup) findViewById(R.id.rdSex);
+        sexSelected="F";
         rdSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -172,6 +180,8 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
         cbAcceptTermsCond= (CheckBox) findViewById(R.id.cbAcceptTermsCond);
 
         btn_next=findViewById(R.id.btn_next);
+        //TODO
+        borrar();
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,58 +191,64 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                         || txtEmail.getText().equals("")
                         || txtTel.getText().equals("")
                         || txtPassword.getText().equals("") || txtRePassword.getText().equals("")){
+                    try {
                         validacion();
+                    } catch (Exception e) {
+                        Toast.makeText(RegisterEmployeeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }else{
 
-                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim()).addOnCompleteListener(RegisterEmployeeActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onSuccess(AuthResult authResult) {
-                            //TODO - registro en el firebase
-                            Usuario usuario = new Usuario();
-                            usuario.setUid(auth.getCurrentUser().getUid());
-                            usuario.setNombres(txtName.getText().toString());
-                            usuario.setApellidos(txtLastName.getText().toString());
-                            usuario.setCedula(txtCC.getText().toString());
-                            usuario.setCorreo(txtEmail.getText().toString());
-                            usuario.setTelefono(txtTel.getText().toString());
-                            usuario.setLatitude(myLocation.getLatitude());
-                            usuario.setLongitude(myLocation.getLongitude());
-                            usuario.setCalificacion(0);
-                            usuario.setActivo(false);
-                            usuario.setGenero(sexSelected);
-                            SimpleDateFormat format = new SimpleDateFormat("MMM dd. yyyy");
-                            Date date = null;
-                            try {
-                                String strDate = txtDateOfBirth.getText().toString();
-                                Log.e(">>>", strDate);
-                                date = format.parse(strDate);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                            usuario.setFecha_nacimiento(date);
-
-                            if(userType.equals("employee")){
-                                rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);
-                                Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
-                                i.putExtra("userType",userType);
-                                startActivity(i);
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(!task.isSuccessful()){
+                                if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                    Toast.makeText(RegisterEmployeeActivity.this, "Este correo ya existe en otro usuario", Toast.LENGTH_LONG).show();
+                                }
                             }else{
-                                rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
-                                Intent i= new Intent(RegisterEmployeeActivity.this, PerfilClienteActivity.class);
-                                i.putExtra("id", auth.getCurrentUser().getUid());
-                                startActivity(i);
+                                Usuario usuario = new Usuario();
+                                usuario.setUid(auth.getCurrentUser().getUid());
+                                usuario.setNombres(txtName.getText().toString());
+                                usuario.setApellidos(txtLastName.getText().toString());
+                                usuario.setCedula(txtCC.getText().toString());
+                                usuario.setCorreo(txtEmail.getText().toString());
+                                usuario.setTelefono(txtTel.getText().toString());
+                                usuario.setLatitude(myLocation.getLatitude());
+                                usuario.setLongitude(myLocation.getLongitude());
+                                usuario.setCalificacion(0);
+                                usuario.setActivo(false);
+                                usuario.setGenero(sexSelected);
+                                usuario.setFecha_nacimiento(date);
+
+                                if(userType.equals("employee")){
+                                    rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).setValue(usuario);
+                                    Intent i= new Intent(RegisterEmployeeActivity.this,ServiciosActivity.class);
+                                    i.putExtra("userType",userType);
+                                    startActivity(i);
+                                }else{
+                                    rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).setValue(usuario);
+                                    Intent i= new Intent(RegisterEmployeeActivity.this, PerfilClienteActivity.class);
+                                    i.putExtra("id", auth.getCurrentUser().getUid());
+                                    startActivity(i);
+                                }
+
                             }
-
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(RegisterEmployeeActivity.this, "Hubo un error", Toast.LENGTH_SHORT).show();
-                            Log.e(">>>", "registro problem: " + e.getMessage());
-
                         }
                     });
+
+//                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//                        @Override
+//                        public void onSuccess(AuthResult authResult) {
+//
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(RegisterEmployeeActivity.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+//                            Log.e(">>>", "registro problem: " + e.getMessage());
+//
+//                        }
+//                    });
 
 
 
@@ -243,8 +259,41 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
 
     }
 
+    private void validarFecha(Date date) throws Exception{
+        if (date.compareTo(new Date())>0 || getAge(date)>100){
+            throw new Exception("Por favor selecciona una fecha de nacimiento válida");
+        }
+        if(getAge(date)<18) {
+            throw new Exception("Debes ser mayor de edad para poder registrarte");
+        }
+    }
 
-    public void validacion(){
+    private int getAge(Date date){
+        Calendar calDate = Calendar.getInstance(Locale.US);
+        Calendar today = Calendar.getInstance(Locale.US);
+
+        calDate.setTime(date);
+
+        int age = today.get(Calendar.YEAR) - calDate.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < calDate.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        return age;
+    }
+
+    private void borrar() { //TODO
+        txtPassword.setText("password");
+        txtRePassword.setText("password");
+        txtName.setText("probando");
+        txtLastName.setText("probando");
+        txtCC.setText("probando");
+        txtTel.setText("12345");
+    }
+
+
+    public void validacion() throws Exception {
         String name= txtName.getText().toString();
         String lastName= txtLastName.getText().toString();
         String address= txtAddress.getText().toString();
@@ -283,8 +332,23 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
             txtCC.setError("Requerido");
         }
         if(!cbAcceptTermsCond.isChecked()){
-            cbAcceptTermsCond.setError("Debes aceptar los términos y condiciones");
+            Toast.makeText(RegisterEmployeeActivity.this, "Debes aceptar los términos y condiciones", Toast.LENGTH_SHORT).show();
+            //cbAcceptTermsCond.setError("Debes aceptar los términos y condiciones");
+        } if(!pass.equals(repass)){
+            throw new Exception("Las contraseñas deben coincidir");
         }
+        SimpleDateFormat format = new SimpleDateFormat("d MMM. yyyy", Locale.US);
+        try {
+            String strDate = txtDateOfBirth.getText().toString();
+            Log.e(">>>", strDate);
+            date = format.parse(strDate);
+            validarFecha(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw e;
+        }
+
 
     }
     @Override
