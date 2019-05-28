@@ -52,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#B0CA36"
+
                 android:layout_marginTop="55dp"
                 >
 
@@ -100,10 +101,10 @@
                 android:fontFamily="@font/roboto"
                 android:textStyle="bold"
                 android:textAllCaps="false"
+                android:background="@drawable/bordes_redondeados"
                 android:text="Ingresar"
                 android:textColor="#ffffff"
                 android:layout_marginTop="50dp"
-                android:background="#47838E"
                 android:textSize="15dp"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -119,6 +120,7 @@
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
+                android:background="@drawable/bordes_redondeados"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,12 +13,11 @@
     android:background="#57B2B4">
 
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/linear_perfil_cliente"
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:orientation="vertical"
-        android:background="#B0CA36"
-        >
+        android:background="#B0CA36">
 
         <ImageView
 
@@ -58,7 +59,6 @@
             android:textAlignment="center"
             android:text="Calificación"
             android:textSize="15dp"
-
             android:textColor="#ffff"/>
 
         <TextView
@@ -75,16 +75,18 @@
     </LinearLayout>
 
     <Button
+        android:layout_below="@+id/linear_perfil_cliente"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
         android:id="@+id/btn_historialCliente"
         android:paddingRight="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#C0CCDA"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="40dp"
         android:textAllCaps="false"
         android:text="Historial de solicitudes pedidas"
-
         android:textSize="12dp"
         android:textStyle="bold"
         android:textColor="#000"
@@ -92,35 +94,42 @@
 
 
     <Button
-        android:layout_marginTop="15dp"
-
         android:id="@+id/btn_nuevoServicioCliente"
-        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_historialCliente"
         android:background="#B0CA36"
-        android:textAllCaps="false"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Buscar un nuevo servicio"
-        android:textSize="11dp"
-        android:textStyle="bold"
+        android:textAllCaps="false"
         android:textColor="#fff"
-        />
+        android:textSize="11dp"
+        android:textStyle="bold" />
 
     <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/btn_nuevoServicioCliente"
         android:id="@+id/tv_ayudaCliente"
-
         android:layout_height="25dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
-
         android:text="¿Necesitas ayuda?"
         android:textSize="10dp"
         android:textStyle="bold"
         android:textColor="#ffff"/>
-    <Button
 
+
+    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:layout_centerVertical="true"
+        android:layout_above="@+id/btn_navigation"
         android:id="@+id/btn_sign_out"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
@@ -128,7 +137,6 @@
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:background="#B0CA36"
-
         android:textAllCaps="false"
         android:text="Cerrar sesión"
         android:textSize="11dp"
@@ -137,15 +145,13 @@
         />
 
     <android.support.design.widget.BottomNavigationView
-        android:layout_marginTop="55dp"
         android:id="@+id/btn_navigation"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="bottom"
         android:background="#ffff"
+        android:layout_alignParentBottom="true"
         design:menu="@menu/menu_navigation"
-
         />
 
 
-</LinearLayout>
+</RelativeLayout>

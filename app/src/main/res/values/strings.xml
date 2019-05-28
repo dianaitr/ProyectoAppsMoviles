@@ -16,8 +16,8 @@
         completions."
     </string>
     <string name="perfilusuario">perfilUsuario</string>
-    <string name="notificaciones">notificaciones</string>
-    <string name="perfil">perfil</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="perfil">Perfil</string>
     <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
