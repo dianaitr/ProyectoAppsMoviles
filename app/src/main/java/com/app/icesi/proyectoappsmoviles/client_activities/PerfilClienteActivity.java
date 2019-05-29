@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.app.icesi.proyectoappsmoviles.LoginActivity;
+import com.app.icesi.proyectoappsmoviles.MuroChatsClienteActivity;
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.bumptech.glide.Glide;
@@ -90,6 +91,11 @@ public class PerfilClienteActivity extends AppCompatActivity {
                     finish();
                 }else if(menuItem.getItemId()==R.id.menu_notificaciones){
                     Intent i= new Intent(PerfilClienteActivity.this, NotificacionClienteActivity.class);
+                    startActivity(i);
+                    finish();
+
+                }else if(menuItem.getItemId()==R.id.menu_chat){
+                    Intent i= new Intent(PerfilClienteActivity.this, MuroChatsClienteActivity.class);
                     startActivity(i);
                     finish();
 

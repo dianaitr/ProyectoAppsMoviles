@@ -97,6 +97,7 @@
             android:layout_height="wrap_content"
             android:hint="Tu dirección"
             android:textSize="16dp"
+            android:text="ubicación"
             android:id="@+id/txtAdress"
             android:layout_gravity="center"/>
         

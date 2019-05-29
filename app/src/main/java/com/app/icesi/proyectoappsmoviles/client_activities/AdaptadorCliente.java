@@ -1,8 +1,6 @@
 package com.app.icesi.proyectoappsmoviles.client_activities;
 
-import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +48,7 @@ public class AdaptadorCliente extends RecyclerView.Adapter<AdaptadorCliente.Cust
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.griditem, parent, false);
+        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.renglon_buscar_servicios, parent, false);
         CustomViewHolder vh = new CustomViewHolder(v);
         return vh;
     }
