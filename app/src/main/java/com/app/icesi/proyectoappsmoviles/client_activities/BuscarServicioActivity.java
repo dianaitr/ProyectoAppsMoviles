@@ -1,5 +1,6 @@
 package com.app.icesi.proyectoappsmoviles.client_activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,10 +22,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.employee_activities.PerfilEmpleadoBuscadoActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -36,6 +40,7 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
     private TextView apellidoEmpelado;
     private TextView calificacionEmpleado;
     private ImageView fotoEmpleado;
+    private Button btn_seleccionarEmpleado;
 
 
     private RecyclerView lvServices;
@@ -54,6 +59,7 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +120,35 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         });
 
 
+        btn_seleccionarEmpleado=findViewById(R.id.renglon_empleado_call);
+        btn_seleccionarEmpleado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference dr= (DatabaseReference) rtdb.getReference().child("colaboradores").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        String telefonoEmpleado= String.valueOf(dataSnapshot.child("telefono").getValue());
+
+                        if (dataSnapshot.child("telefono").getValue()!=null) {
+
+                            Intent i = new Intent(BuscarServicioActivity.this, PerfilEmpleadoBuscadoActivity.class);
+                            startActivity(i);
+                    }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+            }
+        });
 
 
     }

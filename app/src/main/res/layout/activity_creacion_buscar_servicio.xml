@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    tools:context=".client_activities.CreacionBuscarServicioActivity"
     android:orientation="vertical"
     android:background="#81C8CA">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/ic_btn_atras"
-
-            android:id="@+id/btn_atras_servicios"/>
+        android:orientation="horizontal"
+        android:background="#B0CA36">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Crear una cuenta"
+            android:text="Buscar un servicio"
+            android:padding="15dp"
             android:textSize="25dp"
+            android:layout_marginLeft="80dp"
+
             android:layout_gravity="center"/>
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="¿Qué servicio deseas prestar?"
-        android:paddingTop="20dp"
-        android:paddingLeft="15dp"/>
 
+<LinearLayout
+    android:layout_width="450dp"
+    android:layout_height="610dp"
+    android:orientation="vertical"
+    android:layout_marginTop="67dp"
+    >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
+        android:paddingTop="8dp"
         android:layout_margin="20dp"
         android:background="#57B2B4">
 
@@ -50,68 +53,94 @@
                 android:layout_height="wrap_content"
                 android:text="Aseo básico para el hogar"
                 android:textSize="12dp"
-                android:id="@+id/cb"/>
+                android:id="@+id/cb_2"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Barrer"
                 android:textSize="12dp"
-                android:id="@+id/cb0"/>
+                android:id="@+id/cb0_2"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Trapear"
                 android:textSize="12dp"
-                android:id="@+id/cb1"/>
+                android:id="@+id/cb1_2"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Desempolvar"
                 android:textSize="12dp"
-                android:id="@+id/cb2"/>
+                android:id="@+id/cb2_2"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lavado de ropa"
                 android:textSize="12dp"
-                android:id="@+id/cb3"/>
+                android:id="@+id/cb3_2"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Planchado de ropa"
                 android:textSize="12dp"
-                android:id="@+id/cb4"/>
+                android:id="@+id/cb4_2"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Limpieza de baños"
                 android:textSize="12dp"
-                android:id="@+id/cb5"/>
+                android:id="@+id/cb5_2"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cocina"
                 android:textSize="12dp"
-                android:id="@+id/cb6"/>
+                android:id="@+id/cb6_2"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Limpieza de cocina"
                 android:textSize="12dp"
-                android:id="@+id/cb7"/>
+                android:id="@+id/cb7_2"/>
 
 
         </LinearLayout>
 
     </ScrollView>
-    
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Finalizar Registro"
-        android:id="@+id/btn_register_finish"
+        android:text="Agregar fecha y hora"
+        android:id="@+id/btn_agregar_hora_fecha"
         android:background="#B0CA36"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Siguiente"
+        android:id="@+id/btn_sigte"
+        android:background="#B0CA36"
+        android:padding="10dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="98dp"/>
 </LinearLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/btn_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffff"
+        android:layout_alignParentBottom="true"
+        design:menu="@menu/menu_navigation"
+        />
+
+
+
+
+</RelativeLayout>

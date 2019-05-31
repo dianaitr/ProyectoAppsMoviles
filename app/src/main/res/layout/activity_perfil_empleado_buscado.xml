@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".employee_activities.PerfilEmpleadoBuscadoActivity"
+    android:orientation="vertical"
+    android:background="#57B2B4"
+
+    >
+    <RelativeLayout
+        android:layout_width="410dp"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:background="#B0CA36"
+        >
+
+        <ImageView
+            android:id="@+id/person2_imagen"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/person2"/>
+
+        <TextView
+            android:id="@+id/tv_nameEmpleado"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="155dp"
+            android:layout_marginTop="65dp"
+            android:text="Maria Antonia"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"/>
+        <TextView
+            android:id="@+id/tv_apellidoEmpleado"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="255dp"
+            android:layout_marginTop="65dp"
+            android:text="Clavijo"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"/>
+
+        <TextView
+            android:id="@+id/tv_telefonoEmpleado"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="85dp"
+            android:text="Contacto:"
+            android:textSize="8dp"
+            android:textStyle="bold"
+            android:textColor="#fff"/>
+
+        <TextView
+
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="85dp"
+            android:text="316 542 784"
+
+            android:textSize="8dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"
+            android:id="@+id/tv_numeroTelEmpleado"/>
+
+        <TextView
+
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="165dp"
+            android:layout_marginTop="100dp"
+            android:text="Calificación"
+
+            android:textSize="8dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"/>
+
+        <TextView
+            android:id="@+id/tv_numeroCalificacionEmpleado"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="110dp"
+            android:text="4.8"
+            android:textSize="8dp"
+            android:textStyle="bold"
+            android:textColor="#fff"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
