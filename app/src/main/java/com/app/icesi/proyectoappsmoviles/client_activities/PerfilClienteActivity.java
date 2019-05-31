@@ -109,7 +109,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
         btn_nuevoServicioCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i= new Intent(PerfilClienteActivity.this, BuscarServicioActivity.class );
+                Intent i= new Intent(PerfilClienteActivity.this,CreacionBuscarServicioActivity.class );
                 startActivity(i);
             }
         });

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.icesi.proyectoappsmoviles">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -22,6 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".client_activities.CalendarioCreacionBuscarServicio"></activity>
+        <activity android:name=".client_activities.CreacionBuscarServicioActivity" />
+        <activity android:name=".employee_activities.PerfilEmpleadoBuscadoActivity" />
         <activity android:name=".client_activities.HistorialClienteActivity" />
         <activity android:name=".employee_activities.HistorialEmpleadoActivity" />
         <activity android:name=".employee_activities.NotificacionEmpleadoActivity" />
@@ -88,7 +89,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".MuroChatsClienteActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.CalendarView;
 
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.client_activities.CreacionBuscarServicioActivity;
 
 public class CalendarEmpRegActivity extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class CalendarEmpRegActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange( CalendarView view, int year, int month, int dayOfMonth) {
                 String date= dayOfMonth+"/"+month+"/"+year;
-                Intent i= new Intent(CalendarEmpRegActivity.this,RegisterEmployeeActivity.class);
+                Intent i= new Intent(CalendarEmpRegActivity.this, RegisterEmployeeActivity.class);
                 i.putExtra("date",date);
                 startActivity(i);
             }
