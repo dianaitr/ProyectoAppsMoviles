@@ -13,83 +13,138 @@
     android:background="#57B2B4">
 
 
-    <LinearLayout android:id="@+id/linear_perfil_cliente"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:orientation="vertical"
-        android:background="#B0CA36">
+        android:layout_height="180dp"
+        android:orientation="horizontal"
+        android:background="#B0CA36"
+        android:id="@+id/layoutInfo"
+        >
 
-        <ImageView
+        <LinearLayout
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            android:id="@+id/person1_imagen"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/person1"/>
+            <ImageView
+                android:id="@+id/person2_imagen"
+                android:layout_width="115dp"
+                android:layout_height="110dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ic_perfiluser" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@mipmap/ic_star_complete"/>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@mipmap/ic_star_complete"/>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@mipmap/ic_star_complete"/>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@mipmap/ic_star_complete"/>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@mipmap/ic_star_complete"/>
+                <TextView
+                    android:id="@+id/tv_numeroCalificacionEmpleado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.8"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"/>
+
+            </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/tv_nameCliente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:text="Pepita Perez"
-            android:textColor="#ffff"
-            android:textSize="20dp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_localidadCliente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:text="Cali, Valle del Cauca"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:textColor="#000"/>
 
-        <TextView
+        </LinearLayout>
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:text="Calificación"
-            android:textSize="15dp"
-            android:textColor="#ffff"/>
 
-        <TextView
-            android:id="@+id/tv_calificacionCliente"
-            android:layout_width="30dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="29mm"
-            android:text="4.3"
-            android:textSize="8dp"
-            android:textStyle="bold"
-            android:textColor="#000"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_nameCliente"
+                android:layout_marginTop="30dp"
+                android:text="Nombres"
+                android:textSize="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#ffff"/>
+            <TextView
+                android:id="@+id/tv_apellidosCliente"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Apellidos"
+                android:textSize="20dp"
+                android:textColor="#ffff"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Ubicación:"
+                    android:textSize="16dp"
+                    android:textColor="#fff"/>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cali, Colombia"
+                    android:textSize="16dp"
+                    android:textColor="#ffff"
+                    android:id="@+id/tv_localidadCliente"/>
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
 
 
     </LinearLayout>
 
     <Button
-        android:layout_below="@+id/linear_perfil_cliente"
-        android:layout_alignParentLeft="true"
-        android:layout_centerInParent="true"
         android:id="@+id/btn_historialCliente"
-        android:paddingRight="20dp"
-        android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#C0CCDA"
-        android:layout_marginTop="40dp"
+        android:layout_height="35dp"
+        android:background="#ffff"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/layoutInfo"
         android:textAllCaps="false"
-        android:text="Historial de solicitudes pedidas"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        android:textColor="#000"
+        android:padding="10dp"
+        android:text="Historial de servicios prestados"
+        android:textAlignment="textStart"
+        android:textSize="14dp"
+        android:textColor="#57B2B4"
+        android:layout_marginTop="30dp"
         />
 
 

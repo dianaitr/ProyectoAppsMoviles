@@ -71,7 +71,6 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
 
         et_nombre_empleado = findViewById(R.id.tv_nameEmpleado);
         et_telefono_empleado = findViewById(R.id.tv_telefonoEmpleado);
-        et_calificacion_empleado = findViewById(R.id.tv_calificacionCliente);
 
         sw_estado_empleado = findViewById(R.id.sw_estadoEmpleado);
         sw_estado_empleado.setOnClickListener(new View.OnClickListener() {
