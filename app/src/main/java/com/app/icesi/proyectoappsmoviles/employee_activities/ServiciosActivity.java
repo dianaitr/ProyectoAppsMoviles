@@ -49,6 +49,7 @@ public class ServiciosActivity extends AppCompatActivity {
             public void onClick(View v) {
                 verificarServicios();
                 Intent i = new Intent(ServiciosActivity.this, PerfilEmpleadoActivity.class);
+                i.putExtra("userType","employee");
                 startActivity(i);
                 finish();
             }
