@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.client_activities.NotificacionClienteActivity;
 import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
@@ -167,6 +168,8 @@ public class MuroChatsClienteActivity extends AppCompatActivity {
 
                 }
             });
+        }else{
+            Toast.makeText(MuroChatsClienteActivity.this, "No existen solicitudes de servicios aceptadas aún.", Toast.LENGTH_SHORT).show();
         }
 
 

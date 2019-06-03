@@ -21,14 +21,17 @@
             android:layout_height="wrap_content"
             android:text="Enviar"
             android:layout_weight="1"
-            android:id="@+id/btn_enviar_chat"/>
+            android:id="@+id/btn_enviar_chat"
+            android:background="#B0CA36"/>
     </LinearLayout>
 
 
     <TextView
+        android:id="@+id/txt_mensajes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/txt_mensajes"
+        android:textStyle="bold"
+        android:background="#A7D4D6"
 
         />
 
