@@ -185,19 +185,8 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(txtName.getText().equals("") || txtLastName.getText().equals("")
-                        || txtAddress.getText().equals("")
-                        || txtCC.getText().equals("")
-                        || txtEmail.getText().equals("")
-                        || txtTel.getText().equals("")
-                        || txtPassword.getText().equals("") || txtRePassword.getText().equals("")){
-                    try {
-                        validacion();
-                    } catch (Exception e) {
-                        Toast.makeText(RegisterEmployeeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }else{
-
+                try {
+                    validacion();
                     auth.createUserWithEmailAndPassword(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim()).addOnCompleteListener(RegisterEmployeeActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -235,31 +224,26 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                             }
                         }
                     });
-
-//                    auth.createUserWithEmailAndPassword(txtEmail.getText().toString().trim(), txtPassword.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//                        @Override
-//                        public void onSuccess(AuthResult authResult) {
-//
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(RegisterEmployeeActivity.this, "Hubo un error", Toast.LENGTH_SHORT).show();
-//                            Log.e(">>>", "registro problem: " + e.getMessage());
-//
-//                        }
-//                    });
-
-
-
-
+                } catch (Exception e) {
+                    Toast.makeText(RegisterEmployeeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
     }
 
-    private void validarFecha(Date date) throws Exception{
+    private void validarFecha() throws Exception{
+        SimpleDateFormat format = new SimpleDateFormat("d MMM. yyyy", Locale.US);
+        try {
+            String strDate = txtDateOfBirth.getText().toString();
+            Log.e(">>>", strDate);
+            date = format.parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw e;
+        }
         if (date.compareTo(new Date())>0 || getAge(date)>100){
             throw new Exception("Por favor selecciona una fecha de nacimiento válida");
         }
@@ -333,21 +317,10 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
         }
         if(!cbAcceptTermsCond.isChecked()){
             Toast.makeText(RegisterEmployeeActivity.this, "Debes aceptar los términos y condiciones", Toast.LENGTH_SHORT).show();
-            //cbAcceptTermsCond.setError("Debes aceptar los términos y condiciones");
         } if(!pass.equals(repass)){
             throw new Exception("Las contraseñas deben coincidir");
         }
-        SimpleDateFormat format = new SimpleDateFormat("d MMM. yyyy", Locale.US);
-        try {
-            String strDate = txtDateOfBirth.getText().toString();
-            Log.e(">>>", strDate);
-            date = format.parse(strDate);
-            validarFecha(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            throw e;
-        }
+        validarFecha();
 
 
     }
