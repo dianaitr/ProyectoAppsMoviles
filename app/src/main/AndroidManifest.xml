@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".client_activities.CalendarioCreacionBuscarServicio"></activity>
+        <activity android:name=".MuroChatsEmpleadoActivity"></activity>
+        <activity android:name=".client_activities.CalendarioCreacionBuscarServicio" />
         <activity android:name=".client_activities.CreacionBuscarServicioActivity" />
         <activity android:name=".employee_activities.PerfilEmpleadoBuscadoActivity" />
         <activity android:name=".client_activities.HistorialClienteActivity" />

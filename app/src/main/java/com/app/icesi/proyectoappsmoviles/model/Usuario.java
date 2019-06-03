@@ -144,4 +144,9 @@ public class Usuario {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public String toString(){
+        return "Conversación con "+ nombres+" "+ apellidos;
+    }
 }

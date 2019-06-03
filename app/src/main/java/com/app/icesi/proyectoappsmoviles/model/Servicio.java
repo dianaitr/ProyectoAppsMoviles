@@ -12,8 +12,8 @@ public class Servicio {
     private String id_cliente;
     private double calificacion;
     private String comentarios;
-    private Date fechaServicio;
-    private ArrayList<String> tiposServicios;
+   // private Date fechaServicio;
+   // private ArrayList<String> tiposServicios;
 
     public Servicio(){
 
@@ -59,19 +59,19 @@ public class Servicio {
         this.comentarios = comentarios;
     }
 
-    public Date getFechaServicio() {
-        return fechaServicio;
-    }
+  //  public Date getFechaServicio() {
+  //      return fechaServicio;
+  //  }
 
-    public void setFechaServicio(Date fechaServicio) {
-        this.fechaServicio = fechaServicio;
-    }
+  //  public void setFechaServicio(Date fechaServicio) {
+   //     this.fechaServicio = fechaServicio;
+ //   }
 
-    public ArrayList<String> getTiposServicios() {
-        return tiposServicios;
-    }
+    //public ArrayList<String> getTiposServicios() {
+      //  return tiposServicios;
+    //}
 
-    public void setTiposServicios(ArrayList<String> tiposServicios) {
-        this.tiposServicios = tiposServicios;
-    }
+   // public void setTiposServicios(ArrayList<String> tiposServicios) {
+    //    this.tiposServicios = tiposServicios;
+    //}
 }
