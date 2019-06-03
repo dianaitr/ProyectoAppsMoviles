@@ -27,9 +27,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class PerfilEmpleadoActivity extends AppCompatActivity {
 
-    private TextView et_nombre_empleado, et_telefono_empleado,et_calificacion_empleado;
+    private TextView et_nombre_empleado, et_telefono_empleado,et_calificacion_empleado,et_apellidos_empleado;
     private Switch sw_estado_empleado;
     private Button btn_sign_out_empleado;
+
 
     private String userType;
     private GoogleSignInClient mGoogleSignInClient;
@@ -70,7 +71,9 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
         });
 
         et_nombre_empleado = findViewById(R.id.tv_nameEmpleado);
-        et_telefono_empleado = findViewById(R.id.tv_telefonoEmpleado);
+        et_telefono_empleado = findViewById(R.id.tv_numeroTelEmpleado);
+        et_calificacion_empleado=findViewById(R.id.tv_numeroCalificacionEmpleado);
+        et_apellidos_empleado=findViewById(R.id.tv_apellidoEmpleado);
 
         sw_estado_empleado = findViewById(R.id.sw_estadoEmpleado);
         sw_estado_empleado.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +91,8 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Usuario usuario = (Usuario) dataSnapshot.getValue(Usuario.class);
-                et_nombre_empleado.setText(usuario.getNombres()+" "+usuario.getApellidos());
+                et_nombre_empleado.setText(usuario.getNombres());
+                et_apellidos_empleado.setText(usuario.getApellidos());
                 et_calificacion_empleado.setText(""+usuario.getCalificacion());
                 et_telefono_empleado.setText(usuario.getTelefono());
             }
