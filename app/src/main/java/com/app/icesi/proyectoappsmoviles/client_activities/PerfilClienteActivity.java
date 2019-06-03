@@ -70,7 +70,6 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
 
         //mapeo de xml
-        person1_imagen=findViewById(R.id.person1_imagen);
         tv_nameCliente=findViewById(R.id.tv_nameCliente);
         tv_localidadCliente=findViewById(R.id.tv_localidadCliente);
         tv_calificacionCliente=findViewById(R.id.tv_nameCliente);
