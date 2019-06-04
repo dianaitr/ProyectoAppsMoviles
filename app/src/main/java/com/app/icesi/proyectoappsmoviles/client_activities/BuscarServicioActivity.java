@@ -40,6 +40,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -70,6 +71,7 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
     FirebaseAuth auth;
 
     ArrayList<Usuario> listaUsuarios;
+    List<Usuario> usuariosBuscados;
 
     private Map<String, Boolean> servicios_solicitados;
     private int hora_solicitada;
@@ -86,6 +88,7 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         auth = FirebaseAuth.getInstance();
 
         obtenerValoresSolicitud();
+        usuariosBuscados = buscarServicio();
 
         final Location myLocation = getMyLocation();
 
@@ -110,9 +113,8 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
                 Log.e(">>>","Holiiiii");
 
                 if(position==0){
-                    List<Usuario> usuarios = buscarServicio();
                     listaUsuarios.clear();
-                    listaUsuarios.addAll(usuarios);
+                    listaUsuarios.addAll(usuariosBuscados);
                     adapter.notifyDataSetChanged();
 
                 }
@@ -126,11 +128,15 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
                             for(DataSnapshot objSnapshot: dataSnapshot.getChildren()){
 
                                 Usuario usuario= objSnapshot.getValue(Usuario.class);
-                                Location userLocation = new Location(LocationManager.NETWORK_PROVIDER);
-                                userLocation.setLatitude(usuario.getLatitude());
-                                userLocation.setLongitude(usuario.getLongitude());
-                                float distance = myLocation.distanceTo(userLocation)/1000;
-                                distances.put(usuario,distance);
+                                // Esto puede cambiar, no ordenar todos los colaboradores, solo los buscados
+                                if(usuariosBuscados.contains(usuario)){
+                                    Location userLocation = new Location(LocationManager.NETWORK_PROVIDER);
+                                    userLocation.setLatitude(usuario.getLatitude());
+                                    userLocation.setLongitude(usuario.getLongitude());
+                                    float distance = myLocation.distanceTo(userLocation)/1000;
+                                    distances.put(usuario,distance);
+                                }
+
                             }
 
                             HashMap<Usuario, Float> sortDistances = sortByValue(distances);
@@ -286,9 +292,13 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         return  usuarios;
     }
 
-    private boolean compararFechas(Date fecha, Date fecha_solicitada) {
-        //TODO
-        return true;
+    private boolean compararFechas(Date fecha_servicio, Date fecha_solicitada) {
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(fecha_servicio);
+        cal2.setTime(fecha_solicitada);
+        boolean iguales = cal1.get(Calendar.DAY_OF_YEAR)==cal2.get(Calendar.DAY_OF_YEAR) && cal1.get(Calendar.YEAR)==cal2.get(Calendar.YEAR);
+        return iguales;
     }
 
     @Override
