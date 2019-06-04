@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.employee_activities.PerfilEmpleadoBuscadoActivity;
@@ -301,10 +302,26 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
 
     @Override
-    public void onItemClick(Usuario amigo) {
-        Intent i = new Intent( Intent.ACTION_CALL );
-        //i.setData( Uri.parse("tel:"+amigo.getTelefono()) );
-        startActivity(i);
+    public void onItemClick(Usuario usuario) {
+        rtdb.getReference().child("servicios_en_progreso").child("ofertado").child(usuario.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    Servicio servicio=  (Servicio) dataSnapshot.getValue(Servicio.class);
+                    servicio.setEstado("solicitado");
+                    rtdb.getReference().child("servicios_en_progreso").child("solicitado").child(servicio.getId_colab()).setValue(servicio);
+                    rtdb.getReference().child("servicios_en_progreso").child("ofertado").child(servicio.getId_colab()).removeValue();
+                    Toast.makeText(BuscarServicioActivity.this, "Se ha solicitado el servicio correctamente", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(BuscarServicioActivity.this, NotificacionClienteActivity.class);
+                    i.putExtra("id_colab",servicio.getId_colab());
+                    startActivity(i);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 

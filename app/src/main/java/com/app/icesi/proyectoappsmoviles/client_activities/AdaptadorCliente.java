@@ -86,7 +86,6 @@ public class AdaptadorCliente extends RecyclerView.Adapter<AdaptadorCliente.Cust
     //OBSERVER
     public interface OnItemClickListener{
         void onItemClick(Usuario usuario);
-        //void onChat(Amigo amigo);
     }
 
     private OnItemClickListener listener;
