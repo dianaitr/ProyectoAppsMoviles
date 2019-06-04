@@ -243,32 +243,38 @@ public class LoginActivity extends AppCompatActivity {
                 final String mail = mEmailView.getText().toString().trim();
                 final String pass = mPasswordView.getText().toString().trim();
 
-                auth.signInWithEmailAndPassword(mail, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        //Estamos logeados
+                if (mail.trim().equals("") || pass.trim().equals("")){
+                    Toast.makeText(LoginActivity.this, "Debes llenar los campos de correo y contraseña", Toast.LENGTH_SHORT).show();
+                } else {
+                    auth.signInWithEmailAndPassword(mail, pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            //Estamos logeados
 
-                        if(typeUser.equals("employee")){
-                            Intent i = new Intent(LoginActivity.this, PerfilEmpleadoActivity.class);
-                            i.putExtra("userType",typeUser); //por si acaso
-                            startActivity(i);
-                        }else if(typeUser.equals("client")){
-                            Intent i = new Intent(LoginActivity.this, PerfilClienteActivity.class);
-                            i.putExtra("userType",typeUser); //por si acaso
-                            startActivity(i);
+                            if(typeUser.equals("employee")){
+                                Intent i = new Intent(LoginActivity.this, PerfilEmpleadoActivity.class);
+                                i.putExtra("userType",typeUser); //por si acaso
+                                startActivity(i);
+                            }else if(typeUser.equals("client")){
+                                Intent i = new Intent(LoginActivity.this, PerfilClienteActivity.class);
+                                i.putExtra("userType",typeUser); //por si acaso
+                                startActivity(i);
+                            }
+                            finish();
+
                         }
-                        finish();
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, "El correo no existe o la contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+                            Log.e(">>>", "login con correo " + e.getMessage());
+                            Log.e(">>>", "Google sign in failed" + mail+"c es:"+pass+"");
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(LoginActivity.this, "Hubo un problema al iniciar sesión", Toast.LENGTH_SHORT).show();
-                        Log.e(">>>", "login con correo " + e.getMessage());
-                        Log.e(">>>", "Google sign in failed" + mail+"c es:"+pass+"");
+                        }
+                    });
+                }
 
-                    }
-                });
+
 
             }
         });

@@ -204,7 +204,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                                 usuario.setTelefono(txtTel.getText().toString());
                                 usuario.setLatitude(myLocation.getLatitude());
                                 usuario.setLongitude(myLocation.getLongitude());
-                                usuario.setCalificacion(0);
+                                usuario.setCalificacion(3);
                                 usuario.setActivo(false);
                                 usuario.setGenero(sexSelected);
                                 usuario.setFecha_nacimiento(date);
@@ -220,6 +220,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
                                     i.putExtra("id", auth.getCurrentUser().getUid());
                                     startActivity(i);
                                 }
+                                finish();
 
                             }
                         }
