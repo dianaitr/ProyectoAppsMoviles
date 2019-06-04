@@ -14,7 +14,7 @@ public class CalendarioCreacionBuscarServicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario_creacion_buscar_servicio);
-        calendarViewCreacionBuscarServicio= (CalendarView)findViewById(R.id.calendarViewEmployee);
+        calendarViewCreacionBuscarServicio= (CalendarView)findViewById(R.id.calendario_Creacion_buscarServicio);
         calendarViewCreacionBuscarServicio.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange( CalendarView view, int year, int month, int dayOfMonth) {
