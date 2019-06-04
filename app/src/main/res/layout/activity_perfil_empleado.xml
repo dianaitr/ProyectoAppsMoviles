@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="210dp"
         android:orientation="horizontal"
         android:background="#B0CA36"
         android:id="@+id/layoutInfo"
@@ -24,7 +24,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/person2_imagen"
+                android:id="@+id/employe_ima"
                 android:layout_width="115dp"
                 android:layout_height="110dp"
                 android:layout_marginLeft="10dp"
@@ -35,22 +35,29 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <ImageView
+                    android:id="@+id/im_star_one_one"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
                 <ImageView
+                    android:id="@+id/im_star_one_two"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
                 <ImageView
+                    android:id="@+id/im_star_one_three"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
                 <ImageView
+
+                    android:id="@+id/im_star_one_four"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
                 <ImageView
+                    android:id="@+id/im_star_one_five"
+
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
@@ -102,6 +109,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Contacto:"
+                    android:textStyle="bold"
                     android:textSize="16dp"
                     android:textColor="#fff"/>
 
@@ -116,6 +124,29 @@
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Ubicacion:"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"/>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Universidad Icesi"
+                    android:textSize="16dp"
+                    android:textColor="#ffff"
+                    android:id="@+id/tv_ubicaEMple"/>
+
+            </LinearLayout>
 
 
 
@@ -146,6 +177,7 @@
             android:id="@+id/sw_estadoEmpleado"
             android:layout_width="55dp"
             android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="340dp"
             android:layout_marginTop="10dp"/>
 

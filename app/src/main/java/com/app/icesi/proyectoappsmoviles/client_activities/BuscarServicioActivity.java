@@ -206,6 +206,7 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         hora_solicitada = intent.getExtras().getInt("hora_solicitada");
         String strFecha = intent.getExtras().getString("fecha_solicitada");
         SimpleDateFormat format = new SimpleDateFormat("d MMM. yyyy", Locale.US);
+
         try {
             fecha_solicitada = format.parse(strFecha);
         } catch (ParseException e) {
