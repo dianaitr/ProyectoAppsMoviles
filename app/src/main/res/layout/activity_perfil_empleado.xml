@@ -6,17 +6,19 @@
     android:layout_height="match_parent"
     xmlns:design="http://schemas.android.com/apk/res-auto"
     tools:context=".employee_activities.PerfilEmpleadoActivity"
-    android:background="#57B2B4"
+    android:background="#C4D66E"
     android:orientation="vertical">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="210dp"
-        android:orientation="horizontal"
-        android:background="#B0CA36"
         android:id="@+id/layoutInfo"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="#B0CA36"
+        android:gravity="center"
+
+        android:layout_marginTop="200dp"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="190dp"
@@ -28,53 +30,57 @@
                 android:layout_width="115dp"
                 android:layout_height="110dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/person2"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="20dp"/>
+                android:background="@drawable/person2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:id="@+id/im_star_one_one"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@mipmap/ic_star_complete"/>
+                    android:background="@mipmap/ic_star_complete" />
+
                 <ImageView
                     android:id="@+id/im_star_one_two"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@mipmap/ic_star_complete"/>
+                    android:background="@mipmap/ic_star_complete" />
+
                 <ImageView
                     android:id="@+id/im_star_one_three"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@mipmap/ic_star_complete"/>
+                    android:background="@mipmap/ic_star_complete" />
+
                 <ImageView
 
                     android:id="@+id/im_star_one_four"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@mipmap/ic_star_complete"/>
+                    android:background="@mipmap/ic_star_complete" />
+
                 <ImageView
                     android:id="@+id/im_star_one_five"
 
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@mipmap/ic_star_complete"/>
+                    android:background="@mipmap/ic_star_complete" />
+
                 <TextView
                     android:id="@+id/tv_numeroCalificacionEmpleado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.8"
+                    android:textColor="#fff"
                     android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:textColor="#fff"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>
@@ -86,43 +92,45 @@
             android:orientation="vertical">
 
 
-                <TextView
-                    android:id="@+id/tv_nameEmpleado"
-                    android:layout_marginTop="30dp"
-                    android:text="Nombres"
-                    android:textSize="25dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="#ffff"/>
-                <TextView
-                    android:id="@+id/tv_apellidoEmpleado"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Apellidos"
-                    android:textSize="20dp"
-                    android:textColor="#ffff"/>
+            <TextView
+                android:id="@+id/tv_nameEmpleado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Nombres"
+                android:textColor="#ffff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_apellidoEmpleado"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Apellidos"
+                android:textColor="#ffff"
+                android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Contacto:"
-                    android:textStyle="bold"
+                    android:textColor="#fff"
                     android:textSize="16dp"
-                    android:textColor="#fff"/>
+                    android:textStyle="bold" />
 
                 <TextView
 
+                    android:id="@+id/tv_numeroTelEmpleado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Número"
-                    android:textSize="16dp"
                     android:textColor="#ffff"
-                    android:id="@+id/tv_numeroTelEmpleado"/>
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
@@ -131,38 +139,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Ubicacion:"
+                    android:textColor="#fff"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:textColor="#fff"/>
+                    android:textStyle="bold" />
 
                 <TextView
 
+                    android:id="@+id/tv_ubicaEMple"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Universidad Icesi"
-                    android:textSize="16dp"
                     android:textColor="#ffff"
-                    android:id="@+id/tv_ubicaEMple"/>
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
-
+            <Button
+                android:id="@+id/btn_sign_out_empleado"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:background="#009688"
+                android:text="Cerrar sesión"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="12dp" />
 
 
         </LinearLayout>
 
 
-
     </LinearLayout>
+
 
 
     <RelativeLayout
         android:layout_below="@+id/layoutInfo"
         android:layout_width="match_parent"
+        android:visibility="invisible"
         android:layout_height="match_parent">
 
         <TextView
@@ -190,22 +211,24 @@
             android:layout_height="25dp"
             android:text="Servicios prestados"
             android:textSize="16dp"
+            android:visibility="invisible"
             android:textColor="#fff"
             android:layout_centerHorizontal="true"/>
 
 
-        <GridView
+        <TextView
             android:layout_below="@+id/tv_titulo_serviciosEmpleado"
             android:id="@+id/gv_lista_servicios_empleado"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="10dp"
             android:background="#8CC0C0"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:visibility="invisible"
             >
 
+        </TextView>
 
-        </GridView>
 
 
 
@@ -223,6 +246,7 @@
             android:padding="10dp"
             android:layout_marginRight="10dp"
             android:textSize="14dp"
+            android:visibility="invisible"
             android:textColor="#57B2B4"
             />
 
@@ -238,7 +262,7 @@
             android:text="Editar mi disponibilidad"
             android:textAlignment="textStart"
             android:layout_marginRight="10dp"
-
+            android:visibility="invisible"
             android:textSize="14dp"
             android:textColor="#57B2B4"
             />
@@ -267,9 +291,11 @@
             android:layout_below="@+id/btn_editar_historial_empleado"
             android:text="¿Necesitas ayuda?"
             android:textSize="16dp"
+            android:visibility="invisible"
             android:textColor="#ffff"/>
         <Button
             android:id="@+id/btn_servicioColaborador"
+            android:visibility="invisible"
             android:layout_below="@id/tv_ayudaEmpleado"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -286,19 +312,7 @@
             />
 
 
-        <Button
-            android:id="@+id/btn_sign_out_empleado"
-            android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:layout_below="@+id/btn_servicioColaborador"
-            android:layout_marginLeft="148dp"
-            android:background="#B0CA36"
-            android:text="Cerrar sesión"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="#000"
-            android:textSize="12dp"
-       />
+
 
     </RelativeLayout>
 

@@ -21,6 +21,7 @@ import com.app.icesi.proyectoappsmoviles.MuroChatsEmpleadoActivity;
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.client_activities.NotificacionClienteActivity;
 import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
+import com.app.icesi.proyectoappsmoviles.model.Servicio;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -33,6 +34,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -61,6 +64,7 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
     private TextView tv_ubicaEMple;
     private TextView  tv_numeroCalificacionEmpleado;
     private TextView  tv_numeroTelEmpleado;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +150,9 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
                 rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).child("estado").setValue(sw_estado_empleado.isChecked());
             }
         });
+
+
+
 
         llenarCampos();
     }
