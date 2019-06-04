@@ -192,6 +192,14 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        if (fecha_solicitada==null){
+            format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+            try {
+                fecha_solicitada = format.parse(strFecha);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void getMyLocation() {
