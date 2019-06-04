@@ -85,15 +85,30 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 //verificarServicios();
 
-                DatabaseReference databaseReference = rtdb.getReference().child("servicios_en_proceso");
-                DatabaseReference dataColaboradores= (DatabaseReference) rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                final DatabaseReference databaseReference = rtdb.getReference().child("servicios_en_progreso");
+
+                databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                            Log.e("Datos colaborador",""+snapshot.getValue());
-                            }
-                        }
 
+                       for (final DataSnapshot snapshot:dataSnapshot.getChildren())
+                       databaseReference.child("aceptado").child(snapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                           @Override
+                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                               Servicio servicio1=snapshot.getValue(Servicio.class);
+                               String estado= servicio1.getEstado();
+                               String cedula_colab=servicio1.getId_colab();
+                               String cedula_cliente=servicio1.getId_cliente();
+
+                           }
+
+                           @Override
+                           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                           }
+                       });
+
+                    }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -110,7 +125,7 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
                     //}
 
                     databaseReference.child("Calificacion").setValue(servicio1.getCalificacion());
-                    databaseReference.child("Comentarios").setValue(servicio1.getComentarios());
+                    databaseReference.child("Comentarios").setValue("");
                     databaseReference.child("Servicios").child(cbox.toString()).setValue(true);
                     databaseReference.child("Fecha servicio realizado").setValue(fecha);
                    // Servicio ser=new Servicio();
