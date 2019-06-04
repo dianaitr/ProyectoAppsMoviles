@@ -149,6 +149,24 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
                 }else if (position==2){
 
+                    // Este ordenamiento se puede optimizar pero por tiempo paila xd
+
+                    HashMap<Usuario, Float> scores = new HashMap<Usuario, Float>();
+
+                    buscarServicio();
+
+                    for (Usuario usuario : listaUsuarios){
+                        scores.put(usuario, (float)usuario.getCalificacion());
+                    }
+
+                    HashMap<Usuario, Float> sortDistances = sortByValue(scores);
+                    Iterator<Usuario> iterator = sortDistances.keySet().iterator();
+                    listaUsuarios.clear();
+                    while(iterator.hasNext()){
+                        listaUsuarios.add(iterator.next());
+                    }
+
+                    adapter.notifyDataSetChanged();
                 }
             }
 
