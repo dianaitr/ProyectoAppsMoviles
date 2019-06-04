@@ -15,13 +15,13 @@ public class Servicio {
     private double calificacion;
     private String comentarios;
     private Date fecha;
-    private String horaInicio;
+    private int horaInicio;
 
-    public String getHoraInicio() {
+    public int getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(String horaInicio) {
+    public void setHoraInicio(int horaInicio) {
         this.horaInicio = horaInicio;
     }
 
@@ -92,13 +92,6 @@ public class Servicio {
         this.comentarios = comentarios;
     }
 
-  //  public Date getFechaServicio() {
-  //      return fechaServicio;
-  //  }
-
-  //  public void setFechaServicio(Date fechaServicio) {
-   //     this.fechaServicio = fechaServicio;
- //   }
 
 
 }
