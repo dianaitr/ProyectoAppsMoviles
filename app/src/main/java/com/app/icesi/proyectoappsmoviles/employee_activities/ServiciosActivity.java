@@ -28,9 +28,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class ServiciosActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerClass.TimePickerListener{
 
@@ -98,10 +101,6 @@ public class ServiciosActivity extends AppCompatActivity implements DatePickerDi
 
                 Intent i = new Intent(ServiciosActivity.this, PerfilEmpleadoActivity.class);
                 i.putExtra("userType","employee");
-                i.putExtra("servicios_solicitados",servicios_solicitados2);
-                i.putExtra("fecha_solicitada",fecha_solicitada2);
-                i.putExtra("hora_solicitada",hora_solicitada2);
-
                 startActivity(i);
                 finish();
             }
@@ -117,8 +116,14 @@ public class ServiciosActivity extends AppCompatActivity implements DatePickerDi
         servicio.setCalificacion(0.0);
         servicio.setComentarios("");
         servicio.setEstado("ofertado");
-        servicio.setFecha(new Date());
-        servicio.setHoraInicio(0);
+        SimpleDateFormat format = new SimpleDateFormat("d MMM. yyyy", Locale.US);
+        try {
+            Date date = format.parse(fecha_solicitada2);
+            servicio.setFecha(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        servicio.setHoraInicio(hora_solicitada2);
         servicio.setId_cliente("");
         servicio.setId_colab(auth.getCurrentUser().getUid());
 

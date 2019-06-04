@@ -70,14 +70,16 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
     FirebaseDatabase rtdb;
     FirebaseAuth auth;
 
-    ArrayList<Usuario> listaUsuarios;
-    List<Usuario> usuariosBuscados;
+    ArrayList<Usuario> listaUsuarios; // mostrados en el adapter
+    //List<Usuario> usuariosBuscados; // filtrados por servicio, fecha y hora
 
     private Map<String, Boolean> servicios_solicitados;
     private int hora_solicitada;
     private Date fecha_solicitada;
 
     private BottomNavigationView btn_navigation;
+
+    Location myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +89,10 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        obtenerValoresSolicitud();
-        usuariosBuscados = buscarServicio();
+        myLocation = new Location(LocationManager.NETWORK_PROVIDER);
 
-        final Location myLocation = getMyLocation();
+        obtenerValoresSolicitud();
+        getMyLocation();
 
         listaUsuarios = new ArrayList<Usuario>();
 
@@ -106,6 +108,15 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones);
         sp_filtro.setAdapter(arrayAdapter);
 
+        lvServices = findViewById(R.id.lvServices);
+        lvServices.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new AdaptadorCliente(listaUsuarios);
+        lvServices.setAdapter(adapter);
+        adapter.setListener(this);
+
+        lvServices.setHasFixedSize(true);
+
         sp_filtro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, final long id) {
@@ -113,23 +124,20 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
                 Log.e(">>>","Holiiiii");
 
                 if(position==0){
-                    listaUsuarios.clear();
-                    listaUsuarios.addAll(usuariosBuscados);
-                    adapter.notifyDataSetChanged();
-
+                    buscarServicio();
                 }
                 else if(position==1){
                     rtdb.getReference().child("usuarios").child("colaboradores").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            listaUsuarios.clear();
 
                             HashMap<Usuario, Float> distances = new HashMap<Usuario, Float>();
                             for(DataSnapshot objSnapshot: dataSnapshot.getChildren()){
 
                                 Usuario usuario= objSnapshot.getValue(Usuario.class);
                                 // Esto puede cambiar, no ordenar todos los colaboradores, solo los buscados
-                                if(usuariosBuscados.contains(usuario)){
+                                buscarServicio();
+                                if(listaUsuarios.contains(usuario)){
                                     Location userLocation = new Location(LocationManager.NETWORK_PROVIDER);
                                     userLocation.setLatitude(usuario.getLatitude());
                                     userLocation.setLongitude(usuario.getLongitude());
@@ -141,6 +149,7 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
                             HashMap<Usuario, Float> sortDistances = sortByValue(distances);
                             Iterator<Usuario> iterator = sortDistances.keySet().iterator();
+                            listaUsuarios.clear();
                             while(iterator.hasNext()){
                                 listaUsuarios.add(iterator.next());
                             }
@@ -165,14 +174,6 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
             }
         });
 
-        lvServices = findViewById(R.id.lvServices);
-        lvServices.setLayoutManager(new LinearLayoutManager(this));
-
-        adapter = new AdaptadorCliente(listaUsuarios);
-        lvServices.setAdapter(adapter);
-        adapter.setListener(this);
-
-        lvServices.setHasFixedSize(true);
 
         btn_navigation = findViewById(R.id.btn_navigation);
         btn_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -210,8 +211,8 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         }
     }
 
-    private Location getMyLocation() {
-        final Location myLocation = new Location(LocationManager.NETWORK_PROVIDER);
+    private void getMyLocation() {
+
         rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -225,7 +226,6 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
             }
         });
-        return myLocation;
     }
 
     // function to sort hashmap by values
@@ -253,25 +253,28 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
     }
 
 
-    private List<Usuario> buscarServicio() {
-
-        final List<Usuario> usuarios = new LinkedList<Usuario>();
+    private void buscarServicio() {
 
         rtdb.getReference().child("servicios_en_progreso").child("ofertado").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaUsuarios.clear();
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Servicio servicio = (Servicio) objSnapshot.getValue(Servicio.class);
 
                     if (servicio.getTiposServicios().values().containsAll(servicios_solicitados.values()) &&
                             compararFechas(servicio.getFecha(), fecha_solicitada) && servicio.getHoraInicio() == hora_solicitada) {
-                        String userID = servicio.getId_colab();
-
+                        final String userID = servicio.getId_colab();
+                        Log.e(">>>", userID);
                         rtdb.getReference().child("usuarios").child("colaboradores").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Log.e(">>>","entró");
                                 Usuario usuario = (Usuario) dataSnapshot.getValue(Usuario.class);
-                                usuarios.add(usuario);
+                                Log.e(">>>", usuario.getUid());
+                                listaUsuarios.add(usuario);
+                                Log.e(">>>",listaUsuarios.size()+"");
+                                adapter.notifyDataSetChanged();
                             }
 
                             @Override
@@ -281,7 +284,6 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
                         });
                     }
                 }
-
             }
 
             @Override
@@ -289,7 +291,6 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
             }
         });
-        return  usuarios;
     }
 
     private boolean compararFechas(Date fecha_servicio, Date fecha_solicitada) {
