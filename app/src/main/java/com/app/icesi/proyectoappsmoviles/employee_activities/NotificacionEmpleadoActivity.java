@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.app.icesi.proyectoappsmoviles.MuroChatsClienteActivity;
 import com.app.icesi.proyectoappsmoviles.MuroChatsEmpleadoActivity;
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.SolicitudActivity;
 import com.app.icesi.proyectoappsmoviles.client_activities.AdaptadorNotificacionCliente;
 import com.app.icesi.proyectoappsmoviles.client_activities.NotificacionClienteActivity;
 import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
@@ -111,7 +112,9 @@ public class NotificacionEmpleadoActivity extends AppCompatActivity implements A
     @Override
     public void onItemClick(Servicio servicio) {
 
-        
+        Intent i= new Intent(NotificacionEmpleadoActivity.this, SolicitudActivity.class);
+        i.putExtra("id_cliente",servicio.getId_cliente());
+        startActivity(i);
 
     }
 }

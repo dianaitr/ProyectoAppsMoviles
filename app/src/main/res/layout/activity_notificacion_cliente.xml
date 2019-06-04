@@ -10,7 +10,7 @@
 
 
     <LinearLayout
-        android:id="@+id/layoutSolicitud"
+        android:id="@+id/renglon_notificacion_empleado"
         android:layout_width="410dp"
         android:layout_height="68dp"
         android:background="#B0CA36"
@@ -42,7 +42,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/layoutSolicitud"
+        android:layout_below="@+id/renglon_notificacion_empleado"
         android:id="@+id/lv_listaServiciosNoti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

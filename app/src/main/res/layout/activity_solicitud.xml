@@ -5,15 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:design="http://schemas.android.com/apk/res-auto"
-    tools:context=".SolicitudActivity"
+
     android:background="#fff">
 
-    <ScrollView
-        android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
     <LinearLayout
-        android:id="@+id/layoutSolicitud"
+        android:id="@+id/renglon_notificacion_empleado"
         android:layout_width="410dp"
         android:layout_height="68dp"
         android:background="#B0CA36"
@@ -46,9 +43,9 @@
     <LinearLayout
         android:id="@+id/l2"
         android:layout_width="wrap_content"
-        android:layout_height="500dp"
+        android:layout_height="300dp"
         android:orientation="vertical"
-        android:layout_below="@+id/layoutSolicitud"
+        android:layout_below="@+id/renglon_notificacion_empleado"
         android:layout_gravity="center_horizontal">
 
 
@@ -67,12 +64,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Nombre"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:id="@+id/nombreS"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Apellidos"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:id="@+id/apellidoS"/>
         </LinearLayout>
 
 
@@ -199,9 +198,10 @@
 
     </LinearLayout>
 
+
         <Button
             android:layout_below="@+id/l2"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="ACEPTAR"
             android:background="#fff"
@@ -212,8 +212,8 @@
             android:id="@+id/btn_aceptarSolicitud"/>
 
         <Button
-            android:layout_below="@+id/btn_aceptarSolicitud"
-            android:layout_width="match_parent"
+            android:layout_below="@+id/l2"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="RECHAZAR"
             android:background="#fff"
@@ -223,11 +223,15 @@
             android:textSize="16dp"
             android:id="@+id/btn_rechazarSolicitud"/>
 
+
+
+
+
     <Button
         android:layout_below="@+id/btn_rechazarSolicitud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver perfil del solicitante"
+        android:text="Ver información del solicitante"
         android:background="#fff"
         android:textColor="#B0CA36"
         android:id="@+id/btn_verPerfilSolicitante"/>
@@ -243,5 +247,5 @@
 
         />
 
-    </ScrollView>
+
 </RelativeLayout>

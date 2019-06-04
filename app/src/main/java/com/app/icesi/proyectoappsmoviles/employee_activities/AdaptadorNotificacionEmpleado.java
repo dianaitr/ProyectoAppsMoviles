@@ -3,8 +3,10 @@ package com.app.icesi.proyectoappsmoviles.employee_activities;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.icesi.proyectoappsmoviles.R;
@@ -99,6 +101,12 @@ public class AdaptadorNotificacionEmpleado extends RecyclerView.Adapter<Adaptado
         ((TextView) holder.root.findViewById(R.id.txtFechaEmpleadoNoti)).setText(" "+dateFormat.format(lista_servicios_solicitados.get(position).getFecha())+"");
         ((TextView) holder.root.findViewById(R.id.txtHoraEmpleadoNoti)).setText(" "+ lista_servicios_solicitados.get(position).getHoraInicio()+"");
 
+        holder.root.findViewById(R.id.renglon_notificacion_empleado).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(lista_servicios_solicitados.get(position));
+            }
+        });
 
     }
 

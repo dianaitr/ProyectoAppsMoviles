@@ -111,8 +111,6 @@ public class NotificacionClienteActivity extends AppCompatActivity implements Ad
     @Override
     public void onItemClick(Servicio servicio) {
 
-        Intent i= new Intent(NotificacionClienteActivity.this, SolicitudActivity.class);
-        i.putExtra("id_colab",servicio.getId_colab());
-        startActivity(i);
+
     }
 }
