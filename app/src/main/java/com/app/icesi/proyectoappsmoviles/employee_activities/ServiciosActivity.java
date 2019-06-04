@@ -74,7 +74,7 @@ public class ServiciosActivity extends AppCompatActivity {
         servicio.setComentarios("");
         servicio.setEstado("ofertado");
         servicio.setFecha(new Date());
-        servicio.setHoraInicio("");
+        servicio.setHoraInicio(0);
         servicio.setId_cliente("");
         servicio.setId_colab(auth.getCurrentUser().getUid());
 

@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.employee_activities.PerfilEmpleadoBuscadoActivity;
+import com.app.icesi.proyectoappsmoviles.model.Servicio;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -220,15 +221,14 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
     }
 
 
-    private void llenarRenglones() {
+    private void llenarRenglones() { //TODO
 
-            rtdb.getReference().child("servicios_ofertados").child("colaboradores").addValueEventListener(new ValueEventListener() {
+        rtdb.getReference().child("servicios_en_progreso").child("ofertado").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaUsuarios.clear();
                 for(DataSnapshot objSnapshot: dataSnapshot.getChildren()){
-                    Usuario p= objSnapshot.getValue(Usuario.class);
-                    listaUsuarios.add(p);
+                    Servicio servicio = (Servicio) objSnapshot.getValue(Servicio.class);
 
                 }
                 adapter.notifyDataSetChanged();
