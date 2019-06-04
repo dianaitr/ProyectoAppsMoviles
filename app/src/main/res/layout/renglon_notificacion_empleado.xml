@@ -27,7 +27,7 @@
                 android:id="@+id/sol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Solicitud enviada a :  "
+                android:text="Solicitante :  "
                 android:textColor="#57B2B4"
                 android:textSize="16dp"/>
             <TextView

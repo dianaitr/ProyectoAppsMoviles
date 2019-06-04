@@ -309,11 +309,12 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
                     Servicio servicio=  (Servicio) dataSnapshot.getValue(Servicio.class);
                     servicio.setEstado("solicitado");
+                    servicio.setId_cliente(auth.getCurrentUser().getUid());
                     rtdb.getReference().child("servicios_en_progreso").child("solicitado").child(servicio.getId_colab()).setValue(servicio);
                     rtdb.getReference().child("servicios_en_progreso").child("ofertado").child(servicio.getId_colab()).removeValue();
                     Toast.makeText(BuscarServicioActivity.this, "Se ha solicitado el servicio correctamente", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(BuscarServicioActivity.this, NotificacionClienteActivity.class);
-                    i.putExtra("id_colab",servicio.getId_colab());
+                    //i.putExtra("id_colab",servicio.getId_colab());
                     startActivity(i);
             }
 

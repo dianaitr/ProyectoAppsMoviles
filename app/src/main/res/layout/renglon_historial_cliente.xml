@@ -24,7 +24,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/renglon_hist_cliente_nombre"
+                        android:id="@+id/renglon_noti_empleado_nombre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nombres "
@@ -32,7 +32,7 @@
                         android:textStyle="bold"
                         android:textSize="16dp"/>
                     <TextView
-                        android:id="@+id/renglon_hist_cliente_apellidos"
+                        android:id="@+id/renglon_noti_empleado_apellidos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Apellidos"
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:text="Servicios:"/>
                     <TextView
-                        android:id="@+id/txtServiciosClienteHist"
+                        android:id="@+id/txtServiciosEmpleadoNoti"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=" Servicios obtenidos"/>
@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:text="Fecha:"/>
                     <TextView
-                        android:id="@+id/txtFechaClienteHist"
+                        android:id="@+id/txtFechaEmpleadoNoti"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=" 0/00/0000"/>
@@ -85,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:text="Hora:"/>
                     <TextView
-                        android:id="@+id/txtHoraClienteHist"
+                        android:id="@+id/txtHoraEmpleadoNoti"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=" 00:00"/>

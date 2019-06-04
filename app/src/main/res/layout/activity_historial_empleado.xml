@@ -33,7 +33,7 @@
 
 
         <TextView
-            android:id="@+id/et_historial_empleado"
+            android:id="@+id/et_noti_empleado"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
