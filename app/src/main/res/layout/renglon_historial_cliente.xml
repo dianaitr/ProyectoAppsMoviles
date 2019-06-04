@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="#fff">
+
+
+            <ImageView
+                android:id="@+id/iconHistorialClient"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@mipmap/ic_edit"
+                android:layout_gravity="center_vertical"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/renglon_hist_cliente_nombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombres "
+                        android:textColor="#57B2B4"
+                        android:textStyle="bold"
+                        android:textSize="16dp"/>
+                    <TextView
+                        android:id="@+id/renglon_hist_cliente_apellidos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apellidos"
+                        android:textColor="#57B2B4"
+                        android:textStyle="bold"
+                        android:textSize="16dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Servicios:"/>
+                    <TextView
+                        android:id="@+id/txtServiciosClienteHist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" Servicios obtenidos"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha:"/>
+                    <TextView
+                        android:id="@+id/txtFechaClienteHist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" 0/00/0000"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hora:"/>
+                    <TextView
+                        android:id="@+id/txtHoraClienteHist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" 00:00"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lugar:"/>
+                    <TextView
+                        android:id="@+id/txtLugarClienteHist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ubicación"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+</LinearLayout>

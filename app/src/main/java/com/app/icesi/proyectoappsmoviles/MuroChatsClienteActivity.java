@@ -58,9 +58,10 @@ public class MuroChatsClienteActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaUsuarios.clear();
                 for(DataSnapshot objSnapshot: dataSnapshot.getChildren()) {
+
                     Servicio p = objSnapshot.getValue(Servicio.class);
                     servicios_aceptados.add(p);
-                    Log.e("Serviciooooo:",servicios_aceptados.get(0).getId_cliente()+"");
+                    Log.e("Serviciooooo:",servicios_aceptados.get(0).getTiposServicios().get("cocinar")+"");
                 }
                 cargarChats();
 

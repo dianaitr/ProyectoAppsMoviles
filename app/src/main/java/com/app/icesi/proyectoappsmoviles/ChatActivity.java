@@ -93,7 +93,6 @@ public class ChatActivity extends AppCompatActivity {
                     String pushID=rtdb.getReference().child("chat").child(me_id).child(userSelected_id)
                             .push().getKey();
                     //creacion ramas genericas
-
                     rtdb.getReference().child("chat").child(me_id).child(userSelected_id).setValue(pushID);
                     rtdb.getReference().child("chat").child(userSelected_id).child(me_id).setValue(pushID);
                     idChat=pushID;
