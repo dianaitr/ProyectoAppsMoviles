@@ -107,7 +107,10 @@
         </LinearLayout>
 
     </ScrollView>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -139,8 +142,9 @@
 
         android:background="#B0CA36"
         android:padding="10dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="98dp"/>
+</LinearLayout>
 </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView

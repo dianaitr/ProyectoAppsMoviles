@@ -1,5 +1,6 @@
 package com.app.icesi.proyectoappsmoviles.employee_activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
@@ -25,10 +27,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-public class ServiciosActivity extends AppCompatActivity implements TimePickerClass.TimePickerListener{
+public class ServiciosActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerClass.TimePickerListener{
 
     CheckBox cb,cb0,cb1,cb2,cb3,cb4,cb5,cb6,cb7;
     Button btn_register_finish;
@@ -180,5 +184,17 @@ public class ServiciosActivity extends AppCompatActivity implements TimePickerCl
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int min) {
         hora_solicitada2=hour;
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker,int year, int month, int dayOfMonth) {
+        Calendar c= Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH,month);
+        c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+        String currentDateString = DateFormat.getDateInstance(DateFormat.MEDIUM).format(c.getTime());
+
+        fecha_solicitada2=currentDateString;
     }
 }
