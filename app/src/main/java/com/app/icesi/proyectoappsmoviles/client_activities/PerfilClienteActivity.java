@@ -75,6 +75,13 @@ public class PerfilClienteActivity extends AppCompatActivity {
         tv_calificacionCliente=findViewById(R.id.tv_nameCliente);
         btn_sign_out = findViewById(R.id.btn_sign_out);
         btn_historialCliente=findViewById(R.id.btn_historialCliente);
+        btn_historialCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(PerfilClienteActivity.this,HistorialClienteActivity.class);
+                startActivity(i);
+            }
+        });
         btn_nuevoServicioCliente=findViewById(R.id.btn_nuevoServicioCliente);
         tv_ayudaCliente=findViewById(R.id.tv_ayudaCliente);
 
@@ -86,6 +93,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
                 if (menuItem.getItemId()==R.id.menu_perfilUsuario){
 
                     Intent i= new Intent(PerfilClienteActivity.this, PerfilClienteActivity.class);
+                    i.putExtra("userType","client");
                     startActivity(i);
                     finish();
                 }else if(menuItem.getItemId()==R.id.menu_notificaciones){

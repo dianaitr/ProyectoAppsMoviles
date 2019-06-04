@@ -127,7 +127,7 @@
         android:id="@+id/btn_sigte"
         android:background="#B0CA36"
         android:padding="10dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="100dp"
         android:layout_marginLeft="98dp"/>
 </LinearLayout>
 

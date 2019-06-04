@@ -23,15 +23,25 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AdaptadorHistorialCliente extends RecyclerView.Adapter<AdaptadorHistorialCliente.CustomViewHolder> {
 
 
     private List<Servicio> lista_servicios_terminados;
     FirebaseStorage storage;
-    private AdaptadorCliente.OnItemClickListener listener;
+
+    public AdaptadorHistorialCliente.OnItemClickListener getListener() {
+        return listener;
+    }
+
+    private AdaptadorHistorialCliente.OnItemClickListener listener;
 
     FirebaseDatabase rtdb;
     FirebaseAuth auth;
@@ -45,10 +55,12 @@ public class AdaptadorHistorialCliente extends RecyclerView.Adapter<AdaptadorHis
         lista_servicios_terminados=new ArrayList<>();
     }
 
+
+
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.renglon_buscar_servicios, parent, false);
+        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.renglon_historial_cliente, parent, false);
         AdaptadorHistorialCliente.CustomViewHolder vh = new AdaptadorHistorialCliente.CustomViewHolder(v);
         return vh;
     }
@@ -64,30 +76,35 @@ public class AdaptadorHistorialCliente extends RecyclerView.Adapter<AdaptadorHis
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Usuario us = dataSnapshot.getValue(Usuario.class);
-                        ((TextView) holder.root.findViewById(R.id.renglon_hist_cliente_nombre)).setText(us.getNombres());
-                        ((TextView) holder.root.findViewById(R.id.renglon_hist_cliente_nombre)).setText(us.getApellidos());
-
-
+                        ((TextView) holder.root.findViewById(R.id.renglon_hist_cliente_nombre)).setText(us.getNombres()+" ");
+                        ((TextView) holder.root.findViewById(R.id.renglon_hist_cliente_apellidos)).setText(us.getApellidos());
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 }
         );
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy ");
 
-
+        ((TextView) holder.root.findViewById(R.id.txtFechaClienteHist)).setText(" "+dateFormat.format(lista_servicios_terminados.get(position).getFecha())+"");
+        ((TextView) holder.root.findViewById(R.id.txtHoraClienteHist)).setText(" "+lista_servicios_terminados.get(position).getHoraInicio()+"");
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return lista_servicios_terminados.size();
     }
-    public void setListener(AdaptadorCliente.OnItemClickListener listener){
+    public void setListener(AdaptadorHistorialCliente.OnItemClickListener listener){
         this.listener = listener;
     }
+
+    //OBSERVER
+    public interface OnItemClickListener{
+        void onItemClick(Servicio servicio);
+    }
+
 
 
 
