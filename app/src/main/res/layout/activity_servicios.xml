@@ -105,14 +105,7 @@
 
     </ScrollView>
     
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Finalizar Registro"
-        android:id="@+id/btn_register_finish"
-        android:background="#B0CA36"
-        android:padding="10dp"/>
+
 
     <Button
         android:layout_width="wrap_content"
@@ -133,8 +126,19 @@
         android:id="@+id/btn_agregar_hora2"
         android:background="#B0CA36"
         android:padding="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="5dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Finalizar Registro"
+        android:id="@+id/btn_register_finish"
+        android:background="#B0CA36"
+        android:padding="10dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="6dp"/>
 
 
 
