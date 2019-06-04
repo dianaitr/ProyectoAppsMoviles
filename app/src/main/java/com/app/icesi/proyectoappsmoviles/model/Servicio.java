@@ -1,7 +1,9 @@
 package com.app.icesi.proyectoappsmoviles.model;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Servicio {
 
@@ -12,8 +14,39 @@ public class Servicio {
     private String id_cliente;
     private double calificacion;
     private String comentarios;
-    private Date fechaServicio;
-    private ArrayList<String> tiposServicios;
+    private Date fecha;
+    private String horaInicio;
+
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+
+
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+
+    public HashMap<String, Boolean> getTiposServicios() {
+        return tiposServicios;
+    }
+
+    public void setTiposServicios(HashMap<String, Boolean> tiposServicios) {
+        this.tiposServicios = tiposServicios;
+    }
+
+    private HashMap<String,Boolean> tiposServicios;
+
 
     public Servicio(){
 
@@ -59,19 +92,13 @@ public class Servicio {
         this.comentarios = comentarios;
     }
 
-    public Date getFechaServicio() {
-        return fechaServicio;
-    }
+  //  public Date getFechaServicio() {
+  //      return fechaServicio;
+  //  }
 
-    public void setFechaServicio(Date fechaServicio) {
-        this.fechaServicio = fechaServicio;
-    }
+  //  public void setFechaServicio(Date fechaServicio) {
+   //     this.fechaServicio = fechaServicio;
+ //   }
 
-    public ArrayList<String> getTiposServicios() {
-        return tiposServicios;
-    }
 
-    public void setTiposServicios(ArrayList<String> tiposServicios) {
-        this.tiposServicios = tiposServicios;
-    }
 }

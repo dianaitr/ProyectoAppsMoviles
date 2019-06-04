@@ -2,8 +2,10 @@ package com.app.icesi.proyectoappsmoviles.employee_activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +13,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.app.icesi.proyectoappsmoviles.LoginActivity;
+import com.app.icesi.proyectoappsmoviles.MuroChatsClienteActivity;
+import com.app.icesi.proyectoappsmoviles.MuroChatsEmpleadoActivity;
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.client_activities.NotificacionClienteActivity;
 import com.app.icesi.proyectoappsmoviles.client_activities.PerfilClienteActivity;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -38,6 +43,8 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase rtdb;
 
+    private BottomNavigationView btn_navigation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,34 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
+        btn_navigation=findViewById(R.id.menu_navigation);
+        btn_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId()==R.id.menu_perfilUsuario){
+
+                    Intent i= new Intent(PerfilEmpleadoActivity.this, PerfilEmpleadoActivity.class);
+                    i.putExtra("userType","employee");
+                    startActivity(i);
+                    finish();
+                }else if(menuItem.getItemId()==R.id.menu_notificaciones){
+                    Intent i= new Intent(PerfilEmpleadoActivity.this, NotificacionEmpleadoActivity.class);
+                    i.putExtra("userType","employee");
+                    startActivity(i);
+                    finish();
+
+                }else if(menuItem.getItemId()==R.id.menu_chat){
+                    Intent i= new Intent(PerfilEmpleadoActivity.this, MuroChatsEmpleadoActivity.class);
+                    startActivity(i);
+                    i.putExtra("userType","employee");
+                    finish();
+
+                }
+
+                return false;
+            }
+        });
         btn_sign_out_empleado = findViewById(R.id.btn_sign_out_empleado);
         btn_sign_out_empleado.setOnClickListener(new View.OnClickListener() {
             @Override
