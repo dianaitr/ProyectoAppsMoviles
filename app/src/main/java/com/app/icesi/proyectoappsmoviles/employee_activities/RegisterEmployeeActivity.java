@@ -234,22 +234,24 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
     }
 
     private void validarFecha() throws Exception{
+
         SimpleDateFormat format = new SimpleDateFormat("d MMM. yyyy", Locale.US);
         try {
             String strDate = txtDateOfBirth.getText().toString();
             Log.e(">>>", strDate);
             date = format.parse(strDate);
+            if (date.compareTo(new Date())>0 || getAge(date)>100){
+                throw new Exception("Por favor selecciona una fecha de nacimiento válida");
+            }
+            if(getAge(date)<18) {
+                throw new Exception("Debes ser mayor de edad para poder registrarte");
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (Exception e) {
             throw e;
         }
-        if (date.compareTo(new Date())>0 || getAge(date)>100){
-            throw new Exception("Por favor selecciona una fecha de nacimiento válida");
-        }
-        if(getAge(date)<18) {
-            throw new Exception("Debes ser mayor de edad para poder registrarte");
-        }
+
     }
 
     private int getAge(Date date){
