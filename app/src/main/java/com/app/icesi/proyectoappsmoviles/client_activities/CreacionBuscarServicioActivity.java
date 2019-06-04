@@ -40,6 +40,7 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
     Button btn_Siguiente;
     Button btn_agregarFecha;
     Button btn_agregarHora;
+    Button btn_atras2;
     private Usuario user;
     private Servicio servicio1;
     private int hora_solicitada;
@@ -165,6 +166,15 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
 
                 startActivity(i);
                // finish();
+            }
+        });
+
+        btn_atras2=findViewById(R.id.btn_atras_CreacionBuscarService);
+        btn_atras2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CreacionBuscarServicioActivity.this, PerfilClienteActivity.class);
+                startActivity(i);
             }
         });
 

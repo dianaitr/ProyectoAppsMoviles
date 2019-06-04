@@ -16,15 +16,21 @@
         android:orientation="horizontal"
         android:background="#B0CA36">
 
+        <Button
+            android:id="@+id/btn_atras_CreacionBuscarService"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_btn_atras" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Buscar un servicio"
             android:padding="15dp"
             android:textSize="25dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="50dp"
 
             android:layout_gravity="center"/>
+
 
     </LinearLayout>
 
@@ -110,7 +116,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -120,7 +126,7 @@
         android:background="#B0CA36"
         android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginLeft="35dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -131,8 +137,10 @@
         android:background="#B0CA36"
         android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginLeft="75dp"/>
 
+
+</LinearLayout>
     <Button
         android:id="@+id/btn_sigte2"
         android:layout_width="wrap_content"
@@ -142,9 +150,8 @@
 
         android:background="#fff"
         android:padding="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="98dp"/>
-</LinearLayout>
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="8dp"/>
 </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
