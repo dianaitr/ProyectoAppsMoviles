@@ -1,13 +1,20 @@
 package com.app.icesi.proyectoappsmoviles.client_activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +26,7 @@ import com.app.icesi.proyectoappsmoviles.LoginActivity;
 import com.app.icesi.proyectoappsmoviles.MuroChatsClienteActivity;
 import com.app.icesi.proyectoappsmoviles.R;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
+import com.app.icesi.proyectoappsmoviles.util.UtilDomi;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -33,9 +41,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class PerfilClienteActivity extends AppCompatActivity {
 
@@ -43,6 +56,9 @@ public class PerfilClienteActivity extends AppCompatActivity {
     FirebaseStorage storage;
     FirebaseAuth auth;
     private Usuario me;
+
+    private File photoFile;
+
 
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
@@ -83,6 +99,8 @@ public class PerfilClienteActivity extends AppCompatActivity {
     private Button btn_open_gal;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +125,31 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
 
         btn_take_pic = findViewById(R.id.btn_take_pic);
+        btn_take_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                photoFile = new File(Environment.getExternalStorageDirectory() + "/" + UUID.randomUUID().toString() + ".png");
+                Uri uri = FileProvider.getUriForFile(PerfilClienteActivity.this, getPackageName(), photoFile);
+                i.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                startActivityForResult(i, CAMERA_CALLBACK_ID);
+            }
+        });
+
+
+
         btn_open_gal = findViewById(R.id.btn_open_gal);
+        btn_open_gal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.setAction(Intent.ACTION_GET_CONTENT);
+                i.setType("image/*");
+                startActivityForResult(i, GALLERY_CALLBACK_ID);
+
+            }
+        });
+
 
         btn_sign_out = findViewById(R.id.btn_sign_out);
         btn_historialCliente = findViewById(R.id.btn_historialCliente);
@@ -198,6 +240,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
         // TODO Inicializar los componentes gráficos
 
+
         llenarPerfil();
     }
 
@@ -231,6 +274,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
                 double clientCalification = (int) me.getCalificacion();
                 changeViewStars(clientCalification);
                 tv_calificacion_perfilCliente.setText(clientCalification + "");
+
                 //sw_activo.setChecked(me.isActivo());
             }
 
@@ -331,5 +375,48 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //Luego de tomar la foto y guardarla
+        if (requestCode == CAMERA_CALLBACK_ID && resultCode == RESULT_OK) {
+            //Bitmap imagen = BitmapFactory.decodeFile(photoFile.getPath());
+            //imv_perfilCliente.setImageBitmap(imagen);
+            subirImagen();
+        }
+        if (requestCode == GALLERY_CALLBACK_ID && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            photoFile = new File(UtilDomi.getPath(this, uri));
+            subirImagen();
+        }
+    }
+
+
+    private void subirImagen() {
+        try {
+            Log.e(">>>", "me es" +me.getUid());
+                StorageReference ref = storage.getReference().child("profiles").child(me.getUid());
+                FileInputStream fis = new FileInputStream(photoFile);
+                ref.putStream(fis).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        cargarFotoPerfil();
+                    }
+                });
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+    }
+
+    private void cargarFotoPerfil() {
+        StorageReference ref = storage.getReference().child("profiles").child(me.getUid());
+        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(PerfilClienteActivity.this).load(uri).into(imv_perfilCliente);
+            }
+        });
     }
 }
