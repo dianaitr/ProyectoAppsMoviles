@@ -181,7 +181,7 @@ public class RegisterEmployeeActivity extends AppCompatActivity implements DateP
 
         btn_next=findViewById(R.id.btn_next);
         //TODO
-        borrar();
+        //borrar();
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
