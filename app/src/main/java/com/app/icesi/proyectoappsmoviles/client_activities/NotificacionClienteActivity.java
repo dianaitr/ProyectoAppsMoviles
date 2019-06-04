@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.app.icesi.proyectoappsmoviles.MuroChatsClienteActivity;
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.SolicitudActivity;
 import com.app.icesi.proyectoappsmoviles.model.Servicio;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -110,5 +111,8 @@ public class NotificacionClienteActivity extends AppCompatActivity implements Ad
     @Override
     public void onItemClick(Servicio servicio) {
 
+        Intent i= new Intent(NotificacionClienteActivity.this, SolicitudActivity.class);
+        i.putExtra("id_colab",servicio.getId_colab());
+        startActivity(i);
     }
 }

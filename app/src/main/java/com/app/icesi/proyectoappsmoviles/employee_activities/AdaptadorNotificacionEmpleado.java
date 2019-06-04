@@ -64,7 +64,7 @@ public class AdaptadorNotificacionEmpleado extends RecyclerView.Adapter<Adaptado
         rtdb = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        rtdb.getReference().child("usuarios").child("colaboradores").child(lista_servicios_solicitados.get(position).getId_colab()).addListenerForSingleValueEvent(
+        rtdb.getReference().child("usuarios").child("clientes").child(lista_servicios_solicitados.get(position).getId_cliente()).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

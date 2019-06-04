@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".employee_activities.CalendarioServiciosActivity"></activity>
+        <activity android:name=".SolicitudActivity"></activity>
+        <activity android:name=".employee_activities.CalendarioServiciosActivity" />
         <activity android:name=".MuroChatsEmpleadoActivity" />
         <activity android:name=".client_activities.CalendarioCreacionBuscarServicio" />
         <activity android:name=".client_activities.CreacionBuscarServicioActivity" />
@@ -70,6 +71,7 @@
         <activity android:name=".employee_activities.CalendarEmpRegActivity" />
         <activity android:name=".client_activities.CalendarClientRegActivity" />
         <activity android:name=".employee_activities.ServiciosActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}"
@@ -79,6 +81,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/providerpath" />
         </provider>
+
         <activity
             android:name=".NavigationDrawerActivity"
             android:label="@string/title_activity_navigation_drawer"

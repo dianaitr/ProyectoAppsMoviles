@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    tools:context=".SolicitudActivity"
+    android:background="#fff">
+
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/layoutSolicitud"
+        android:layout_width="410dp"
+        android:layout_height="68dp"
+        android:background="#B0CA36"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/btn_atras_notiEmple"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_btn_atras" />
+
+
+
+
+        <TextView
+            android:id="@+id/et_noti_empleado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+
+            android:text="Solicitud"
+            android:textColor="#000"
+            android:textSize="20dp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/l2"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/layoutSolicitud"
+        android:layout_gravity="center_horizontal">
+
+
+    <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+     >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Solicitante : "
+                android:textSize="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Nombre"
+                android:textSize="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Apellidos"
+                android:textSize="18dp"/>
+        </LinearLayout>
+
+
+    <TextView
+
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#B0CA36"
+        android:text="Información : "
+        />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#B0CA36"
+                android:text="Fecha : "
+                />
+
+            <TextView
+
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/txtFechaSolicitud"
+                android:text="0/00/0000 "
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#B0CA36"
+                android:text="Hora inicio : "
+                />
+
+            <TextView
+
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/txtHoraInicioSolicitud"
+                android:text="0:00 "
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#B0CA36"
+                android:text="Lugar : "
+                />
+
+            <TextView
+
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/txtLugarSolicitud"
+                android:text="0/00/0000 "
+                />
+        </LinearLayout>
+
+
+        <TextView
+
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#B0CA36"
+            android:text="Servicios solicitados : "
+            />
+
+        <TextView
+
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:background="#B2C071"
+            android:id="@+id/txtServiciosSolicitados"
+
+            />
+
+
+
+
+
+
+    </LinearLayout>
+
+        <Button
+            android:layout_below="@+id/l2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ACEPTAR"
+            android:background="#fff"
+            android:textColor="#B0CA36"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textSize="16dp"
+            android:id="@+id/btn_aceptarSolicitud"/>
+
+        <Button
+            android:layout_below="@+id/btn_aceptarSolicitud"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RECHAZAR"
+            android:background="#fff"
+            android:textColor="#B0CA36"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:textSize="16dp"
+            android:id="@+id/btn_rechazarSolicitud"/>
+
+    <Button
+        android:layout_below="@+id/btn_rechazarSolicitud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver perfil del solicitante"
+        android:background="#fff"
+        android:textColor="#B0CA36"
+        android:id="@+id/btn_verPerfilSolicitante"/>
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/btn_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#ffff"
+        design:menu="@menu/menu_navigation"
+
+        />
+
+    </ScrollView>
+</RelativeLayout>
