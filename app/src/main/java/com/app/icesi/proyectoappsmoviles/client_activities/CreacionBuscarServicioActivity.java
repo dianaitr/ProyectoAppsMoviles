@@ -31,6 +31,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 public class CreacionBuscarServicioActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener  {
 
@@ -40,6 +41,7 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
     private Date fecha;
     private Usuario user;
     private Servicio servicio1;
+    HashMap<String,Boolean> tiposServicios= new HashMap<String,Boolean>();
 
     TextView txtDate;
 
@@ -85,45 +87,92 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 //verificarServicios();
 
-                DatabaseReference databaseReference = rtdb.getReference().child("servicios_en_proceso");
-                DatabaseReference dataColaboradores= (DatabaseReference) rtdb.getReference().child("usuarios").child("colaboradores").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                final DatabaseReference databaseReference = rtdb.getReference().child("servicios_en_progreso").child("solicitado");
+
+                databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                            Log.e("Datos colaborador",""+snapshot.getValue());
-                            }
-                        }
 
+                       for (final DataSnapshot snapshot:dataSnapshot.getChildren())
+                       databaseReference.child(snapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                           @Override
+                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                               Servicio servicio1=snapshot.getValue(Servicio.class);
+                               servicio1.setEstado("solicitado");
+                               servicio1.setFecha(new Date());
+
+
+                           }
+
+                           @Override
+                           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                           }
+                       });
+
+                    }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
-                if(cbox.isChecked()){
-                    databaseReference.child("Estado").setValue(servicio1.getEstado());
-                    Log.e("",user.getUid().toString());
-                  //  if(){
-                    //    databaseReference.child("Id_Colab").setValue(user.getCedula());
-                    //}else {
-                        databaseReference.child("Id_Cliente").setValue(user.getCedula());
-                    //}
+                if(cbox.isChecked()) {
 
-                    databaseReference.child("Calificacion").setValue(servicio1.getCalificacion());
-                    databaseReference.child("Comentarios").setValue(servicio1.getComentarios());
-                    databaseReference.child("Servicios").child(cbox.toString()).setValue(true);
-                    databaseReference.child("Fecha servicio realizado").setValue(fecha);
-                   // Servicio ser=new Servicio();
-                    //ser.setEstado("");
-                    //ser.setId_colab("");
-                    //ser.setId_cliente("");
-                    //ser.setCalificacion(0);
-                    //ser.setComentarios("");
-                    //servicioEnprocess.add(cbox.getText().toString());
-                    //ser.setTiposServicios(ser.getTiposServicios());
-                    //ser.setFechaServicio( ser.getFechaServicio());
+                    tiposServicios.put("barrer",true);
+                    tiposServicios.put("trapear",true);
+                    tiposServicios.put("desempolvar",true);
+
+                } else {
+                    tiposServicios.put("barrer",false);
+                    tiposServicios.put("trapear",false);
+                    tiposServicios.put("desempolvar",false);
+                } if(cbox0.isChecked()) {
+                    tiposServicios.put("barrer",true);
+                } else {
+                    tiposServicios.put("barrer",false);
+                } if(cbox1.isChecked()) {
+                    tiposServicios.put("trapear",true);
+                } else {
+                    tiposServicios.put("trapear",false);
+                } if(cbox2.isChecked()) {
+                    tiposServicios.put("desempolvar",true);
+                } else {
+                    tiposServicios.put("trapear",false);
+                } if(cbox3.isChecked()) {
+                    tiposServicios.put("lavado_ropa",true);
+
+                } else {
+                    tiposServicios.put("lavado_ropa",false);
+                } if(cbox4.isChecked()) {
+                    tiposServicios.put("planchado_ropa",true);
+
+                } else {
+                    tiposServicios.put("planchado_ropa",false);
+
+                } if(cbox5.isChecked()) {
+                    tiposServicios.put("limpieza_banos",true);
+
+                } else {
+                    tiposServicios.put("limpieza_banos",false);
+
+                } if(cbox6.isChecked()) {
+                    tiposServicios.put("cocinar",true);
+
+                } else {
+                    tiposServicios.put("cocinar",false);
+
+                } if(cbox7.isChecked()) {
+                    tiposServicios.put("limpieza_cocina",true);
+
+                } else {
+                    tiposServicios.put("limpieza_cocina",false);
 
                 }
+
+                servicio1.setTiposServicios(tiposServicios);
+
+                databaseReference.child(auth.getCurrentUser().getUid()).setValue(servicio1);
 
                 Intent i = new Intent(CreacionBuscarServicioActivity.this, BuscarServicioActivity.class);
                 startActivity(i);
