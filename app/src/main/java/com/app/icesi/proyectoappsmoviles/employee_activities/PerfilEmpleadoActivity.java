@@ -60,6 +60,7 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
 
     private TextView tv_ubicaEMple;
     private TextView  tv_numeroCalificacionEmpleado;
+    private TextView  tv_numeroTelEmpleado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,7 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
         employe_ima = findViewById(R.id.employe_ima);
         tv_ubicaEMple =findViewById(R.id.tv_ubicaEMple);
         tv_numeroCalificacionEmpleado= findViewById(R.id.tv_numeroCalificacionEmpleado);
+        tv_numeroTelEmpleado=findViewById(R.id.tv_numeroTelEmpleado);
 
         btn_navigation=findViewById(R.id.menu_navigation);
         btn_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -157,7 +159,9 @@ public class PerfilEmpleadoActivity extends AppCompatActivity {
                 et_apellidos_empleado.setText(usuario.getApellidos());
                 et_calificacion_empleado.setText(""+usuario.getCalificacion());
                 et_telefono_empleado.setText(usuario.getTelefono());
-
+                if(usuario.getTelefono()!=null) {
+                    tv_numeroTelEmpleado.setText(usuario.getTelefono());
+                }
 
 
                 //search for locality
