@@ -103,7 +103,7 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         calificacionEmpleado = findViewById(R.id.renglon_calEmpleado);
 
         sp_filtro = findViewById(R.id.sp_filtro);
-        String[] opciones = {"Sin filtro","Cercanía", "Calificación"};
+        String[] opciones = {"Ordenar(Por defecto)","Cercanía", "Calificación"};
         //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.filter_spinner_row, R.id.filter, opciones);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, opciones);
         sp_filtro.setAdapter(arrayAdapter);
@@ -121,47 +121,30 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, final long id) {
 
-                Log.e(">>>","Holiiiii");
-
                 if(position==0){
                     buscarServicio();
                 }
                 else if(position==1){
-                    rtdb.getReference().child("usuarios").child("colaboradores").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    HashMap<Usuario, Float> distances = new HashMap<Usuario, Float>();
 
-                            HashMap<Usuario, Float> distances = new HashMap<Usuario, Float>();
-                            for(DataSnapshot objSnapshot: dataSnapshot.getChildren()){
+                    buscarServicio();
+                    for (Usuario usuario : listaUsuarios){
+                        Location userLocation = new Location(LocationManager.NETWORK_PROVIDER);
+                        userLocation.setLatitude(usuario.getLatitude());
+                        userLocation.setLongitude(usuario.getLongitude());
+                        float distance = myLocation.distanceTo(userLocation)/1000;
+                        distances.put(usuario,distance);
+                    }
 
-                                Usuario usuario= objSnapshot.getValue(Usuario.class);
-                                // Esto puede cambiar, no ordenar todos los colaboradores, solo los buscados
-                                buscarServicio();
-                                if(listaUsuarios.contains(usuario)){
-                                    Location userLocation = new Location(LocationManager.NETWORK_PROVIDER);
-                                    userLocation.setLatitude(usuario.getLatitude());
-                                    userLocation.setLongitude(usuario.getLongitude());
-                                    float distance = myLocation.distanceTo(userLocation)/1000;
-                                    distances.put(usuario,distance);
-                                }
+                    HashMap<Usuario, Float> sortDistances = sortByValue(distances);
+                    Iterator<Usuario> iterator = sortDistances.keySet().iterator();
+                    listaUsuarios.clear();
+                    while(iterator.hasNext()){
+                        listaUsuarios.add(iterator.next());
+                    }
 
-                            }
+                    adapter.notifyDataSetChanged();
 
-                            HashMap<Usuario, Float> sortDistances = sortByValue(distances);
-                            Iterator<Usuario> iterator = sortDistances.keySet().iterator();
-                            listaUsuarios.clear();
-                            while(iterator.hasNext()){
-                                listaUsuarios.add(iterator.next());
-                            }
-
-                            adapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
 
                 }else if (position==2){
 
