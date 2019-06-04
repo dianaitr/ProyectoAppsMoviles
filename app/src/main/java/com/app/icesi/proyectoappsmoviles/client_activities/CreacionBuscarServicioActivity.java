@@ -158,9 +158,9 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
                 //databaseReference.child(auth.getCurrentUser().getUid()).setValue(servicio1);
 
                 Intent i = new Intent(CreacionBuscarServicioActivity.this, BuscarServicioActivity.class);
-                i.putExtra("hashMap",servicios_solicitados);
-                i.putExtra("fecha solicitada",fecha_solicitada);
-                i.putExtra("hora solicitada",hora_solicitada);
+                i.putExtra("servicios_solicitados",servicios_solicitados);
+                i.putExtra("fecha_solicitada",fecha_solicitada);
+                i.putExtra("hora_solicitada",hora_solicitada);
 
 
                 startActivity(i);

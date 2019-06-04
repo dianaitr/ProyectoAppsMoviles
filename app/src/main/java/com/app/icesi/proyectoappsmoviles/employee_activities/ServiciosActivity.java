@@ -26,6 +26,8 @@ public class ServiciosActivity extends AppCompatActivity {
 
     CheckBox cb,cb0,cb1,cb2,cb3,cb4,cb5,cb6,cb7;
     Button btn_register_finish;
+    Button btn_agregarFecha2;
+    Button btn_agregarHora2;
 
     FirebaseDatabase rtdb;
     FirebaseAuth auth;
@@ -62,6 +64,16 @@ public class ServiciosActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        btn_agregarFecha2=findViewById(R.id.btn_agregar_fecha2);
+        btn_agregarFecha2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
 
     }
 
