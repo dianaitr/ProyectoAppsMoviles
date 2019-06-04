@@ -30,9 +30,11 @@
 
             <ImageView
                 android:id="@+id/imv_perfilCliente"
+                android:background="@drawable/person2"
                 android:layout_width="115dp"
                 android:layout_height="110dp"
                 android:layout_marginTop="15dp"/>
+
 
             <Button
                 android:layout_width="wrap_content"
@@ -40,15 +42,18 @@
                 android:id="@+id/btn_take_pic"
                 android:background="@drawable/bordes_redondeados"
                 android:layout_margin="5dp"
+                android:visibility="invisible"
                 android:text="Tomar Foto"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
+                android:visibility="invisible"
                 android:id="@+id/btn_open_gal"
                 android:background="@drawable/bordes_redondeados"
                 android:layout_margin="5dp"
                 android:text="Abrir galeria"/>
+
 
 
             <LinearLayout
