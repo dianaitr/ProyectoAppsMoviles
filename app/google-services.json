@@ -52,6 +52,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "760362536666-d5id6cfp7plctua2qpqomb18ehsfb2v6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.icesi.proyectoappsmoviles",
+            "certificate_hash": "2503cacadf2cc5bc4cc6ca536dd3510ec031604d"
+          }
+        },
+        {
+          "client_id": "760362536666-1psgv4mub1cjol56tff59g03839pq5ac.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.icesi.proyectoappsmoviles",
+            "certificate_hash": "154461e6373eb29ed49e4b5e73f17754a4ed1601"
+          }
+        },
+        {
+          "client_id": "760362536666-l2b6nr5hchkuiopkenff3b1b0fib2tqk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.icesi.proyectoappsmoviles",
+            "certificate_hash": "53afc81c0fc29c8abd12b83b3b85ed7a7cc0f252"
+          }
+        },
+        {
+          "client_id": "760362536666-lne832m3r0h6570tcqvavhhal3hgo2s9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.icesi.proyectoappsmoviles",
+            "certificate_hash": "b16a0163e1a23c1279cc9afb32698b52e791601d"
+          }
+        },
+        {
           "client_id": "760362536666-jchu4nsa4eij6rj3l1qum6mp6p87dnko.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

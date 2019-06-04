@@ -67,7 +67,6 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
 
     private BottomNavigationView btn_navigation;
-    private ImageView person1_imagen;
     private TextView tv_nameCliente;
     private TextView tv_apellidosCliente;
     private TextView tv_ubicacionCliente;
@@ -125,6 +124,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
 
         btn_take_pic = findViewById(R.id.btn_take_pic);
+
         btn_take_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,8 +135,6 @@ public class PerfilClienteActivity extends AppCompatActivity {
                 startActivityForResult(i, CAMERA_CALLBACK_ID);
             }
         });
-
-
 
         btn_open_gal = findViewById(R.id.btn_open_gal);
         btn_open_gal.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +147,7 @@ public class PerfilClienteActivity extends AppCompatActivity {
 
             }
         });
+
 
 
         btn_sign_out = findViewById(R.id.btn_sign_out);
@@ -238,20 +237,31 @@ public class PerfilClienteActivity extends AppCompatActivity {
             return;
         }
 
-        // TODO Inicializar los componentes gráficos
+        //AutoID
+        rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                me = dataSnapshot.getValue(Usuario.class);
+                cargarFotoPerfil();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         llenarPerfil();
     }
 
     private void llenarPerfil() {
-      /*  StorageReference ref = storage.getReference().child("profiles").child(auth.getCurrentUser().getUid());
+       StorageReference ref = storage.getReference().child("profiles").child(auth.getCurrentUser().getUid());
         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(getApplicationContext()).load(uri).into(person1_imagen);
+                Glide.with(getApplicationContext()).load(uri).into(imv_perfilCliente);
             }
-        });*/
+        });
 
         rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -382,36 +392,40 @@ public class PerfilClienteActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //Luego de tomar la foto y guardarla
         if (requestCode == CAMERA_CALLBACK_ID && resultCode == RESULT_OK) {
-            //Bitmap imagen = BitmapFactory.decodeFile(photoFile.getPath());
-            //imv_perfilCliente.setImageBitmap(imagen);
+            //Bitmap imagen = BitmapFactory.decodeFile(photoFile.toString());
+            //img_amigo.setImageBitmap(imagen);
             subirImagen();
         }
-        if (requestCode == GALLERY_CALLBACK_ID && resultCode == RESULT_OK) {
+        if(requestCode == GALLERY_CALLBACK_ID && resultCode == RESULT_OK){
             Uri uri = data.getData();
-            photoFile = new File(UtilDomi.getPath(this, uri));
+            photoFile = new File(  UtilDomi.getPath(this, uri)  );
+            // Bitmap m = BitmapFactory.decodeFile(photoFile.toString());
+            //img_amigo.setImageBitmap(m);
             subirImagen();
         }
     }
 
-
     private void subirImagen() {
+        //path raiz
+
         try {
-            Log.e(">>>", "me es" +me.getUid());
-                StorageReference ref = storage.getReference().child("profiles").child(me.getUid());
-                FileInputStream fis = new FileInputStream(photoFile);
-                ref.putStream(fis).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        cargarFotoPerfil();
-                    }
-                });
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            StorageReference ref=storage.getReference().child("profiles").child(me.getUid());
+
+            FileInputStream fis= new FileInputStream(photoFile);
+            ref.putStream(fis).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    cargarFotoPerfil();
+                }
+            });
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void cargarFotoPerfil() {
-        StorageReference ref = storage.getReference().child("profiles").child(me.getUid());
+        StorageReference ref=storage.getReference().child("profiles").child(me.getUid());
         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
