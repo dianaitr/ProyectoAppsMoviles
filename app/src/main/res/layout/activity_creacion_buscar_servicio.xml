@@ -113,7 +113,7 @@
     android:orientation="vertical">
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:text="Agregar fecha"
         android:id="@+id/btn_agregar_fecha1"
@@ -124,7 +124,7 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:text="Agregar hora"
         android:id="@+id/btn_agregar_hora"
@@ -140,7 +140,7 @@
         android:layout_gravity="center"
         android:text="Siguiente"
 
-        android:background="#B0CA36"
+        android:background="#fff"
         android:padding="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="98dp"/>
