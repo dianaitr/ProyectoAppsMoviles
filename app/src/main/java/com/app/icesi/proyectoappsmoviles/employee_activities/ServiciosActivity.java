@@ -1,6 +1,7 @@
 package com.app.icesi.proyectoappsmoviles.employee_activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +10,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import com.app.icesi.proyectoappsmoviles.R;
+import com.app.icesi.proyectoappsmoviles.model.Servicio;
 import com.app.icesi.proyectoappsmoviles.model.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Date;
+import java.util.HashMap;
 
 public class ServiciosActivity extends AppCompatActivity {
 
@@ -59,49 +67,75 @@ public class ServiciosActivity extends AppCompatActivity {
 
     private void verificarServicios() {
 
-        DatabaseReference databaseReference = rtdb.getReference().child("servicios_ofertados").child(auth.getCurrentUser().getUid());
+        DatabaseReference databaseReference = rtdb.getReference().child("servicios_en_progreso").child("ofertado");
+
+        Servicio servicio= new Servicio();
+        servicio.setCalificacion(0.0);
+        servicio.setComentarios("");
+        servicio.setEstado("ofertado");
+        servicio.setFecha(new Date());
+        servicio.setHoraInicio("");
+        servicio.setId_cliente("");
+        servicio.setId_colab(auth.getCurrentUser().getUid());
+
+        HashMap<String,Boolean> tiposServicios= new HashMap<String,Boolean>();
 
         if(cb.isChecked()) {
-            databaseReference.child("barrer").setValue(true);
-            databaseReference.child("trapear").setValue(true);
-            databaseReference.child("desempolvar").setValue(true);
+
+            tiposServicios.put("barrer",true);
+            tiposServicios.put("trapear",true);
+            tiposServicios.put("desempolvar",true);
+
         } else {
-            databaseReference.child("barrer").setValue(false);
-            databaseReference.child("trapear").setValue(false);
-            databaseReference.child("desempolvar").setValue(false);
+            tiposServicios.put("barrer",false);
+            tiposServicios.put("trapear",false);
+            tiposServicios.put("desempolvar",false);
         } if(cb0.isChecked()) {
-            databaseReference.child("barrer").setValue(true);
+            tiposServicios.put("barrer",true);
         } else {
-            databaseReference.child("barrer").setValue(false);
+            tiposServicios.put("barrer",false);
         } if(cb1.isChecked()) {
-            databaseReference.child("trapear").setValue(true);
+            tiposServicios.put("trapear",true);
         } else {
-            databaseReference.child("trapear").setValue(false);
+            tiposServicios.put("trapear",false);
         } if(cb2.isChecked()) {
-            databaseReference.child("desempolvar").setValue(true);
+            tiposServicios.put("desempolvar",true);
         } else {
-            databaseReference.child("desempolvar").setValue(false);
+            tiposServicios.put("trapear",false);
         } if(cb3.isChecked()) {
-            databaseReference.child("lavado_ropa").setValue(true);
+            tiposServicios.put("lavado_ropa",true);
+
         } else {
-            databaseReference.child("lavado_ropa").setValue(false);
+            tiposServicios.put("lavado_ropa",false);
         } if(cb4.isChecked()) {
-            databaseReference.child("planchado_ropa").setValue(true);
+            tiposServicios.put("planchado_ropa",true);
+
         } else {
-            databaseReference.child("planchado_ropa").setValue(false);
+            tiposServicios.put("planchado_ropa",false);
+
         } if(cb5.isChecked()) {
-            databaseReference.child("limpieza_banos").setValue(true);
+            tiposServicios.put("limpieza_banos",true);
+
         } else {
-            databaseReference.child("limpieza_banos").setValue(false);
+            tiposServicios.put("limpieza_banos",false);
+
         } if(cb6.isChecked()) {
-            databaseReference.child("cocinar").setValue(true);
+            tiposServicios.put("cocinar",true);
+
         } else {
-            databaseReference.child("cocinar").setValue(false);
+            tiposServicios.put("cocinar",false);
+
         } if(cb7.isChecked()) {
-            databaseReference.child("limpieza_cocina").setValue(true);
+            tiposServicios.put("limpieza_cocina",true);
+
         } else {
-            databaseReference.child("limpieza_cocina").setValue(false);
+            tiposServicios.put("limpieza_cocina",false);
+
         }
+
+        servicio.setTiposServicios(tiposServicios);
+
+        databaseReference.child(auth.getCurrentUser().getUid()).setValue(servicio);
     }
 
 }
