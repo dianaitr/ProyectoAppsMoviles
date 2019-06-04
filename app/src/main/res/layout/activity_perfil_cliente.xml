@@ -15,51 +15,74 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="210dp"
         android:orientation="horizontal"
         android:background="#B0CA36"
         android:id="@+id/layoutInfo"
+        android:gravity="center"
         >
 
         <LinearLayout
             android:layout_width="190dp"
+            android:gravity="center"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/person2_imagen"
+                android:id="@+id/imv_perfilCliente"
                 android:layout_width="115dp"
                 android:layout_height="110dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/ic_perfiluser" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:id="@+id/btn_take_pic"
+                android:background="@drawable/bordes_redondeados"
+                android:layout_margin="5dp"
+                android:text="Tomar Foto"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:id="@+id/btn_open_gal"
+                android:background="@drawable/bordes_redondeados"
+                android:layout_margin="5dp"
+                android:text="Abrir galeria"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <ImageView
+                    android:id="@+id/imv_star_one"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
                 <ImageView
+                    android:id="@+id/imv_star_two"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
                 <ImageView
+                    android:id="@+id/imv_star_three"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
                 <ImageView
+                    android:id="@+id/imv_star_four"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
                 <ImageView
+                    android:id="@+id/imv_star_five"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@mipmap/ic_star_complete"/>
                 <TextView
-                    android:id="@+id/tv_numeroCalificacionEmpleado"
+                    android:id="@+id/tv_calificacion_perfilCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.8"
@@ -68,9 +91,6 @@
                     android:textColor="#fff"/>
 
             </LinearLayout>
-
-
-
 
         </LinearLayout>
 
@@ -101,11 +121,12 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Ubicación:"
+                    android:textStyle="bold"
                     android:textSize="16dp"
                     android:textColor="#fff"/>
 
@@ -114,9 +135,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Cali, Colombia"
+                    android:textStyle="italic"
                     android:textSize="16dp"
                     android:textColor="#ffff"
-                    android:id="@+id/tv_localidadCliente"/>
+                    android:id="@+id/tv_ubicacionCliente"/>
 
             </LinearLayout>
 
@@ -133,7 +155,7 @@
     <Button
         android:id="@+id/btn_historialCliente"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:background="#ffff"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -159,8 +181,8 @@
         android:background="#B0CA36"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Buscar un nuevo servicio"
-        android:textAllCaps="false"
+        android:text="BUSCAR UN NUEVO SERVICIO"
+        android:textAllCaps="true"
         android:textColor="#fff"
         android:textSize="11dp"
         android:textStyle="bold" />
@@ -193,7 +215,7 @@
         android:paddingLeft="10dp"
         android:background="#B0CA36"
         android:textAllCaps="false"
-        android:text="Cerrar sesión"
+        android:text="CERRAR SESIÓN"
         android:textSize="11dp"
         android:textStyle="bold"
         android:textColor="#fff"
