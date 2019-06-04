@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.app.icesi.proyectoappsmoviles.DatePickerFragment;
 import com.app.icesi.proyectoappsmoviles.R;
@@ -33,29 +34,31 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-public class CreacionBuscarServicioActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener  {
+public class CreacionBuscarServicioActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerClass.TimePickerListener  {
 
     CheckBox cbox,cbox0,cbox1,cbox2,cbox3,cbox4,cbox5,cbox6,cbox7;
     Button btn_Siguiente;
     Button btn_agregarFecha;
-    private Date fecha;
+    Button btn_agregarHora;
     private Usuario user;
     private Servicio servicio1;
-    HashMap<String,Boolean> tiposServicios= new HashMap<String,Boolean>();
+    private int hora_solicitada;
+    private String fecha_solicitada;
+    HashMap<String,Boolean> servicios_solicitados= new HashMap<String,Boolean>();
 
     TextView txtDate;
 
-    ArrayList<String>servicioEnprocess;
-    FirebaseDatabase rtdb;
-    FirebaseAuth auth;
+
+    //FirebaseDatabase rtdb;
+    //FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creacion_buscar_servicio);
 
-        auth = FirebaseAuth.getInstance();
-        rtdb = FirebaseDatabase.getInstance();
+      //  auth = FirebaseAuth.getInstance();
+        //rtdb = FirebaseDatabase.getInstance();
         user=new Usuario();
         servicio1=new Servicio();
 
@@ -70,16 +73,26 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
         cbox5 = findViewById(R.id.cb5_2);
         cbox6 = findViewById(R.id.cb6_2);
         cbox7 = findViewById(R.id.cb7_2);
-        btn_agregarFecha=findViewById(R.id.btn_agregar_hora_fecha);
+        btn_agregarFecha=findViewById(R.id.btn_agregar_fecha1);
         btn_agregarFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogFragment datePicker2 = new DatePickerFragment();
                 datePicker2.show(getSupportFragmentManager(),"date picker");
+
             }
         });
 
-        btn_Siguiente = findViewById(R.id.btn_sigte);
+        btn_agregarHora=findViewById(R.id.btn_agregar_hora);
+        btn_agregarHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment tp=new TimePickerClass();
+                tp.setCancelable(false);
+                tp.show(getSupportFragmentManager(),"timePicker");
+            }
+        });
+        btn_Siguiente = findViewById(R.id.btn_sigte2);
 
         //TODO - checkboxes
         btn_Siguiente.setOnClickListener(new View.OnClickListener() {
@@ -87,96 +100,71 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 //verificarServicios();
 
-                final DatabaseReference databaseReference = rtdb.getReference().child("servicios_en_progreso").child("solicitado");
-
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                       for (final DataSnapshot snapshot:dataSnapshot.getChildren())
-                       databaseReference.child(snapshot.getKey()).addValueEventListener(new ValueEventListener() {
-                           @Override
-                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                               Servicio servicio1=snapshot.getValue(Servicio.class);
-                               servicio1.setEstado("solicitado");
-                               servicio1.setFecha(new Date());
-
-
-                           }
-
-                           @Override
-                           public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                           }
-                       });
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
                 if(cbox.isChecked()) {
 
-                    tiposServicios.put("barrer",true);
-                    tiposServicios.put("trapear",true);
-                    tiposServicios.put("desempolvar",true);
+                    servicios_solicitados.put("barrer",true);
+                    servicios_solicitados.put("trapear",true);
+                    servicios_solicitados.put("desempolvar",true);
 
                 } else {
-                    tiposServicios.put("barrer",false);
-                    tiposServicios.put("trapear",false);
-                    tiposServicios.put("desempolvar",false);
+                    servicios_solicitados.put("barrer",false);
+                    servicios_solicitados.put("trapear",false);
+                    servicios_solicitados.put("desempolvar",false);
                 } if(cbox0.isChecked()) {
-                    tiposServicios.put("barrer",true);
+                    servicios_solicitados.put("barrer",true);
                 } else {
-                    tiposServicios.put("barrer",false);
+                    servicios_solicitados.put("barrer",false);
                 } if(cbox1.isChecked()) {
-                    tiposServicios.put("trapear",true);
+                    servicios_solicitados.put("trapear",true);
                 } else {
-                    tiposServicios.put("trapear",false);
+                    servicios_solicitados.put("trapear",false);
                 } if(cbox2.isChecked()) {
-                    tiposServicios.put("desempolvar",true);
+                    servicios_solicitados.put("desempolvar",true);
                 } else {
-                    tiposServicios.put("trapear",false);
+                    servicios_solicitados.put("trapear",false);
                 } if(cbox3.isChecked()) {
-                    tiposServicios.put("lavado_ropa",true);
+                    servicios_solicitados.put("lavado_ropa",true);
 
                 } else {
-                    tiposServicios.put("lavado_ropa",false);
+                    servicios_solicitados.put("lavado_ropa",false);
                 } if(cbox4.isChecked()) {
-                    tiposServicios.put("planchado_ropa",true);
+                    servicios_solicitados.put("planchado_ropa",true);
 
                 } else {
-                    tiposServicios.put("planchado_ropa",false);
+                    servicios_solicitados.put("planchado_ropa",false);
 
                 } if(cbox5.isChecked()) {
-                    tiposServicios.put("limpieza_banos",true);
+                    servicios_solicitados.put("limpieza_banos",true);
 
                 } else {
-                    tiposServicios.put("limpieza_banos",false);
+                    servicios_solicitados.put("limpieza_banos",false);
 
                 } if(cbox6.isChecked()) {
-                    tiposServicios.put("cocinar",true);
+                    servicios_solicitados.put("cocinar",true);
 
                 } else {
-                    tiposServicios.put("cocinar",false);
+                    servicios_solicitados.put("cocinar",false);
 
                 } if(cbox7.isChecked()) {
-                    tiposServicios.put("limpieza_cocina",true);
+                    servicios_solicitados.put("limpieza_cocina",true);
 
                 } else {
-                    tiposServicios.put("limpieza_cocina",false);
+                    servicios_solicitados.put("limpieza_cocina",false);
 
                 }
 
-                servicio1.setTiposServicios(tiposServicios);
+                //servicio1.setTiposServicios(tiposServicios);
 
-                databaseReference.child(auth.getCurrentUser().getUid()).setValue(servicio1);
+                //databaseReference.child(auth.getCurrentUser().getUid()).setValue(servicio1);
 
                 Intent i = new Intent(CreacionBuscarServicioActivity.this, BuscarServicioActivity.class);
+                i.putExtra("hashMap",servicios_solicitados);
+                i.putExtra("fecha solicitada",fecha_solicitada);
+                i.putExtra("hora solicitada",hora_solicitada);
+
+
                 startActivity(i);
-                finish();
+               // finish();
             }
         });
 
@@ -191,6 +179,13 @@ public class CreacionBuscarServicioActivity extends AppCompatActivity implements
 
         String currentDateString = DateFormat.getDateInstance(DateFormat.MEDIUM).format(c.getTime());
 
+        fecha_solicitada=currentDateString;
        // txtDate.setText(currentDateString);
+    }
+
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hour, int min) {
+        hora_solicitada=hour;
     }
 }

@@ -57,7 +57,7 @@ public class AdaptadorCliente extends RecyclerView.Adapter<AdaptadorCliente.Cust
     public void onBindViewHolder(final CustomViewHolder holder, final int position) {
         ((TextView) holder.root.findViewById(R.id.renglon_nombreEmpleado)).setText(data.get(position).getNombres());
         ((TextView) holder.root.findViewById(R.id.renglon_apellidoEmpleado)).setText(data.get(position).getApellidos());
-        holder.root.findViewById(R.id.renglon_empleado_call).setOnClickListener(new View.OnClickListener() {
+        holder.root.findViewById(R.id.renglon_empleado).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onItemClick(data.get(position));

@@ -120,7 +120,7 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         });
 
 
-        btn_seleccionarEmpleado=findViewById(R.id.renglon_empleado_call);
+        btn_seleccionarEmpleado=findViewById(R.id.renglon_empleado);
         btn_seleccionarEmpleado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

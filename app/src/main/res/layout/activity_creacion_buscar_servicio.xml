@@ -112,8 +112,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Agregar fecha y hora"
-        android:id="@+id/btn_agregar_hora_fecha"
+        android:text="Agregar fecha"
+        android:id="@+id/btn_agregar_fecha1"
         android:background="#B0CA36"
         android:padding="10dp"
         android:layout_marginTop="10dp"
@@ -123,11 +123,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Siguiente"
-        android:id="@+id/btn_sigte"
+        android:text="Agregar hora"
+        android:id="@+id/btn_agregar_hora"
         android:background="#B0CA36"
         android:padding="10dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"/>
+
+    <Button
+        android:id="@+id/btn_sigte2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Siguiente"
+
+        android:background="#B0CA36"
+        android:padding="10dp"
+        android:layout_marginTop="60dp"
         android:layout_marginLeft="98dp"/>
 </LinearLayout>
 
