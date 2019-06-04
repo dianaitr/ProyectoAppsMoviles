@@ -36,15 +36,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class BuscarServicioActivity extends AppCompatActivity implements  AdaptadorCliente.OnItemClickListener {
@@ -59,13 +64,16 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
     private RecyclerView lvServices;
 
-
     private AdaptadorCliente adapter;
 
     FirebaseDatabase rtdb;
     FirebaseAuth auth;
 
     ArrayList<Usuario> listaUsuarios;
+
+    private Map<String, Boolean> servicios_solicitados;
+    private int hora_solicitada;
+    private Date fecha_solicitada;
 
     private BottomNavigationView btn_navigation;
 
@@ -75,8 +83,9 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
         setContentView(R.layout.activity_buscar_servicio);
 
         rtdb = FirebaseDatabase.getInstance();
-
         auth = FirebaseAuth.getInstance();
+
+        obtenerValoresSolicitud();
 
         final Location myLocation = getMyLocation();
 
@@ -101,7 +110,11 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
                 Log.e(">>>","Holiiiii");
 
                 if(position==0){
-                    llenarRenglones();
+                    List<Usuario> usuarios = buscarServicio();
+                    listaUsuarios.clear();
+                    listaUsuarios.addAll(usuarios);
+                    adapter.notifyDataSetChanged();
+
                 }
                 else if(position==1){
                     rtdb.getReference().child("usuarios").child("colaboradores").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -178,6 +191,19 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
     }
 
+    private void obtenerValoresSolicitud() {
+        Intent intent = getIntent();
+        servicios_solicitados = (Map<String, Boolean>) intent.getSerializableExtra("servicios_solicitados");
+        hora_solicitada = intent.getExtras().getInt("hora_solicitada");
+        String strFecha = intent.getExtras().getString("fecha_solicitada");
+        SimpleDateFormat format = new SimpleDateFormat("d MMM. yyyy", Locale.US);
+        try {
+            fecha_solicitada = format.parse(strFecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Location getMyLocation() {
         final Location myLocation = new Location(LocationManager.NETWORK_PROVIDER);
         rtdb.getReference().child("usuarios").child("clientes").child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -221,17 +247,35 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
     }
 
 
-    private void llenarRenglones() { //TODO
+    private List<Usuario> buscarServicio() {
+
+        final List<Usuario> usuarios = new LinkedList<Usuario>();
 
         rtdb.getReference().child("servicios_en_progreso").child("ofertado").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listaUsuarios.clear();
-                for(DataSnapshot objSnapshot: dataSnapshot.getChildren()){
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Servicio servicio = (Servicio) objSnapshot.getValue(Servicio.class);
 
+                    if (servicio.getTiposServicios().values().containsAll(servicios_solicitados.values()) &&
+                            compararFechas(servicio.getFecha(), fecha_solicitada) && servicio.getHoraInicio() == hora_solicitada) {
+                        String userID = servicio.getId_colab();
+
+                        rtdb.getReference().child("usuarios").child("colaboradores").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Usuario usuario = (Usuario) dataSnapshot.getValue(Usuario.class);
+                                usuarios.add(usuario);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                 }
-                adapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -239,7 +283,12 @@ public class BuscarServicioActivity extends AppCompatActivity implements  Adapta
 
             }
         });
+        return  usuarios;
+    }
 
+    private boolean compararFechas(Date fecha, Date fecha_solicitada) {
+        //TODO
+        return true;
     }
 
     @Override
