@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#fff" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/cal_nombre_cliente"
+        android:text="Nombre"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+        <TextView
+            android:layout_below="@+id/cal_nombre_cliente"
+            android:id="@+id/cal_apellidos_cliente"
+            android:text="Apellidos"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <LinearLayout
+            android:id="@+id/layoutInfoCal"
+            android:layout_below="@+id/cal_apellidos_cliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:text="Fecha del servicio : "
+                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+
+                android:text=" 0/00/0000"
+                android:id="@+id/cal_fecha_servicio"
+                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/layoutInfoCal"
+            android:id="@+id/layoutInfoCal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calificación: "
+                android:textSize="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cal_num"
+                android:text="0.0"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_below="@+id/layoutInfoCal2"
+            android:id="@+id/txtC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comentarios :"
+            android:textSize="16dp"/>
+        <EditText
+            android:layout_below="@id/txtC"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:id="@+id/cal_comentarios"
+            android:background="#E9C4D578"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textSize="16dp"
+            android:textColor="#B0CA36"
+            android:id="@+id/cal_btn_ok"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCELAR"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:textSize="16dp"
+            android:textColor="#B0CA36"
+            android:id="@+id/cal_btn_cancelar"/>
+
+
+
+    </RelativeLayout>
+</RelativeLayout>
