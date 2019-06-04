@@ -115,8 +115,6 @@ public class SolicitudActivity extends AppCompatActivity {
                 apellidos.setText(u.getApellidos());
                 //lugar.setText(u.get);
 
-
-
             }
 
             @Override
@@ -145,6 +143,8 @@ public class SolicitudActivity extends AppCompatActivity {
                 }
                 serviciosSolicitados.setText(b);
 
+
+                horaInicio.setText(u.getHoraInicio()+"h");
 
 
             }

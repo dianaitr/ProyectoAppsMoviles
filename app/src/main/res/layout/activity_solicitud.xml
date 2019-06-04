@@ -234,6 +234,7 @@
         android:text="Ver información del solicitante"
         android:background="#fff"
         android:textColor="#B0CA36"
+        android:visibility="invisible"
         android:id="@+id/btn_verPerfilSolicitante"/>
 
 
