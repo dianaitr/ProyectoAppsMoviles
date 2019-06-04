@@ -37,6 +37,9 @@ public class HistorialClienteActivity extends AppCompatActivity implements  Adap
     private AdaptadorHistorialCliente adapter;
     ArrayList<Servicio> listaServicios;
 
+    private String comentariosSelected;
+    private double calificacionSelected;
+
 
 
     @Override
@@ -143,6 +146,8 @@ public class HistorialClienteActivity extends AppCompatActivity implements  Adap
 
     @Override
     public void onItemClick(Servicio servicio) {
+
+
 
     }
 
